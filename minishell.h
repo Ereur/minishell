@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:11:41 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/08/16 18:13:56 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:22:43 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include <unistd.h>
-# include <stdio.h>
+#ifndef MINISHEL_H
+# define MINISHEL_H
+
 
 #endif
