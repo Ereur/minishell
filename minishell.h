@@ -6,12 +6,19 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:11:41 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/08/16 18:22:43 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:47:40 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHEL_H
 # define MINISHEL_H
 
+#include <unistd.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <stdio.h>
+#include "libft/libft.h"
+
+int	built_in_pwd(char **str);
 
 #endif
