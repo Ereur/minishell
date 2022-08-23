@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:04:56 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/08/20 18:16:13 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/08/22 18:25:03 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 
 int gettoken(char **ps, char *es, char **q, char **eq);
 
-int	gettoken();
+// int	gettoken();
 
 #endif

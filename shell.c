@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/08/20 19:03:55 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/08/23 19:53:46 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,15 @@ int	main(int ac, char **argv, char **envp)
 	while (again)
 	{
 		buffer = readline(getprompt(envp));
-		
-		while (1)
+		while ((i = gettoken(&buffer, &buffer[ft_strlen(buffer)], &q, &eq)) && i)
 		{
-			gettoken(&buffer, &buffer[ft_strlen(buffer) - 1], &q, &eq);
-			if (q == eq)
-				break;
-			while (q <= eq)
-			{	
-				printf("%c\n",*q);
+			printf("\ntoken type : %c\n", i);
+			while (q < eq)
+			{
+				printf("%c", *q);
 				q++;
 			}
+			printf("\n");
 		}
 	}
 	return (0);
