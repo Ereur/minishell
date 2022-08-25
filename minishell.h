@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:11:41 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/08/20 18:16:52 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/08/23 23:14:56 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <readline/history.h>
 #include <stdbool.h>
 #include "token.h"
+#include "parser.h"
+#include <fcntl.h>
 
 int			built_in_pwd(char **str);
 const char	*getprompt(char **envp);

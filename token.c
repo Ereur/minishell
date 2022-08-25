@@ -6,13 +6,41 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:58:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/08/23 19:59:51 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/08/25 05:32:51 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// void raise_error
+void raise_error(char *message, int exitcode, int tok)
+{
+	printf("%s `%c'\n", message, tok);
+	exit(1);	
+}
+
+int skip_and_find_0(char **ps, char *es)
+{
+	char	*s;
+	int		ret;
+	
+	s = *ps;
+	while(s < es && ft_strchr(WHITESPACE, *s))
+		s++;
+	return (!*s);
+}
+// skip spaces and return true in case of finding the given token
+int skip_and_find(char **ps, char *es, char *tok)
+{
+	char	*s;
+	int		ret;
+	
+	s = *ps;
+	while(s < es && ft_strchr(WHITESPACE, *s))
+		s++;
+	ret = *s && ft_strchr(tok, *s);
+	return (ret);
+}
+
 // check if there is append rederiction or heredoc and set token type
 void	get_token_helper(char **s, int *ret)
 {
@@ -55,31 +83,27 @@ int	gettoken(char **ps, char *es, char **q, char **eq)
 {
 	char	*s;
 	int		ret;
-	char	*whitespace;
-	char	*symbols;
 
-	symbols = "<|>&";
-	whitespace = " \t\r\n\v";
 	s = *ps;
-	while (s < es && ft_strchr(whitespace, *s))
+	while (s < es && ft_strchr(WHITESPACE, *s))
 		s++;
 	if (q)
 		*q = s;
 	ret = *s;
 	if (s < es)
 	{
-		if (ft_strchr(symbols, *s))
-			ret = *(ft_strchr(symbols, *s));
-		if (!ft_strchr(symbols, *s))
+		if (ft_strchr(SYMBOLE, *s))
+			ret = *(ft_strchr(SYMBOLE, *s));
+		if (!ft_strchr(SYMBOLE, *s))
 			ret = 'a';
 		get_token_helper(&s, &ret);
 		s++;
-		while (s < es && ret == 'a' && !ft_strchr(whitespace, *s) 
-			&& !ft_strchr(symbols, *s))
+		while (s < es && ret == 'a' && !ft_strchr(WHITESPACE, *s) 
+			&& !ft_strchr(SYMBOLE, *s))
 			s++;
 		if (eq)
 			*eq = s;
-		while (s < es && ft_strchr(whitespace, *s))
+		while (s < es && ft_strchr(WHITESPACE, *s))
 			s++;
 		*ps = s;
 	}

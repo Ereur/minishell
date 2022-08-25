@@ -1,0 +1,27 @@
+total 456
+drwxr-xr-x  26 aamoussa  2019    884 Aug 24 23:55 .
+drwxr-xr-x  22 aamoussa  2019    748 Aug 24 23:25 ..
+-rw-r--r--@  1 aamoussa  2019   6148 Aug 23 20:01 .DS_Store
+drwxr-xr-x  14 aamoussa  2019    476 Aug 23 20:03 .git
+-rw-r--r--   1 aamoussa  2019     26 Aug 23 19:57 .gitignore
+drwxr-xr-x   4 aamoussa  2019    136 Aug 23 21:08 .vscode
+-rw-r--r--   1 aamoussa  2019  49665 Aug 24 21:47 New Document.tldr
+-rwxr-xr-x   1 aamoussa  2019  28264 Aug 24 23:50 a.out
+drwxr-xr-x   3 aamoussa  2019    102 Aug 23 20:45 a.out.dSYM
+-rw-r--r--   1 aamoussa  2019      0 Aug 24 23:55 allo
+-rw-r--r--   1 aamoussa  2019   1467 Aug 24 23:55 anas
+-rw-r--r--   1 aamoussa  2019   1424 Aug 24 23:49 build_nodes.c
+drwxr-xr-x   3 aamoussa  2019    102 Aug 16 18:41 builtin
+drwxr-xr-x  20 aamoussa  2019    680 Aug 17 08:21 homebrew
+-rw-r--r--   1 aamoussa  2019    933 Aug 16 17:18 lexer.h
+drwxr-xr-x  82 aamoussa  2019   2788 Aug 23 20:03 libft
+-rw-r--r--   1 aamoussa  2019    892 Aug 16 17:05 makefile
+-rw-r--r--   1 aamoussa  2019   1283 Aug 23 23:14 minishell.h
+-rw-r--r--   1 aamoussa  2019   3447 Aug 24 23:49 parser.c
+-rw-r--r--   1 aamoussa  2019   1608 Aug 24 08:42 parser.h
+-rw-r--r--   1 aamoussa  2019   1467 Aug 24 23:55 salah
+-rw-r--r--   1 aamoussa  2019   1516 Aug 24 21:53 shell.c
+-rw-r--r--   1 aamoussa  2019      0 Aug 24 23:55 test
+-rw-r--r--   1 aamoussa  2019  92029 Aug 23 19:55 tld.tldr
+-rw-r--r--   1 aamoussa  2019   2940 Aug 24 03:18 token.c
+-rw-r--r--   1 aamoussa  2019   1139 Aug 24 02:16 token.h

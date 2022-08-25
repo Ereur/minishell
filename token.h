@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:04:56 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/08/22 18:25:03 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/08/25 05:37:10 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 #include "minishell.h"
 
-int gettoken(char **ps, char *es, char **q, char **eq);
-
+int		gettoken(char **ps, char *es, char **q, char **eq);
+int		skip_and_find(char **ps, char *es, char *tok);
+int		skip_and_find_0(char **ps, char *es);
+void	raise_error(char *message, int exitcode, int tok);
 // int	gettoken();
 
 #endif
