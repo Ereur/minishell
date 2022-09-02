@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/08/25 04:08:52 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/08/28 22:52:29 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,17 @@ int	main(int ac, char **argv, char **envp)
 	char	*q;
 	char	*eq;
 	int		i;
+
 	q = NULL;
 	eq = NULL;
 	again = true;
 	while (again)
 	{
 		buffer = readline(getprompt(envp));
-		es = &buffer[ft_strlen(buffer)];
+		if (buffer)
+			es = &buffer[ft_strlen(buffer)];
 		ps = buffer;
-		cmd = parsepipe(&ps, es);
+		cmd = parsepipe(&ps, es, envp);
 		nullterminating(cmd);
 		print_tree(cmd);
 		// while ((i = gettoken(&buffer, &buffer[ft_strlen(buffer)], &q, &eq)) && i)

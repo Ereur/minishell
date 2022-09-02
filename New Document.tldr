@@ -794,8 +794,8 @@
             "parentId": "page",
             "childIndex": 11,
             "point": [
-              147.19,
-              241.1
+              387.4,
+              271.02
             ],
             "rotation": 0,
             "text": "Define  A Parsing Grammar",
@@ -816,8 +816,8 @@
             "parentId": "page",
             "childIndex": 12,
             "point": [
-              322.27,
-              296.19
+              562.48,
+              326.11
             ],
             "rotation": 0,
             "bend": 0.00021991523094136024,
@@ -872,8 +872,8 @@
             "parentId": "page",
             "childIndex": 13,
             "point": [
-              86.12,
-              370.73
+              325.7,
+              401.6
             ],
             "rotation": 0,
             "text": "PARSE_EXEC ",
@@ -882,7 +882,7 @@
               "size": "small",
               "isFilled": false,
               "dash": "draw",
-              "scale": 1,
+              "scale": 0.9505578647998251,
               "font": "script",
               "textAlign": "middle"
             }
@@ -894,8 +894,8 @@
             "parentId": "page",
             "childIndex": 14,
             "point": [
-              236,
-              389.87
+              468.17,
+              420.67
             ],
             "rotation": 0,
             "bend": 0,
@@ -914,8 +914,8 @@
                 "id": "end",
                 "index": 1,
                 "point": [
-                  110.46,
-                  2.86
+                  105,
+                  2.85
                 ],
                 "canBind": true
               },
@@ -923,7 +923,7 @@
                 "id": "bend",
                 "index": 2,
                 "point": [
-                  55.23,
+                  52.5,
                   1.43
                 ]
               }
@@ -951,12 +951,12 @@
             "parentId": "page",
             "childIndex": 15,
             "point": [
-              73.3,
-              358.42
+              313.51,
+              389.34
             ],
             "size": [
-              162.7,
-              58.68
+              154.66,
+              58.46
             ],
             "rotation": 0,
             "style": {
@@ -979,8 +979,8 @@
             "parentId": "page",
             "childIndex": 14,
             "point": [
-              86.66,
-              478.56
+              326.21,
+              509.02
             ],
             "rotation": 0,
             "text": "PARSE_PIPE ",
@@ -989,7 +989,7 @@
               "size": "small",
               "isFilled": false,
               "dash": "draw",
-              "scale": 1,
+              "scale": 0.9505578647998251,
               "font": "script",
               "textAlign": "middle"
             }
@@ -1001,8 +1001,8 @@
             "parentId": "page",
             "childIndex": 15,
             "point": [
-              236,
-              499.2
+              468.17,
+              529.59
             ],
             "rotation": 0,
             "bend": 0,
@@ -1021,8 +1021,8 @@
                 "id": "end",
                 "index": 1,
                 "point": [
-                  105.2,
-                  1.7
+                  100,
+                  1.69
                 ],
                 "canBind": true
               },
@@ -1030,7 +1030,7 @@
                 "id": "bend",
                 "index": 2,
                 "point": [
-                  52.6,
+                  50,
                   0.85
                 ]
               }
@@ -1058,12 +1058,12 @@
             "parentId": "page",
             "childIndex": 16,
             "point": [
-              73.3,
-              468.55
+              313.51,
+              499.05
             ],
             "size": [
-              162.7,
-              58.68
+              154.66,
+              58.46
             ],
             "rotation": 0,
             "style": {
@@ -1086,8 +1086,8 @@
             "parentId": "page",
             "childIndex": 15,
             "point": [
-              79.15,
-              573.71
+              319.07,
+              603.81
             ],
             "rotation": 0,
             "text": "PARSE_REDIR ",
@@ -1096,7 +1096,7 @@
               "size": "small",
               "isFilled": false,
               "dash": "draw",
-              "scale": 1,
+              "scale": 0.9505578647998251,
               "font": "script",
               "textAlign": "middle"
             }
@@ -1108,8 +1108,8 @@
             "parentId": "page",
             "childIndex": 16,
             "point": [
-              236,
-              595.57
+              469.66,
+              627.42
             ],
             "rotation": 0,
             "bend": -0.00009770554263440026,
@@ -1128,8 +1128,8 @@
                 "id": "end",
                 "index": 1,
                 "point": [
-                  109.94,
-                  3.43
+                  103.01,
+                  1.59
                 ],
                 "canBind": true
               },
@@ -1137,8 +1137,8 @@
                 "id": "bend",
                 "index": 2,
                 "point": [
-                  54.97,
-                  1.72
+                  51.51,
+                  0.8
                 ]
               }
             },
@@ -1165,12 +1165,12 @@
             "parentId": "page",
             "childIndex": 17,
             "point": [
-              73.3,
-              563.7
+              315,
+              597
             ],
             "size": [
-              162.7,
-              58.68
+              154.66,
+              58.46
             ],
             "rotation": 0,
             "style": {
@@ -1193,8 +1193,8 @@
             "parentId": "page",
             "childIndex": 18.666666666666668,
             "point": [
-              517.33,
-              475.96
+              736.4,
+              511.37
             ],
             "rotation": 0,
             "text": "  | ",
@@ -1203,7 +1203,7 @@
               "size": "small",
               "isFilled": false,
               "dash": "draw",
-              "scale": 1,
+              "scale": 0.9505578647998251,
               "font": "script",
               "textAlign": "middle"
             }
@@ -1215,8 +1215,8 @@
             "parentId": "page",
             "childIndex": 19.666666666666668,
             "point": [
-              562.69,
-              374.9
+              778.7,
+              405.76
             ],
             "rotation": 0,
             "text": "EXEC ",
@@ -1225,7 +1225,7 @@
               "size": "small",
               "isFilled": false,
               "dash": "draw",
-              "scale": 1,
+              "scale": 0.9505578647998251,
               "font": "script",
               "textAlign": "middle"
             }
@@ -1237,8 +1237,8 @@
             "parentId": "page",
             "childIndex": 20.666666666666668,
             "point": [
-              384.88,
-              575.7
+              609.68,
+              605.8
             ],
             "rotation": 0,
             "text": "< FDGF",
@@ -1247,7 +1247,7 @@
               "size": "small",
               "isFilled": false,
               "dash": "draw",
-              "scale": 1,
+              "scale": 0.9505578647998251,
               "font": "script",
               "textAlign": "middle"
             }
@@ -1259,8 +1259,8 @@
             "parentId": "page",
             "childIndex": 14,
             "point": [
-              373.75,
-              479.15
+              599.11,
+              509.61
             ],
             "rotation": 0,
             "text": "PARSE_EXEC ",
@@ -1269,7 +1269,7 @@
               "size": "small",
               "isFilled": false,
               "dash": "draw",
-              "scale": 1,
+              "scale": 0.9505578647998251,
               "font": "script",
               "textAlign": "middle"
             }
@@ -1281,8 +1281,8 @@
             "parentId": "page",
             "childIndex": 14,
             "point": [
-              578.11,
-              477.84
+              793.36,
+              508.31
             ],
             "rotation": 0,
             "text": "PARSE_EXEC ",
@@ -1291,7 +1291,7 @@
               "size": "small",
               "isFilled": false,
               "dash": "draw",
-              "scale": 1,
+              "scale": 0.9505578647998251,
               "font": "script",
               "textAlign": "middle"
             }
@@ -1303,8 +1303,8 @@
             "parentId": "page",
             "childIndex": 21.666666666666668,
             "point": [
-              472.16,
-              577.24
+              692.65,
+              607.33
             ],
             "rotation": 0,
             "text": "<< FDGF",
@@ -1313,7 +1313,7 @@
               "size": "small",
               "isFilled": false,
               "dash": "draw",
-              "scale": 1,
+              "scale": 0.9505578647998251,
               "font": "script",
               "textAlign": "middle"
             }
@@ -1325,8 +1325,8 @@
             "parentId": "page",
             "childIndex": 22.666666666666668,
             "point": [
-              674.44,
-              576.79
+              884.93,
+              606.88
             ],
             "rotation": 0,
             "text": ">> FDGF",
@@ -1335,7 +1335,7 @@
               "size": "small",
               "isFilled": false,
               "dash": "draw",
-              "scale": 1,
+              "scale": 0.9505578647998251,
               "font": "script",
               "textAlign": "middle"
             }
@@ -1347,8 +1347,8 @@
             "parentId": "page",
             "childIndex": 16,
             "point": [
-              383.17,
-              370.04
+              608.06,
+              400.92
             ],
             "rotation": 0,
             "text": "PARSE_REDIR ",
@@ -1357,7 +1357,7 @@
               "size": "small",
               "isFilled": false,
               "dash": "draw",
-              "scale": 1,
+              "scale": 0.9505578647998251,
               "font": "script",
               "textAlign": "middle"
             }
@@ -1369,8 +1369,8 @@
             "parentId": "page",
             "childIndex": 16,
             "point": [
-              653.66,
-              378.56
+              865.18,
+              409.4
             ],
             "rotation": 0,
             "text": "PARSE_REDIR ",
@@ -1379,7 +1379,7 @@
               "size": "small",
               "isFilled": false,
               "dash": "draw",
-              "scale": 1,
+              "scale": 0.9505578647998251,
               "font": "script",
               "textAlign": "middle"
             }
@@ -1391,8 +1391,8 @@
             "parentId": "page",
             "childIndex": 23.666666666666668,
             "point": [
-              579.81,
-              575.11
+              794.98,
+              605.21
             ],
             "rotation": 0,
             "text": " > Anas",
@@ -1401,7 +1401,7 @@
               "size": "small",
               "isFilled": false,
               "dash": "draw",
-              "scale": 1,
+              "scale": 0.9505578647998251,
               "font": "script",
               "textAlign": "middle"
             }
@@ -1413,8 +1413,8 @@
             "parentId": "page",
             "childIndex": 24.666666666666668,
             "point": [
-              85.46,
-              676.09
+              96.15,
+              840.34
             ],
             "size": [
               374.31,
@@ -1441,8 +1441,8 @@
             "parentId": "page",
             "childIndex": 25.666666666666668,
             "point": [
-              119.82,
-              706.61
+              130.51,
+              870.86
             ],
             "rotation": 0,
             "text": "type ",
@@ -1463,8 +1463,8 @@
             "parentId": "page",
             "childIndex": 26.666666666666668,
             "point": [
-              127.82,
-              753.58
+              138.51,
+              917.83
             ],
             "rotation": 0,
             "text": "file",
@@ -1485,8 +1485,8 @@
             "parentId": "page",
             "childIndex": 27.666666666666668,
             "point": [
-              122.82,
-              799.71
+              133.51,
+              963.96
             ],
             "rotation": 6.207307532530266,
             "text": "efile",
@@ -1507,8 +1507,8 @@
             "parentId": "page",
             "childIndex": 28.666666666666668,
             "point": [
-              119.32,
-              842.34
+              130.01,
+              1006.59
             ],
             "rotation": 0,
             "text": "mode",
@@ -1529,8 +1529,8 @@
             "parentId": "page",
             "childIndex": 29.666666666666668,
             "point": [
-              132.82,
-              884.2
+              143.51,
+              1048.45
             ],
             "rotation": 0,
             "text": "fd",
@@ -1573,8 +1573,8 @@
             "parentId": "page",
             "childIndex": 31.666666666666668,
             "point": [
-              210.52,
-              638.89
+              221.21,
+              803.14
             ],
             "size": [
               104.5,
