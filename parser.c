@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/01 19:27:48 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/06 08:40:58 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
-char *find_name(char *s, char **after)
+char *find_name(char *s)
 {
 	char *tmp;
 	char *name;
@@ -69,7 +69,8 @@ int skip_$(char *str)
 	int i;
 	
 	i = 0;
-	while (ft_strchr(str, '$'))
+	str = ft_strchr(str, '$');
+	while (str && *str == '$')
 	{
 		str++;	
 		i++;
@@ -77,90 +78,164 @@ int skip_$(char *str)
 	return (i);
 }
 
-char *find_first(char *str)
-{
-	char *ret;
-	char tmp[0];
-	char *first;
+// char *find_first(char *str)
+// {
+// 	char *ret;
+// 	char tmp[0];
+// 	char *first;
 
-	ret = ft_strchr(str, '$');
-	ret = ret + skip_$(ret);
-	tmp[0] = *ret;
-	*ret = 0;
-	first = ft_strdup(str);
-	*ret = tmp[0];
-	return (first);
+// 	ret = ft_strchr(str, '$');
+// 	ret = ret + skip_$(ret);
+// 	tmp[0] = *ret;
+// 	*ret = 0;
+// 	first = ft_strdup(str);
+// 	*ret = tmp[0];
+// 	return (first);
+// }
+
+// char *join_all(char *first, char *sec, char *third)
+// {
+// 	char *str;
+
+// 	if (!sec)
+// 	{	
+// 		sec = (char *)malloc(1);
+// 		sec[0] = 0;
+// 	}
+// 	if (!first)
+// 	{
+// 		first = (char *)malloc(1);
+// 		first[0] = 0;
+// 	}
+// 	if(!third)
+// 	{
+// 		third = (char *)malloc(1);
+// 		third[0] = 0;
+// 	}
+// 	str = ft_strjoin(first, sec);
+// 	str = ft_strjoin(str, third);
+// 	return (str);
+// }
+
+
+
+// int	expand_dq(char **q, char **eq, char **envp)
+// {
+// 	char *ret;
+// 	char tmp[0];
+// 	char *name;
+// 	char *first;
+// 	int		i;
+// 	char	*variabl;
+// 	char	*after;
+
+// 	i = 0;
+// 	ret = NULL;
+// 	variabl = NULL;
+// 	first = NULL;
+// 	tmp[0] = *eq[0];
+// 	name = NULL;
+// 	*eq[0] = 0;
+// 	ret = ft_strchr(*q, '$');
+// 	if (ret)
+// 	{	
+// 		ret = ret + skip_$(ret);
+// 		first = find_first(*q);
+// 		first[ft_strlen(first) - 1] = 0;
+// 		name = find_name(ret, &after);
+// 		while (envp[i])
+// 		{
+// 			if (ft_strnstr(envp[i], name, ft_strlen(envp[i])))
+// 				break;
+// 			i++;
+// 		}
+// 		printf("test : %s\n",*q);
+// 		if(envp[i])
+// 		{	
+// 			variabl = (ft_strchr(envp[i], '=') + 1);
+// 		}
+// 		ret = ret + (ft_strlen(name) - 1);
+// 		*q = join_all(first, variabl, ret);
+		
+// 	}
+// 	else 
+// 		return (0);
+// 	expand_dq(q, eq, envp);
+// 	return (1);
+// }
+void put_zero_in_null(char **str)
+{
+	char *tmp;
+
+	tmp = NULL;
+	tmp = *str;
+	if (!tmp)
+	{
+		tmp = (char *)malloc(1);
+		tmp[0] = 0;
+	}
+	*str = tmp;
 }
 
-char *join_all(char *first, char *sec, char *third)
+char *join(char *str, size_t i, char *name, char *ret)
 {
-	char *str;
+	char *result;
+	char *dest;
 
-	if (!sec)
+	result = NULL;
+	if (i > 0)
 	{	
-		sec = (char *)malloc(1);
-		sec[0] = 0;
+		dest = (char *)malloc(i);
+		result =  ft_strncpy(dest, str, i);	
 	}
-	if (!first)
-	{
-		first = (char *)malloc(1);
-		first[0] = 0;
-	}
-	if(!third)
-	{
-		third = (char *)malloc(1);
-		third[0] = 0;
-	}
-	str = ft_strjoin(first, sec);
-	str = ft_strjoin(str, third);
-	return (str);
+	put_zero_in_null(&name);
+	put_zero_in_null(&ret);
+	put_zero_in_null(&result);
+	result = ft_strjoin(result, name);
+	result = ft_strjoin(ret, result);
+	return (result);
 }
 
-
-
-int	expand_dq(char **q, char **eq, char **envp)
+void expand_dq(char **q, char **eq, char **envp)
 {
-	char *ret;
-	char tmp[0];
-	char *name;
-	char *first;
+	char *scanning;
+	char *variable_name;
+	size_t scanning_lenght;
+	char	*result;
 	int		i;
-	char	*variabl;
-	char	*after;
+	char	*value;
 
 	i = 0;
-	ret = NULL;
-	variabl = NULL;
-	first = NULL;
-	tmp[0] = *eq[0];
-	name = NULL;
-	*eq[0] = 0;
-	ret = ft_strchr(*q, '$');
-	if (ret)
-	{	
-		ret = ret + skip_$(ret);
-		first = find_first(*q);
-		first[ft_strlen(first) - 1] = 0;
-		name = find_name(ret, &after);
+	result = NULL;
+	variable_name = NULL;
+	scanning = NULL;
+	value = NULL;
+	while (scanning < *eq)
+	{
+		scanning = ft_strchr(*q, '$');
+		if (!scanning)
+			break;
+		scanning = scanning + skip_$(*q);
+		variable_name = find_name(scanning);
+		scanning_lenght = scanning - *q;	
+		scanning = scanning + (ft_strlen(variable_name) - 1);
+		i = 0;
 		while (envp[i])
 		{
-			if (ft_strnstr(envp[i], name, ft_strlen(envp[i])))
+			if (ft_strnstr(envp[i], variable_name, ft_strlen(envp[i])))
 				break;
 			i++;
 		}
 		printf("test : %s\n",*q);
-		if(envp[i])
+ 		if(envp[i])
 		{	
-			variabl = (ft_strchr(envp[i], '=') + 1);
+			value = (ft_strchr(envp[i], '=') + 1);
 		}
-		ret = ret + (ft_strlen(name) - 1);
-		*q = join_all(first, variabl, ret);
-		
+		result = join(*q, scanning_lenght - 1, value, result);
+		*q = scanning;
 	}
-	else 
-		return (0);
-	expand_dq(q, eq, envp);
-	return (1);
+	if (result)
+		*q = ft_strjoin(result, *q);
 }
 
 void double_quote_parser(char **q, char **eq, char *es, char **ps, char **envp)
@@ -325,6 +400,14 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 	return (t_cmd *)(cmd);
 }
 
+void single_quote_parser(char **q, char **eq, char *es, char **ps, char **envp)
+{
+	char *single_quote;
+	char *double_quote;
+
+		
+}
+
 t_cmd *parseexec(char **ps, char *es, char **envp)
 {
 	t_cmd		*cmd;
@@ -353,6 +436,7 @@ t_cmd *parseexec(char **ps, char *es, char **envp)
 			printf("syntax error 1");
 			exit(1);
 		}
+		single_quote_parser(&q, &eq, es, ps, envp);
 		double_quote_parser(&q, &eq, es, ps, envp);
 		ret->argv[argc] = q;
 		ret->eargv[argc] = eq;
