@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/08/28 22:52:29 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/12 09:06:28 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ int	main(int ac, char **argv, char **envp)
 	while (again)
 	{
 		buffer = readline(getprompt(envp));
-		if (buffer)
-			es = &buffer[ft_strlen(buffer)];
+		if (!buffer[0])
+			continue ;
+		es = &buffer[ft_strlen(buffer)];
 		ps = buffer;
 		cmd = parsepipe(&ps, es, envp);
 		nullterminating(cmd);

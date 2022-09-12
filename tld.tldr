@@ -4086,6 +4086,72 @@
               "font": "script",
               "textAlign": "middle"
             }
+          },
+          "34ffbe73-913d-4c22-1518-6a82f58a7874": {
+            "id": "34ffbe73-913d-4c22-1518-6a82f58a7874",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 33,
+            "point": [
+              725.1333333333334,
+              748.1199999999999
+            ],
+            "rotation": 0,
+            "text": " Anas'12345'ok",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "8f348e43-7ec2-4217-0cca-19eb68c7109c": {
+            "id": "8f348e43-7ec2-4217-0cca-19eb68c7109c",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 34,
+            "point": [
+              726.73,
+              785.04
+            ],
+            "rotation": 0,
+            "text": " Anas'12345'ok",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
+          },
+          "43c8d155-04e1-4d0d-26fd-054f70112029": {
+            "id": "43c8d155-04e1-4d0d-26fd-054f70112029",
+            "type": "text",
+            "name": "Text",
+            "parentId": "page",
+            "childIndex": 35,
+            "point": [
+              778.9933333333333,
+              774.56
+            ],
+            "rotation": 0,
+            "text": " ",
+            "style": {
+              "color": "black",
+              "size": "small",
+              "isFilled": false,
+              "dash": "draw",
+              "scale": 1,
+              "font": "script",
+              "textAlign": "middle"
+            }
           }
         },
         "bindings": {}

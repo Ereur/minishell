@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/06 08:40:58 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/12 09:04:47 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,13 +400,20 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 	return (t_cmd *)(cmd);
 }
 
-void single_quote_parser(char **q, char **eq, char *es, char **ps, char **envp)
-{
-	char *single_quote;
-	char *double_quote;
+// char *single_quote_parser(char **q, char **eq, char *es, char **ps, char **envp)
+// {
+// 	char *single_quote;
+// 	char *double_quote;
+// 	char *str;
 
-		
-}
+// 	single_quote = ft_strchr(*q,'\'');
+// 	double_quote = ft_strchr(*q, '\"');
+	
+// 	if (single_quote < double_quote)
+// 	{
+// 		str = ;
+// 	}	
+// }
 
 t_cmd *parseexec(char **ps, char *es, char **envp)
 {
@@ -416,6 +423,7 @@ t_cmd *parseexec(char **ps, char *es, char **envp)
 	char		*eq;
 	int			tok;
 	int			argc;
+	char		*single_quotes;
 
 	argc = 0;
 	cmd = execcmd();
@@ -436,7 +444,7 @@ t_cmd *parseexec(char **ps, char *es, char **envp)
 			printf("syntax error 1");
 			exit(1);
 		}
-		single_quote_parser(&q, &eq, es, ps, envp);
+		// single_quotes = single_quote_parser(&q, &eq, es, ps, envp);
 		double_quote_parser(&q, &eq, es, ps, envp);
 		ret->argv[argc] = q;
 		ret->eargv[argc] = eq;
