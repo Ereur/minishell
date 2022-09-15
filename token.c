@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:58:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/08/25 05:32:51 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/12 10:48:31 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int skip_and_find_0(char **ps, char *es)
 		s++;
 	return (!*s);
 }
+
 // skip spaces and return true in case of finding the given token
 int skip_and_find(char **ps, char *es, char *tok)
 {
