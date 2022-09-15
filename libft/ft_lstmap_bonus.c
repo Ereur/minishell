@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/14 13:29:46 by aamoussa          #+#    #+#             */
-/*   Updated: 2021/11/22 20:02:27 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/13 19:09:43 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *),	void (*del)(void *))
 	head = NULL;
 	if (lst)
 	{
-		head = ft_lstnew(f(lst->content));
+		head = ft_lstnew(f(lst->content), 0);
 		if (!head)
 			return (NULL);
 		lst = lst->next;
