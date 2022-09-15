@@ -1,46 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   excution.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/01 22:35:49 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/12 09:15:16 by zoukaddo         ###   ########.fr       */
+/*   Created: 2022/09/14 20:28:52 by zoukaddo          #+#    #+#             */
+/*   Updated: 2022/09/14 20:28:54 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 
-#include "../minishell.h"
-
-int	built_in_pwd(char **str)
+void    command_excution()
 {
-	char		*pwd;
-	static char	*reserve;
-
-
-	if (*str == NULL)
-		return (0);
-	pwd = getcwd(NULL, 0);
-	if (!pwd)
-		pwd = reserve;
-	else
-	{
-		if (reserve)
-			free(reserve);
-		reserve = pwd;
-	}
-	printf("%s\n", pwd);
-	free(pwd);
-	return (0);
-}
-
-int	main(void)
-{
-	char	*str[2];
-
-	str[0] = "pwd";
-	str[1] = NULL;
-	built_in_pwd(str);
-	return (0);
+    int ret;
+    int i;
+    
+    i = 0;
+    while(i < nbrofsimplecommand)
+    {
+        ret = fork();
+        if (ret == 0)
+        {
+            if(execve())
+            perror("execve");
+            exit(1);
+        }
+        else if (ret < 0)
+        {
+            perror("fork");
+            return ;
+        }
+        i++;
+    }
+    waitpid(ret,NULL);
 }
