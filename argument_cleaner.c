@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/15 17:06:23 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:47:48 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,9 +192,9 @@ void split_dollar(t_list *args)
 	
 }
 
-void make_quotes(t_cmd *cmd)
+void make_quotes(t_list	*args)
 {
-	t_execcmd	*args;
+
 	t_list		*split_args;
 	int			i;
 	char		q;
@@ -205,11 +205,11 @@ void make_quotes(t_cmd *cmd)
 	t_list		*tmp;
 
 	
-	args = (t_execcmd *)cmd;
-	if (!check_quotes(args->args->content))
+
+	if (!check_quotes(args->content))
 		raise_error("syntax error unclosed quotes", 1, 0);
 
-	tmp = args->args;
+	tmp = args;
 	while (tmp)
 	{
 		split_args = NULL;
@@ -272,14 +272,14 @@ void clean_arguments(t_cmd *cmd)
 	if (cmd->type == EXEC)
 	{
 		execcmd = (t_execcmd *)cmd;
-		make_quotes(cmd);
+		if (execcmd->args)
+			make_quotes(execcmd->args);
 	}
 	if (cmd->type == REDIR)
 	{
 		redir = (t_redircmd *)cmd;
-		*redir->efile = 0;
+		make_quotes(redir->filee);
 		clean_arguments(redir->cmd);
-		// nullterminating(redir->cmd);
 	}
 	if (cmd->type == PIPE)
 	{

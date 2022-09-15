@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/15 17:36:17 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:53:37 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ typedef struct s_execcmd {
 typedef struct s_redircmd {
 	int			type;
 	t_cmd		*cmd;
-	char		*file;
-	char		*efile;
+	t_list		*filee;
 	int			mode;
 	int			fd;
 }	t_redircmd;
@@ -68,10 +67,12 @@ char	check_quotes(char *line);
 void	clean_arguments(t_cmd *cmd);
 int		skip_$(char *str);
 int		find_name(char *s);
-void put_zero_in_null(char **str);
+void 	put_zero_in_null(char **str);
+void 	add_arg(t_list **head, char **q, char **eq);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
 void	nullterminating(t_cmd *cmd);
 void	ft_print_som(char *q, char *eq);
+t_cmd	*parser(char **ps, char *es, char **envp);
 void	print_tree(t_cmd *cmd);
 
 #endif

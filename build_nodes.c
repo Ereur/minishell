@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 23:43:08 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/08/25 04:11:32 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:44:13 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 t_cmd *redirecmd(t_cmd *cmd, char *file, char *efile, int mode, int fd)
 {
 	t_redircmd	*root;
-	
+	t_list		*filee;
+
 	root = malloc(sizeof(t_redircmd));
+	root->filee = NULL;
 	ft_memset(root, 0, sizeof(t_redircmd *));
-	root->file = file;
-	root->efile = efile;
+	add_arg(&root->filee, &file, &efile);
 	root->mode = mode;
 	root->type = REDIR;
 	root->cmd = cmd;

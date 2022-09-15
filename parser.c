@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/15 17:19:35 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/15 18:55:04 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,29 +282,28 @@ void quote_parser(char **q, char **eq, char *quote_type, char **ps, char **envp)
 	}
 }
 
-void nullterminating(t_cmd *cmd)
-{
-	t_execcmd	*execcmd;
-	t_redircmd	*redir;
-	t_pipecmd	*pipecmd;
-	int			i;
+// void nullterminating(t_cmd *cmd)
+// {
+// 	t_execcmd	*execcmd;
+// 	t_redircmd	*redir;
+// 	t_pipecmd	*pipecmd;
+// 	int			i;
 
-	i = 0;
-	if (!cmd)
-		return ;
-	if (cmd->type == REDIR)
-	{
-		redir = (t_redircmd *)cmd;
-		*redir->efile = 0;
-		nullterminating(redir->cmd);
-	}
-	if (cmd->type == PIPE)
-	{
-		pipecmd = (t_pipecmd *)(cmd);
-		nullterminating(pipecmd->left);
-		nullterminating(pipecmd->right);
-	}
-}
+// 	i = 0;
+// 	if (!cmd)
+// 		return ;
+// 	if (cmd->type == REDIR)
+// 	{
+// 		redir = (t_redircmd *)cmd;
+// 		nullterminating(redir->cmd);
+// 	}
+// 	if (cmd->type == PIPE)
+// 	{
+// 		pipecmd = (t_pipecmd *)(cmd);
+// 		nullterminating(pipecmd->left);
+// 		nullterminating(pipecmd->right);
+// 	}
+// }
 
 void ft_print_som(char *q, char *eq)
 {
@@ -333,7 +332,7 @@ void print_tree(t_cmd *cmd)
 			redir = (t_redircmd *)(cmd);
 			printf("\n----------redirection-------\n");
 			// ft_print_som(redir->file, redir->efile);
-			printf("|%s|\n", redir->file);
+			printf("|%s|\n", redir->filee->content);
 			printf("fd %d\n", redir->fd);
 			printf(" \nmode %d\n", redir->mode);
 			print_tree(redir->cmd);
@@ -514,4 +513,13 @@ char check_quotes(char *line)
 		i++;
 	}
 	return (1);
+}
+
+t_cmd *parser(char **ps, char *es, char **envp)
+{
+	t_cmd *cmd;
+	
+	cmd = parsepipe(ps, es, envp);
+	clean_arguments(cmd);
+	return (cmd);
 }
