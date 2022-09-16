@@ -2,6 +2,9 @@
 	"files.associations": {
 		"parser.h": "c",
 		"minishell.h": "c",
-		"limits.h": "c"
-	}
+		"limits.h": "c",
+		"excution.h": "c",
+		"execution.h": "c"
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }

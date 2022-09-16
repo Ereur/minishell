@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:08 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/15 18:01:26 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/15 19:23:17 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void    ft_echo(char **av)
 		ft_putchar_fd('\n', 1);
 }
 
-int     main(int ac, char **av)
-{
-    ft_echo(av);
-    return (0);
-}
+// int     main(int ac, char **av)
+// {
+//     ft_echo(av);
+//     return (0);
+// }

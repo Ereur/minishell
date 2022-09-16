@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/15 18:53:37 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:19:09 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@
 typedef struct s_gb_variable
 {
 	char **envp;
-	t_list *env;
+	t_senv *env;
 
 } t_gb_variable;
 
-t_gb_variable	variable;
 
 typedef struct s_cmd
 {
@@ -41,6 +40,7 @@ typedef struct s_cmd
 typedef struct s_execcmd {
 	int		type;
 	t_list	*args;
+	char	**argument;
 	char	*argv[10];
 	char	*eargv[10];
 }	t_execcmd;
@@ -58,6 +58,8 @@ typedef struct s_pipecmd {
 	t_cmd	*left;
 	t_cmd	*right;
 }	t_pipecmd;
+
+t_gb_variable	gb;
 
 t_cmd	*parsepipe(char **ps, char *es, char **envp);
 t_cmd	*redirecmd(t_cmd *cmd, char *file, char *efile, int mode, int fd);
