@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/16 18:21:53 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:28:38 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int	main(int ac, char **argv, char **envp)
 	again = true;
 	gb.envp = 0;
 	int j = 0;
+	gb.status = 0;
 	setup_env(envp);
-	exit(1);
+	// env();
 	while (again)
 	{
 		buffer = readline(getprompt(envp));

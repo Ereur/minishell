@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:58:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/16 17:52:38 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:37:01 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	raise_error(char *message, int exitcode, int tok)
 {
 	printf("%s `%c'\n", message, tok);
-	gb.exit_satut = exitcode;
+	gb.exit_statut = exitcode;
 	gb.status = 1;
 }
 

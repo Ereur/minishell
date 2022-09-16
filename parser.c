@@ -6,7 +6,11 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/09/16 17:52:50 by zoukaddo         ###   ########.fr       */
+=======
+/*   Updated: 2022/09/16 18:16:04 by aamoussa         ###   ########.fr       */
+>>>>>>> 4e007b8b8ab1d6fb2e1b501e6487f50f22f7c84a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -497,7 +501,11 @@ t_cmd *parseexec(char **ps, char *es, char **envp)
 	if (skip_and_find(ps,es, "|"))
 	{		
 		raise_error("syntax error near unexpected token", 258, '|');
+<<<<<<< HEAD
 		if (gb.exit_satut == 258)
+=======
+		if (gb.exit_statut == 258)
+>>>>>>> 4e007b8b8ab1d6fb2e1b501e6487f50f22f7c84a
 			return (NULL);
 	}
 	// if(skip_and_find_0(ps, es))
