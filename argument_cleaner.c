@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/16 17:35:21 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:14:08 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,14 @@ char *grep_variable(char *str)
 	if (!*name)
 		return (name);
 	variabl = NULL;
-	while (variable.envp[i])
+	while (gb.envp[i])
 	{
-		if (ft_strnstr(variable.envp[i], name, ft_strlen(variable.envp[i])))
+		if (ft_strnstr(gb.envp[i], name, ft_strlen(gb.envp[i])))
 			break;
 		i++;
 	}
-	if(variable.envp[i])
-		variabl = (ft_strchr(variable.envp[i], '=') + 1);
+	if(gb.envp[i])
+		variabl = (ft_strchr(gb.envp[i], '=') + 1);
 	put_zero_in_null(&variabl);
 	return (variabl);
 }
@@ -296,7 +296,7 @@ void clean_arguments(t_cmd *cmd)
 		if (execcmd->args)
 		{	
 			make_quotes(execcmd->args);
-			if (variable.status)
+			if (gb.status)
 				return;
 			convert_list_to_args(execcmd);
 		}
@@ -305,20 +305,20 @@ void clean_arguments(t_cmd *cmd)
 	{
 		redir = (t_redircmd *)cmd;
 		make_quotes(redir->filee);
-		if(variable.status)
+		if(gb.status)
 			return;
 		clean_arguments(redir->cmd);
-		if (variable.status)
+		if (gb.status)
 			return ;
 	}
 	if (cmd->type == PIPE)
 	{
 		pipecmd = (t_pipecmd *)(cmd);
 		clean_arguments(pipecmd->left);
-		if (variable.status)
+		if (gb.status)
 			return;
 		clean_arguments(pipecmd->right);
-		if (variable.status)
+		if (gb.status)
 			return;
 	}
 }
