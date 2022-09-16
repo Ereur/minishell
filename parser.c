@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/15 18:55:04 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:23:19 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,11 @@ void quote_parser(char **q, char **eq, char *quote_type, char **ps, char **envp)
 	*eq[0] = *tmp;
 	ret = ft_strchr((ft_strchr(*q, *quote_type) + 1), *quote_type);
 	if (!ret)
-		raise_error("syntax error unclosed quotes", 1, 0);
+	{	
+		raise_error("syntax error unclosed quotes", 258, 0);
+		*q = NULL;
+		return ;
+	}
 	if (ret)
 	{	
 		ret = ret + 1;
@@ -375,28 +379,40 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 		{
 			tok = gettoken(ps, es, &q, &eq);
 			if (ft_strchr(FORBIDEN_REDIR, tok))
-				raise_error("syntax error near unexpected token", 1, tok);
+			{	
+				raise_error("syntax error near unexpected token", 258, tok);
+				return (NULL);
+			}
 			cmd = redirecmd(cmd, q, eq, O_RDONLY, 0);
 		}
 		else if ('>')
 		{
 			tok = gettoken(ps, es, &q, &eq);
 			if (ft_strchr(FORBIDEN_REDIR, tok))
-				raise_error("syntax error near unexpected token", 1, tok);
+			{	
+				raise_error("syntax error near unexpected token", 258, tok);
+				return (NULL);
+			}
 			cmd = redirecmd(cmd, q, eq, O_RDWR|O_TRUNC|O_CREAT, 1);
 		}
 		else if ('-')
 		{
 			tok = gettoken(ps, es, &q, &eq);
 			if (ft_strchr(FORBIDEN_REDIR, tok))
-				raise_error("syntax error near unexpected token", 1, tok);
+			{	
+				raise_error("syntax error near unexpected token", 258, tok);
+				return (NULL);
+			}
 			cmd = redirecmd(cmd, q, eq, O_RDONLY, 0);
 		}
 		else if ('+')
 		{
 			tok = gettoken(ps, es, &q, &eq);
 			if (ft_strchr(FORBIDEN_REDIR, tok))
+			{	
 				raise_error("syntax error near unexpected token", 1, tok);
+				return (NULL);
+			}
 			cmd = redirecmd(cmd, q,eq, O_RDWR|O_CREAT, 1);
 		}
 	}
@@ -415,16 +431,32 @@ void quotes_pareser(char **q, char **eq, char **ps, char **envp)
 	if (single_quotes && double_quotes)
 	{	
 		if (single_quotes < double_quotes)
+		{	
 			quote_parser(q, eq, "\'", ps, envp);
+			if (!q)
+				return ;
+		}
 		else if (double_quotes > single_quotes)
+		{	
 			quote_parser(q, eq, "\"", ps, envp);
+			if (!q)
+				return ;
+		}
 	}
 	else
 	{
 		if (single_quotes)
+		{	
 			quote_parser(q, eq, "\'", ps, envp);
+			if (!q)
+				return ;
+		}
 		if (double_quotes)
+		{	
 			quote_parser(q, eq, "\"", ps, envp);
+			if (!q)
+				return ;
+		}
 	}
 }
 
@@ -452,8 +484,14 @@ t_cmd *parseexec(char **ps, char *es, char **envp)
 	ret = (t_execcmd *)(cmd);
 	ret->args = NULL;
 	cmd = parseredirec(ps, es, cmd);
+	if (!cmd)
+		return (NULL);
 	if (skip_and_find(ps,es, "|"))
-			raise_error("syntax error near unexpected token", 1, '|');
+	{		
+		raise_error("syntax error near unexpected token", 258, '|');
+		if (variable.exit_satut == 258)
+			return (NULL);
+	}
 	// if(skip_and_find_0(ps, es))
 	// 		raise_error("syntax error near unexpected token", 1, '|');
 	while (!skip_and_find(ps , es, "|"))
@@ -464,18 +502,20 @@ t_cmd *parseexec(char **ps, char *es, char **envp)
 		// skip_and_find_quotes(ps, );
 		if (tok != 'a')
 		{
-			printf("syntax error 1");
-			exit(1);
+			raise_error("syntax error ", 258, 0);
+			return (NULL);
 		}
 		quotes_pareser(&q, &eq, ps, envp);
+		if (!q)
+			return (NULL);
 		add_arg(&ret->args, &q, &eq);
 		// ret->argv[argc] = q;
 		// ret->eargv[argc] = eq;
 		argc++;
  		cmd = parseredirec(ps ,es, cmd);
+		if (!cmd)
+			return (NULL);
 	}
-	ret->argv[argc] = 0;
-	ret->eargv[argc] = 0;
 	return (cmd);
 }
 
@@ -484,10 +524,14 @@ t_cmd *parsepipe(char **ps, char *es, char **envp)
 	t_cmd	*cmd;
 	cmd = NULL;
 	cmd = parseexec(ps, es, envp);
+	if (!cmd)
+		return (NULL);
 	if (skip_and_find(ps , es, "|"))
 	{	
 		gettoken(ps , es, 0, 0);
 		cmd = pipecmd(cmd, parsepipe(ps, es, envp));
+		if (!cmd)
+			return (NULL);
 		// printf("hehe%d\n", cmd->type);
 	}
 	return (cmd);
@@ -495,7 +539,7 @@ t_cmd *parsepipe(char **ps, char *es, char **envp)
 
 char check_quotes(char *line)
 {
-	int i;
+	int i;	
 	char q;
 
 	i = 0;
@@ -521,5 +565,7 @@ t_cmd *parser(char **ps, char *es, char **envp)
 	
 	cmd = parsepipe(ps, es, envp);
 	clean_arguments(cmd);
+	if (variable.status)
+		return (NULL);
 	return (cmd);
 }

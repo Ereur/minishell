@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/15 18:53:37 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:17:19 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_gb_variable
 {
 	char **envp;
 	t_list *env;
+	int		status;
+	int		exit_satut;
 
 } t_gb_variable;
 
@@ -41,8 +43,7 @@ typedef struct s_cmd
 typedef struct s_execcmd {
 	int		type;
 	t_list	*args;
-	char	*argv[10];
-	char	*eargv[10];
+	
 }	t_execcmd;
 
 typedef struct s_redircmd {

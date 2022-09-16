@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/15 18:47:48 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:23:01 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,8 +206,11 @@ void make_quotes(t_list	*args)
 
 	
 
-	if (!check_quotes(args->content))
-		raise_error("syntax error unclosed quotes", 1, 0);
+	if (!check_quotes((args)->content))
+	{	
+		raise_error("syntax error unclosed quotes", 258, 0);
+		return ;
+	}
 
 	tmp = args;
 	while (tmp)
@@ -273,18 +276,30 @@ void clean_arguments(t_cmd *cmd)
 	{
 		execcmd = (t_execcmd *)cmd;
 		if (execcmd->args)
+		{	
 			make_quotes(execcmd->args);
+			if (variable.status)
+				return;
+		}
 	}
 	if (cmd->type == REDIR)
 	{
 		redir = (t_redircmd *)cmd;
 		make_quotes(redir->filee);
+		if(variable.status)
+			return;
 		clean_arguments(redir->cmd);
+		if (variable.status)
+			return ;
 	}
 	if (cmd->type == PIPE)
 	{
 		pipecmd = (t_pipecmd *)(cmd);
 		clean_arguments(pipecmd->left);
+		if (variable.status)
+			return;
 		clean_arguments(pipecmd->right);
+		if (variable.status)
+			return;
 	}
 }

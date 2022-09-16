@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/15 19:07:17 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:18:01 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **argv, char **envp)
 
 	again = true;
 	variable.envp = envp;
-	
+	variable.status = 0;	
 	while (again)
 	{
 		buffer = readline(getprompt(envp));
@@ -38,6 +38,8 @@ int	main(int ac, char **argv, char **envp)
 		add_history(buffer);
 		ps = buffer;
 		cmd = parser(&ps, es, envp);
+		if (!cmd)
+			continue;
 		print_tree(cmd);
 	}
 	return (0);

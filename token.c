@@ -6,16 +6,17 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:58:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/12 10:48:31 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/16 16:19:22 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void raise_error(char *message, int exitcode, int tok)
+void	raise_error(char *message, int exitcode, int tok)
 {
 	printf("%s `%c'\n", message, tok);
-	exit(1);	
+	variable.exit_satut = exitcode;
+	variable.status = 1;
 }
 
 int skip_and_find_0(char **ps, char *es)
