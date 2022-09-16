@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   argument_cleaner.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2022/09/16 16:40:10 by zoukaddo         ###   ########.fr       */
+=======
 /*   Updated: 2022/09/16 17:35:21 by aamoussa         ###   ########.fr       */
+>>>>>>> c6c1840004ea643bb4d1d128133d08be6f27a232
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +69,14 @@ char *grep_variable(char *str)
 	if (!*name)
 		return (name);
 	variabl = NULL;
-	while (variable.envp[i])
+	while (gb.envp[i])
 	{
-		if (ft_strnstr(variable.envp[i], name, ft_strlen(variable.envp[i])))
+		if (ft_strnstr(gb.envp[i], name, ft_strlen(gb.envp[i])))
 			break;
 		i++;
 	}
-	if(variable.envp[i])
-		variabl = (ft_strchr(variable.envp[i], '=') + 1);
+	if(gb.envp[i])
+		variabl = (ft_strchr(gb.envp[i], '=') + 1);
 	put_zero_in_null(&variabl);
 	return (variabl);
 }

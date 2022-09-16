@@ -3,6 +3,13 @@
 		"parser.h": "c",
 		"minishell.h": "c",
 		"limits.h": "c",
+<<<<<<< HEAD
+		"excution.h": "c",
+		"execution.h": "c"
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
+=======
 		"minishell": "c"
 	}
+>>>>>>> c6c1840004ea643bb4d1d128133d08be6f27a232
 }

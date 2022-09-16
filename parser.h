@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2022/09/16 17:19:09 by zoukaddo         ###   ########.fr       */
+=======
 /*   Updated: 2022/09/16 16:37:59 by aamoussa         ###   ########.fr       */
+>>>>>>> c6c1840004ea643bb4d1d128133d08be6f27a232
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +31,16 @@
 typedef struct s_gb_variable
 {
 	char **envp;
+<<<<<<< HEAD
+	t_senv *env;
+=======
 	t_list *env;
 	int		status;
 	int		exit_satut;
+>>>>>>> c6c1840004ea643bb4d1d128133d08be6f27a232
 
 } t_gb_variable;
 
-t_gb_variable	variable;
 
 typedef struct s_cmd
 {
@@ -44,7 +51,12 @@ typedef struct s_execcmd {
 	int		type;
 	t_list	*args;
 	char	**argument;
+<<<<<<< HEAD
+	char	*argv[10];
+	char	*eargv[10];
+=======
 		
+>>>>>>> c6c1840004ea643bb4d1d128133d08be6f27a232
 }	t_execcmd;
 
 typedef struct s_redircmd {
@@ -60,6 +72,8 @@ typedef struct s_pipecmd {
 	t_cmd	*left;
 	t_cmd	*right;
 }	t_pipecmd;
+
+t_gb_variable	gb;
 
 t_cmd	*parsepipe(char **ps, char *es, char **envp);
 t_cmd	*redirecmd(t_cmd *cmd, char *file, char *efile, int mode, int fd);
