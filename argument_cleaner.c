@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/16 16:23:01 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:35:21 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,6 +261,24 @@ void make_quotes(t_list	*args)
 	// }
 }
 
+void convert_list_to_args(t_execcmd *execcmd)
+{
+	size_t	size;
+	int		i;
+
+	i = 0;
+	size = ft_lstsize(execcmd->args);
+
+	execcmd->argument = malloc(sizeof(char *) * (size + 1));
+	execcmd->argument[size] = NULL;
+	while (execcmd->args)
+	{
+		execcmd->argument[i] = execcmd->args->content;		
+		execcmd->args = execcmd->args->next;
+		i++;
+	}		
+}
+
 void clean_arguments(t_cmd *cmd)
 {
 	t_execcmd	*execcmd;
@@ -280,6 +298,7 @@ void clean_arguments(t_cmd *cmd)
 			make_quotes(execcmd->args);
 			if (variable.status)
 				return;
+			convert_list_to_args(execcmd);
 		}
 	}
 	if (cmd->type == REDIR)

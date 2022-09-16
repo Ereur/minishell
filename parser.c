@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/16 16:23:19 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:24:15 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,18 +343,26 @@ void print_tree(t_cmd *cmd)
 	}
 	if (cmd->type == EXEC)
 	{
+		int	i;
+
+		i = 0;
 		execcm = (t_execcmd	*)(cmd);
 		t_list *tmp;
 
 		tmp = execcm->args;
 		printf("\n----------Arguments-------\n");
-		while (tmp)
-		{	
-			// ft_print_som(execcm->argv[i], execcm->eargv[i]);
-			// write(1,&execcm->argv[i], ft_strlen(execcm->argv[i]));
-			printf("|%s|\n", tmp->content);
-			tmp = tmp->next;
-		}		
+		// while (tmp)
+		// {	
+		// 	// ft_print_som(execcm->argv[i], execcm->eargv[i]);
+		// 	// write(1,&execcm->argv[i], ft_strlen(execcm->argv[i]));
+		// 	printf("|%s|\n", tmp->content);
+		// 	tmp = tmp->next;
+		// }
+		while (execcm->argument[i])
+		{
+			printf("|%s|\n",execcm->argument[i]);
+			i++;
+		}
 	}
 	if (cmd->type == PIPE)
 	{
