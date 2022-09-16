@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:09:50 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/16 17:30:04 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:23:11 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ void	env_add_back(t_senv **env, t_senv *node)
 	head->next = node;
 	
 }
-
-
 
 int track_env(char *keyword)
 {

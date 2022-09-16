@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:10:59 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/16 17:30:13 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:14:22 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_envstruct
 } t_senv;
 
 void    env(void);
+int     cd_cmd(char **argument);
 void	setup_env(char **envp);
 t_senv	*env_new(char *str);
 void	env_add_back(t_senv **env, t_senv *node);

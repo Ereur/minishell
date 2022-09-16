@@ -6,11 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/09/16 16:40:10 by zoukaddo         ###   ########.fr       */
-=======
-/*   Updated: 2022/09/16 17:35:21 by aamoussa         ###   ########.fr       */
->>>>>>> c6c1840004ea643bb4d1d128133d08be6f27a232
+/*   Updated: 2022/09/16 17:53:10 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,7 +296,7 @@ void clean_arguments(t_cmd *cmd)
 		if (execcmd->args)
 		{	
 			make_quotes(execcmd->args);
-			if (variable.status)
+			if (gb.status)
 				return;
 			convert_list_to_args(execcmd);
 		}
@@ -309,20 +305,20 @@ void clean_arguments(t_cmd *cmd)
 	{
 		redir = (t_redircmd *)cmd;
 		make_quotes(redir->filee);
-		if(variable.status)
+		if(gb.status)
 			return;
 		clean_arguments(redir->cmd);
-		if (variable.status)
+		if (gb.status)
 			return ;
 	}
 	if (cmd->type == PIPE)
 	{
 		pipecmd = (t_pipecmd *)(cmd);
 		clean_arguments(pipecmd->left);
-		if (variable.status)
+		if (gb.status)
 			return;
 		clean_arguments(pipecmd->right);
-		if (variable.status)
+		if (gb.status)
 			return;
 	}
 }

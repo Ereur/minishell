@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/16 17:24:15 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:52:50 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -497,7 +497,7 @@ t_cmd *parseexec(char **ps, char *es, char **envp)
 	if (skip_and_find(ps,es, "|"))
 	{		
 		raise_error("syntax error near unexpected token", 258, '|');
-		if (variable.exit_satut == 258)
+		if (gb.exit_satut == 258)
 			return (NULL);
 	}
 	// if(skip_and_find_0(ps, es))
@@ -573,7 +573,7 @@ t_cmd *parser(char **ps, char *es, char **envp)
 	
 	cmd = parsepipe(ps, es, envp);
 	clean_arguments(cmd);
-	if (variable.status)
+	if (gb.status)
 		return (NULL);
 	return (cmd);
 }
