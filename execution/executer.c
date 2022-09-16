@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.h                                            :+:      :+:    :+:   */
+/*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/17 08:04:56 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/16 11:35:36 by aamoussa         ###   ########.fr       */
+/*   Created: 2022/09/16 17:08:23 by aamoussa          #+#    #+#             */
+/*   Updated: 2022/09/16 17:16:24 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKEN_H
-# define TOKEN_H
+#include "../minishell.h"
 
-#include "minishell.h"
+void executer(t_cmd *cmd)
+{
+	int			pipe[2];
+	t_execcmd	*exec;
+	t_redircmd	*redir;
+	t_pipecmd	*pipecmd;
 
-int		gettoken(char **ps, char *es, char **q, char **eq);
-int		skip_and_find(char **ps, char *es, char *tok);
-int		skip_and_find_0(char **ps, char *es);
-void	raise_error(char *message, int exitcode, int tok);
-
-// int	gettoken();
-
-
-#endif
+	if (cmd->type == EXEC)
+	{
+		exec = (t_execcmd *)(cmd);
+	}
+	if (cmd->type == REDIR)
+	{
+		redir = (t_redircmd *)(cmd);
+		executer(redir->cmd);
+	}
+	if (cmd->type == PIPE)
+	{
+		pipecmd = (t_pipecmd *)(cmd);
+		executer(pipecmd->left);
+		executer(pipecmd->right);
+	}
+	
+}

@@ -6,7 +6,11 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/09/16 16:40:10 by zoukaddo         ###   ########.fr       */
+=======
+/*   Updated: 2022/09/16 17:35:21 by aamoussa         ###   ########.fr       */
+>>>>>>> c6c1840004ea643bb4d1d128133d08be6f27a232
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,8 +210,11 @@ void make_quotes(t_list	*args)
 
 	
 
-	if (!check_quotes(args->content))
-		raise_error("syntax error unclosed quotes", 1, 0);
+	if (!check_quotes((args)->content))
+	{	
+		raise_error("syntax error unclosed quotes", 258, 0);
+		return ;
+	}
 
 	tmp = args;
 	while (tmp)
@@ -258,6 +265,24 @@ void make_quotes(t_list	*args)
 	// }
 }
 
+void convert_list_to_args(t_execcmd *execcmd)
+{
+	size_t	size;
+	int		i;
+
+	i = 0;
+	size = ft_lstsize(execcmd->args);
+
+	execcmd->argument = malloc(sizeof(char *) * (size + 1));
+	execcmd->argument[size] = NULL;
+	while (execcmd->args)
+	{
+		execcmd->argument[i] = execcmd->args->content;		
+		execcmd->args = execcmd->args->next;
+		i++;
+	}		
+}
+
 void clean_arguments(t_cmd *cmd)
 {
 	t_execcmd	*execcmd;
@@ -273,18 +298,31 @@ void clean_arguments(t_cmd *cmd)
 	{
 		execcmd = (t_execcmd *)cmd;
 		if (execcmd->args)
+		{	
 			make_quotes(execcmd->args);
+			if (variable.status)
+				return;
+			convert_list_to_args(execcmd);
+		}
 	}
 	if (cmd->type == REDIR)
 	{
 		redir = (t_redircmd *)cmd;
 		make_quotes(redir->filee);
+		if(variable.status)
+			return;
 		clean_arguments(redir->cmd);
+		if (variable.status)
+			return ;
 	}
 	if (cmd->type == PIPE)
 	{
 		pipecmd = (t_pipecmd *)(cmd);
 		clean_arguments(pipecmd->left);
+		if (variable.status)
+			return;
 		clean_arguments(pipecmd->right);
+		if (variable.status)
+			return;
 	}
 }
