@@ -6,20 +6,19 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:08 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/15 19:23:17 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/17 13:07:17 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <unistd.h>
+#include "../../parser.h"
 
-int ft_strlen(char *s)
-{
-    int i = 0;
-    while(s[i])
-        i++;
-    return (i);
-}
+// int ft_strlen(char *s)
+// {
+//     int i = 0;
+//     while(s[i])
+//         i++;
+//     return (i);
+// }
 
 void	ft_putchar_fd(char c, int fd)
 {

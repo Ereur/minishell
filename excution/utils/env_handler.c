@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:09:50 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/16 17:30:04 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/17 10:17:45 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ int	ft_strcmp(const char *s1, const char *s2)
 		i++;
 	}
 	return (0);
+}
+
+int	env_size()
+{
+	t_senv *head;
+	int i;
+
+	head = gb.env;
+	i = 0;
+	while (head)
+	{
+		i++;
+		head = head->next;
+	}
+	return (i);
+	
 }
 
 t_senv	*env_grabber(char *keyword)
@@ -82,8 +98,6 @@ void	env_add_back(t_senv **env, t_senv *node)
 	
 }
 
-
-
 int track_env(char *keyword)
 {
 	t_senv *head;
@@ -129,7 +143,38 @@ void	setup_env(char **envp)
 		tmp = ft_strdup("_=/usr/bin/env");
 		env_add_back(&gb.env, env_new(tmp));
 		free(tmp);
+	}	
+	// get_envp();
+}
+
+void get_envp(void)
+{
+	int		i;
+	char	*hold;
+	char	*holdt;
+	t_senv	*tmp;
+	
+	i = 0;
+
+	tmp = gb.env;
+	gb.envp = (char**)malloc(sizeof(char*) * (env_size() + 1));
+	while (tmp)
+	{
+		// exit(1);
+		hold = ft_strjoin(tmp->key,"=");
+		holdt = ft_strjoin(hold,tmp->value);
+		
+		gb.envp[i] = holdt;
+		printf("%s \n", gb.envp[i]);
+		tmp = tmp->next;
+		i++;
 	}
-		
-		
+	i = 0;
+	while(gb.envp[i])
+	{
+		free(gb.envp[i]);
+		i++;
+	}
+	free(gb.envp);
+	// print list
 }

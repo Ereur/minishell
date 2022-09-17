@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/16 18:17:17 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/17 15:08:15 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	main(int ac, char **argv, char **envp)
 		cmd = parser(&ps, es, envp);
 		if (!cmd)
 			continue;
-		print_tree(cmd);
+		executer(cmd);
+		// print_tree(cmd);
 	}
 	return (0);
 }

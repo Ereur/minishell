@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:10:59 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/16 17:30:13 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/17 13:12:26 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,14 @@ typedef struct s_envstruct
 } t_senv;
 
 void    env(void);
+int     cd_cmd(char **argument);
+int	    built_in_pwd(char **str);
+void    ft_echo(char **av);
 void	setup_env(char **envp);
 t_senv	*env_new(char *str);
 void	env_add_back(t_senv **env, t_senv *node);
 t_senv	*env_grabber(char *keyword);
 int	    ft_strcmp(const char *s1, const char *s2);
+void    get_envp(void);
 
 #endif 
