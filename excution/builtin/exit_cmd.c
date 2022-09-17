@@ -1,26 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   exit_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 08:58:45 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/17 18:47:31 by zoukaddo         ###   ########.fr       */
+/*   Created: 2022/09/17 19:05:45 by zoukaddo          #+#    #+#             */
+/*   Updated: 2022/09/17 19:05:46 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../parser.h"
-
-void    env(void)
-{
-	t_senv *head;
-
-	head = gb.env;
-    while (head)
-	{
-		// if (head->value)
-			printf("%s=%s\n", head->key, head->value);
-		head = head->next;
-	}
-}

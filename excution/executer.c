@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/17 15:02:14 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:24:21 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ void	checifbuiltin(t_execcmd *exec)
 			env();
 	if (ft_strcmp(exec->argument[0], "echo") == 0)
 			ft_echo(exec->argument);
+	if (ft_strcmp(exec->argument[0], "export") == 0)
+			ft_export(exec->argument);
+	if (ft_strcmp(exec->argument[0], "unset") == 0)
+		unset_cmd(exec->argument);
 	// else (execve(exec->argument[0], exec->argument, gb.envp) == -1)		
 	// {
 	// 	printf("minishell: %s: command not found\n", exec->argument[0]);
