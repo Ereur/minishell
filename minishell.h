@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:11:41 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/16 16:32:11 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/17 10:29:20 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,4 @@
 
 int			built_in_pwd(char **str);
 const char	*getprompt(char **envp);
-
 #endif

@@ -6,12 +6,12 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 22:35:49 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/12 09:15:16 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/17 13:01:41 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "../minishell.h"
+#include "../../parser.h"
 
 int	built_in_pwd(char **str)
 {
@@ -26,8 +26,8 @@ int	built_in_pwd(char **str)
 		pwd = reserve;
 	else
 	{
-		if (reserve)
-			free(reserve);
+		// if (reserve)
+		// 	free(reserve);
 		reserve = pwd;
 	}
 	printf("%s\n", pwd);
@@ -35,12 +35,12 @@ int	built_in_pwd(char **str)
 	return (0);
 }
 
-int	main(void)
-{
-	char	*str[2];
+// int	main(void)
+// {
+// 	char	*str[2];
 
-	str[0] = "pwd";
-	str[1] = NULL;
-	built_in_pwd(str);
-	return (0);
-}
+// 	str[0] = "pwd";
+// 	str[1] = NULL;
+// 	built_in_pwd(str);
+// 	return (0);
+// }

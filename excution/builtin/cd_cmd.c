@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   cd_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/16 18:23:43 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/17 12:48:00 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int cd_cmd(char **argument)
   	}
 	if (chdir(argument[1]))
 	{
-		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd("Minishell: cd: ", 2);
 		ft_putstr_fd(argument[1], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 		return (1);
