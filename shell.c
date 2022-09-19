@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/17 15:08:15 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:09:54 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int ac, char **argv, char **envp)
 		if (!cmd)
 			continue;
 		executer(cmd);
+		printf("exit status: %d\n", gb.exit_statut);
 		// print_tree(cmd);
 	}
 	return (0);

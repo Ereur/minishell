@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:09:50 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/17 10:17:45 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/17 15:15:30 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,9 @@ void get_envp(void)
 		// exit(1);
 		hold = ft_strjoin(tmp->key,"=");
 		holdt = ft_strjoin(hold,tmp->value);
-		
+		// free(hold);
 		gb.envp[i] = holdt;
+		// free(holdt);
 		printf("%s \n", gb.envp[i]);
 		tmp = tmp->next;
 		i++;
