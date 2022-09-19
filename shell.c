@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/19 13:56:58 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:51:41 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ int	main(int ac, char **argv, char **envp)
 		cmd = parser(&ps, es, envp);
 		if (!cmd)
 			continue;
-		// executer(cmd);
-		print_tree(cmd);
+		executer(cmd);
+		printf("exit status: %d\n", gb.exit_statut);
+		// print_tree(cmd);
 	}
 	return (0);
 }
