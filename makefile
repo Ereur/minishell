@@ -6,7 +6,7 @@
 #    By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by aamoussa          #+#    #+#              #
-#    Updated: 2022/09/17 19:24:39 by zoukaddo         ###   ########.fr        #
+#    Updated: 2022/09/18 17:24:57 by zoukaddo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			= minishell
 
 SRCS			= shell.c token.c parser.c build_nodes.c argument_cleaner.c \
 				  $(BUILTIN)echo_cmd.c  $(BUILTIN)env.c $(BUILTIN)cd_cmd.c ./excution/utils/env_handler.c \
-				  $(BUILTIN)pwd.c $(BUILTIN)export_cmd.c $(BUILTIN)unset_cmd.c ./excution/executer.c  
+				  $(BUILTIN)pwd.c $(BUILTIN)export_cmd.c $(BUILTIN)unset_cmd.c $(BUILTIN)exit_cmd.c ./excution/executer.c  
 
 OBJS			= $(SRCS:.c=.o)
 

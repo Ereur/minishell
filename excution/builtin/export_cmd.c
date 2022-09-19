@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:54:48 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/17 18:59:16 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/18 15:10:13 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ void	export_declare(void)
 {
 	t_senv	*head;
 	/* linked list should be sorted to be displayed */
+	// sort linked list by the key alphabetically
 	head = gb.env;
 	while (head)
 	{
