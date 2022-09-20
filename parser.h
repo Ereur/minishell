@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/17 11:57:47 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/20 00:17:50 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_gb_variable
 	t_senv *env;
 	int		status;
 	int		exit_statut;
-
+	int		fdg;
 } t_gb_variable;
 
 
