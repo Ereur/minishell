@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/20 07:28:44 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/20 21:10:33 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ int	main(int ac, char **argv, char **envp)
 		if (cmd->type == REDIR || cmd->type == EXEC)
 			execute_builtins(cmd);
 		else 
+		{	
 			executer(cmd);
-			
+		}
 		// printf("exit status: %d\n", gb.exit_statut);    
 		// print_tree(cmd);
 	}
