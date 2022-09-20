@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+         #
+#    By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by aamoussa          #+#    #+#              #
-#    Updated: 2022/09/18 17:24:57 by zoukaddo         ###   ########.fr        #
+#    Updated: 2022/09/20 01:03:58 by aamoussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS			= shell.c token.c parser.c build_nodes.c argument_cleaner.c \
 
 OBJS			= $(SRCS:.c=.o)
 
-CC				= gcc
+CC				= gcc -g
 
 RM				= rm -f
 
@@ -26,7 +26,7 @@ READLINE_PATH =  -lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/rea
 
 BUILTIN 		= ./excution/builtin/
 
-CFLAGS			=  -fsanitize=address -g #-Wall -Wextra -Werror
+CFLAGS			=  #-fsanitize=address -g #-Wall -Wextra -Werror
 
 all:			$(NAME)
 
