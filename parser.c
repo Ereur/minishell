@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/16 18:31:53 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/20 02:05:24 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -393,7 +393,7 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 			}
 			cmd = redirecmd(cmd, q, eq, O_RDONLY, 0);
 		}
-		else if ('>')
+		else if (tok == '>')
 		{
 			tok = gettoken(ps, es, &q, &eq);
 			if (ft_strchr(FORBIDEN_REDIR, tok))
@@ -403,7 +403,7 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 			}
 			cmd = redirecmd(cmd, q, eq, O_RDWR|O_TRUNC|O_CREAT, 1);
 		}
-		else if ('-')
+		else if (tok == '-')
 		{
 			tok = gettoken(ps, es, &q, &eq);
 			if (ft_strchr(FORBIDEN_REDIR, tok))
@@ -413,7 +413,7 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 			}
 			cmd = redirecmd(cmd, q, eq, O_RDONLY, 0);
 		}
-		else if ('+')
+		else if (tok == '+')
 		{
 			tok = gettoken(ps, es, &q, &eq);
 			if (ft_strchr(FORBIDEN_REDIR, tok))
@@ -421,7 +421,7 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 				raise_error("syntax error near unexpected token", 1, tok);
 				return (NULL);
 			}
-			cmd = redirecmd(cmd, q,eq, O_RDWR|O_CREAT, 1);
+			cmd = redirecmd(cmd, q,eq, O_RDWR|O_APPEND|O_CREAT, 1);
 		}
 	}
 	return (t_cmd *)(cmd);
