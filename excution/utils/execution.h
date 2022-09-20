@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:10:59 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/18 17:14:03 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/20 07:25:27 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
-#include "../../minishell.h"
-
+// #include "../../minishell.h"
+// #include "../../parser.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -25,6 +25,7 @@ typedef struct s_envstruct
     struct s_envstruct *next;
 } t_senv;
 
+// void execute_builtins(t_cmd *cmd);
 void    env(void);
 int     exit_cmd(char **args);
 int     cd_cmd(char **argument);
