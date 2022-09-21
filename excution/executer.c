@@ -6,10 +6,11 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/20 07:29:20 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/20 23:39:54 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "./utils/execution.h"
 #include "../parser.h"
 
 void	checifbuiltin(t_execcmd *exec)
@@ -66,9 +67,51 @@ void	redirection(t_redircmd *redir)
 	}
 }
 
+char **get_paths(void)
+{
+	int		i;
+	t_senv	*tmp;
+	
+	tmp = gb.env;
+	while (tmp)
+	{
+		if (tmp->key == "PATH")
+			return	(ft_split(tmp->value, ':'));
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+void	check_access(char **paths, t_execcmd *cmd)
+{
+	int		i;
+	char	*tmp;
+	i = 0;	
+	while (paths[i])
+	{
+		tmp = ft_strjoin(paths[i], cmd->argument[i]);
+		if (!access(tmp, X_OK))
+		{
+			cmd->argument[i] = tmp;
+			return ;
+		}
+		i++;
+	}
+}
+
+void	execute_cmd(t_execcmd *cmd)
+{
+	char	**paths;
+
+	paths = get_paths();
+	check_access(paths, cmd);
+	
+}
+
 void executer(t_cmd *cmd)
 {
-	int			pipe[2];
+	int			fd[2];
+	pid_t		i;
 	t_execcmd	*exec;
 	t_redircmd	*redir;
 	t_pipecmd	*pipecmd;
@@ -77,6 +120,7 @@ void executer(t_cmd *cmd)
 	{
 		exec = (t_execcmd *)(cmd);
 		checifbuiltin(exec);
+		execute_cmd(exec);
 	}
 	if (cmd->type == REDIR)
 	{
@@ -87,7 +131,26 @@ void executer(t_cmd *cmd)
 	if (cmd->type == PIPE)
 	{
 		pipecmd = (t_pipecmd *)(cmd);
-		executer(pipecmd->left);
-		executer(pipecmd->right);
+		pipe(fd);
+		i = my_fork();
+		if (i == 0)
+		{	
+			dup2(fd[1], 1);
+			close(fd[1]);
+			close(fd[0]);
+			while (1)
+				;
+			executer(pipecmd->left);
+		}
+		i = my_fork();
+		if (i == 0)
+		{
+			dup2(fd[0], 0);
+			close(fd[0]);
+			close(fd[1]);
+			while (1)
+				;
+			executer(pipecmd->right);
+		}
 	}
 }

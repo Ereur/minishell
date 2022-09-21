@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/14 11:36:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/20 22:12:15 by aamoussa         ###   ########.fr       */
+/*   Created: 2022/09/20 21:40:17 by aamoussa          #+#    #+#             */
+/*   Updated: 2022/09/20 21:40:40 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+# include"execution.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+pid_t	my_fork(void)
 {
-	t_list	*tmp;
+	pid_t	i;
 
-	tmp = *lst;
-	if (!(*lst))
+	i = fork();
+	if (i < 0)
 	{
-		*lst = new;
-		new->next = NULL;
+		perror("error");
+		exit(1);
 	}
-	else
-	{	
-		while (tmp->next)
-		{
-			tmp = tmp->next;
-		}
-		tmp->next = new;
-	}
+	return (i);
 }

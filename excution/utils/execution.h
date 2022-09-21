@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:10:59 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/20 07:25:27 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/20 22:04:52 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 // #include "../../parser.h"
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 typedef struct s_envstruct
 {
@@ -26,6 +28,7 @@ typedef struct s_envstruct
 } t_senv;
 
 // void execute_builtins(t_cmd *cmd);
+pid_t	my_fork(void);
 void    env(void);
 int     exit_cmd(char **args);
 int     cd_cmd(char **argument);
