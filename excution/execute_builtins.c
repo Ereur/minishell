@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtins.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 06:25:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/20 21:14:34 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:16:53 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,12 @@ void execute_builtins(t_cmd *cmd)
 	if (cmd->type == EXEC)
 	{
 		exec = (t_execcmd *)(cmd);
-		checifbuiltin(exec);
+		if (checifbuiltin(exec))
+		{	
+			if (my_fork() == 0)
+				execute_cmd(exec);
+			wait(NULL);
+		}
 		dup2(gb.output, 1);
 		dup2(gb.input, 0);
 	}

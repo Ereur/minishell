@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/20 22:51:22 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:00:04 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ int	main(int ac, char **argv, char **envp)
 		if (!cmd)
 			continue;
 		if (cmd->type == REDIR || cmd->type == EXEC)
+		{	
 			execute_builtins(cmd);
+		}
 		else 
 		{	
-			env();
-			exit(1);
 			executer(cmd);
-			while (1)
+			while (waitpid(-1, NULL, 0) != -1)
 				;
-			
+
 		}
 		// printf("exit status: %d\n", gb.exit_statut);    
 		// print_tree(cmd);

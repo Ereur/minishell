@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/20 07:25:42 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:13:12 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ typedef struct s_pipecmd {
 
 t_gb_variable	gb;
 
-void	checifbuiltin(t_execcmd *exec);
+int		checifbuiltin(t_execcmd *exec);
+void	execute_cmd(t_execcmd *cmd);
+
 t_cmd	*parsepipe(char **ps, char *es, char **envp);
 t_cmd	*redirecmd(t_cmd *cmd, char *file, char *efile, int mode, int fd);
 t_cmd	*execcmd(void);
