@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 17:08:23 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/22 19:10:15 by zoukaddo         ###   ########.fr       */
+/*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
+/*   Updated: 2022/09/23 23:28:41 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	checifbuiltin(t_execcmd *exec)
 	if (ft_strcmp(exec->argument[0], "export") == 0)
 	{		
 		ft_export(exec->argument);
+		get_envp();
 		return (0);
 	}
 	if (ft_strcmp(exec->argument[0], "unset") == 0)
@@ -143,7 +144,7 @@ void	execute_cmd(t_execcmd *cmd)
 
 	paths = get_paths();
 	check_access(paths, cmd);
-	fprintf(stderr,"%s\n", cmd->argument[0]);
+	// fprintf(stderr,"%s\n", cmd->argument[0]);
 	if (execve(cmd->argument[0], cmd->argument, gb.envp) == -1)
 	{
 		perror("execve failed");
@@ -179,6 +180,7 @@ void executer(t_cmd *cmd)
 		i = my_fork();
 		if (i == 0)
 		{	
+			sleep(60);
 			dup2(fd[1], 1);
 			close(fd[1]);
 			close(fd[0]);
@@ -187,6 +189,7 @@ void executer(t_cmd *cmd)
 		i = my_fork();
 		if (i == 0)
 		{
+			sleep(60);
 			dup2(fd[0], 0);
 			close(fd[0]);
 			close(fd[1]);

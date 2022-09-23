@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/22 19:00:04 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/23 23:22:05 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	main(int ac, char **argv, char **envp)
 		add_history(buffer);
 		ps = buffer;
 		cmd = parser(&ps, es, envp);
+		// print_tree(cmd);
+		// exit(1);
 		if (!cmd)
 			continue;
 		if (cmd->type == REDIR || cmd->type == EXEC)

@@ -23,7 +23,7 @@
 				}
 			]
 		},
-
+		
 		{
 			"name": "(gdb) Launch",
 			"type": "cppdbg",

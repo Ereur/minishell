@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:09:50 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/17 15:15:30 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/23 21:44:54 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void	setup_env(char **envp)
 		env_add_back(&gb.env, env_new(tmp));
 		free(tmp);
 	}	
-	// get_envp();
+	get_envp();
 }
 
 void get_envp(void)
@@ -166,16 +166,16 @@ void get_envp(void)
 		// free(hold);
 		gb.envp[i] = holdt;
 		// free(holdt);
-		printf("%s \n", gb.envp[i]);
+		// printf("%s \n", gb.envp[i]);
 		tmp = tmp->next;
 		i++;
 	}
-	i = 0;
-	while(gb.envp[i])
-	{
-		free(gb.envp[i]);
-		i++;
-	}
-	free(gb.envp);
+	// i = 0;
+	// while(gb.envp[i])
+	// {
+	// 	free(gb.envp[i]);
+	// 	i++;
+	// }
+	// free(gb.envp);
 	// print list
 }
