@@ -143,7 +143,7 @@ void	execute_cmd(t_execcmd *cmd)
 
 	paths = get_paths();
 	check_access(paths, cmd);
-	// fprintf(2,"paths");
+	fprintf(stderr,"%s\n", cmd->argument[0]);
 	if (execve(cmd->argument[0], cmd->argument, gb.envp) == -1)
 	{
 		perror("execve failed");
