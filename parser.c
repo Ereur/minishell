@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/20 02:05:24 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/24 04:26:38 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -378,6 +378,11 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 	int		tok;
 	char	*q;
 	char	*eq;
+	char	*here_doc_lim;
+	int		her_doc_len;
+
+	here_doc_lim = NULL;
+	her_doc_len = 0;
 	// t_cmd		*cmd;
 	
 	while (skip_and_find(ps, es, "<>"))
@@ -411,6 +416,9 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 				raise_error("syntax error near unexpected token", 258, tok);
 				return (NULL);
 			}
+			her_doc_len = (eq - q);
+			here_doc_lim = ft_substr(q, 0, her_doc_len);
+			here_doc(here_doc_lim);
 			cmd = redirecmd(cmd, q, eq, O_RDONLY, 0);
 		}
 		else if (tok == '+')
