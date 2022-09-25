@@ -3,32 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 17:08:23 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/20 23:39:54 by aamoussa         ###   ########.fr       */
+/*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
+/*   Updated: 2022/09/23 23:28:41 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./utils/execution.h"
 #include "../parser.h"
 
-void	checifbuiltin(t_execcmd *exec)
+int	checifbuiltin(t_execcmd *exec)
 {
 	if (ft_strcmp(exec->argument[0], "cd") == 0)
-			cd_cmd(exec->argument);
+	{		
+		cd_cmd(exec->argument);
+		return (0);
+	}
 	if (ft_strcmp(exec->argument[0], "pwd") == 0)
-			built_in_pwd(exec->argument);
+	{		
+		built_in_pwd(exec->argument);
+		return (0);
+	}
 	if (ft_strcmp(exec->argument[0], "env") == 0)
-			env();
+	{		
+		env();
+		return (0);
+	}
 	if (ft_strcmp(exec->argument[0], "echo") == 0)
-			ft_echo(exec->argument);
+	{		
+		ft_echo(exec->argument);
+		return (0);
+	}
 	if (ft_strcmp(exec->argument[0], "export") == 0)
-			ft_export(exec->argument);
+	{		
+		ft_export(exec->argument);
+		get_envp();
+		return (0);
+	}
 	if (ft_strcmp(exec->argument[0], "unset") == 0)
+	{	
 		unset_cmd(exec->argument);
+		return (0);
+	}
 	if (ft_strcmp(exec->argument[0], "exit") == 0)
+	{	
 		gb.exit_statut = exit_cmd(exec->argument);
+		return (0);
+	}
+	return (1);
 	// else (execve(exec->argument[0], exec->argument, gb.envp) == -1)		
 	// {
 	// 	printf("minishell: %s: command not found\n", exec->argument[0]);
@@ -71,12 +94,25 @@ char **get_paths(void)
 {
 	int		i;
 	t_senv	*tmp;
-	
+	char	**paths;
+
+	i = 0;
 	tmp = gb.env;
 	while (tmp)
 	{
-		if (tmp->key == "PATH")
-			return	(ft_split(tmp->value, ':'));
+		if (!ft_strcmp(tmp->key, "PATH"))
+		{	
+			paths = ft_split(tmp->value, ':');
+			if (paths)
+			{
+				while (paths[i])
+				{
+					paths[i] = ft_strjoin(paths[i], "/");
+					i++;
+				}
+				return (paths);
+			}
+		}
 		tmp = tmp->next;
 	}
 	return (NULL);
@@ -86,13 +122,16 @@ void	check_access(char **paths, t_execcmd *cmd)
 {
 	int		i;
 	char	*tmp;
-	i = 0;	
+	i = 0;
 	while (paths[i])
 	{
-		tmp = ft_strjoin(paths[i], cmd->argument[i]);
+		tmp = ft_strjoin(paths[i], cmd->argument[0]);
+		// write(2,"tmp", ft_strlen(tmp));
+		// write(2,"\n", 1);
 		if (!access(tmp, X_OK))
 		{
-			cmd->argument[i] = tmp;
+			cmd->argument[0] = tmp;
+			// fprintf(stderr, "%s\n", cmd->argument[0]);
 			return ;
 		}
 		i++;
@@ -105,8 +144,14 @@ void	execute_cmd(t_execcmd *cmd)
 
 	paths = get_paths();
 	check_access(paths, cmd);
-	
+	// fprintf(stderr,"%s\n", cmd->argument[0]);
+	if (execve(cmd->argument[0], cmd->argument, gb.envp) == -1)
+	{
+		perror("execve failed");
+		exit(1);
+	}
 }
+
 
 void executer(t_cmd *cmd)
 {
@@ -135,22 +180,22 @@ void executer(t_cmd *cmd)
 		i = my_fork();
 		if (i == 0)
 		{	
+			sleep(60);
 			dup2(fd[1], 1);
 			close(fd[1]);
 			close(fd[0]);
-			while (1)
-				;
 			executer(pipecmd->left);
 		}
 		i = my_fork();
 		if (i == 0)
 		{
+			sleep(60);
 			dup2(fd[0], 0);
 			close(fd[0]);
 			close(fd[1]);
-			while (1)
-				;
 			executer(pipecmd->right);
 		}
+		// close(fd[0]);
+		close(fd[1]);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/16 18:26:26 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/09/23 23:24:38 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ char *grep_name(char *s)
 		tmp++;
 		i++;
 	}
-	name = (char *)malloc(i + 2);
+	name = (char *)malloc(i + 1);
 	name = ft_strncpy(name, s, i);
-	name[i + 1] = 0;
-	name[i] = '=';
+	name[i] = 0;
+	// name[i] = '=';
 	return (name);
 }
 
@@ -59,20 +59,30 @@ char *grep_variable(char *str)
 	char *name;
 	int		i;
 	char	*variabl;
+	t_senv	*tmp;
 
+	tmp = NULL;
+	tmp = gb.env;
 	i = 0;
 	name = grep_name(str);
 	if (!*name)
 		return (name);
 	variabl = NULL;
-	while (gb.envp[i])
+	// while (gb.env)
+	// {
+	// 	printf("%s\n", gb.env->value)
+	// }
+	while (tmp)
 	{
-		if (ft_strnstr(gb.envp[i], name, ft_strlen(gb.envp[i])))
+		// printf("%d \n", ft_strcmp(tmp->key, name));
+		if (!ft_strcmp(tmp->key, name))
 			break;
-		i++;
+		tmp = tmp->next;
 	}
-	if(gb.envp[i])
-		variabl = (ft_strchr(gb.envp[i], '=') + 1);
+	// exit(1);
+	// printf("|%p|\n", tmp);
+	if(tmp)
+		variabl = tmp->value;
 	put_zero_in_null(&variabl);
 	return (variabl);
 }
@@ -111,6 +121,7 @@ void expand_lst(t_list *dollars)
 		put_zero_in_null(&str);
 		content	= ft_strjoin(str,content);
 		tmp->content = content;
+		// printf("|%s|\n", content);
 		tmp = tmp->next;
 	}
 }
@@ -189,7 +200,12 @@ void split_dollar(t_list *args)
 		lst_of_dollar = NULL;
 		tmp = tmp->next;
 	}
-	
+	// while (args)
+	// {
+	// 	printf("|%s|\n", args->content);
+	// 	args = args->next;
+	// }
+	// exit(1);
 }
 
 void make_quotes(t_list	*args)
