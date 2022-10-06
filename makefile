@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+         #
+#    By: gitpod <gitpod@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by aamoussa          #+#    #+#              #
-#    Updated: 2022/09/20 21:42:51 by aamoussa         ###   ########.fr        #
+#    Updated: 2022/10/06 07:40:17 by gitpod           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ READLINE_PATH =  -lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/rea
 
 BUILTIN 		= ./excution/builtin/
 
-CFLAGS			=  #-fsanitize=address -g #-Wall -Wextra -Werror
+CFLAGS			=  #-fsanitize=address -fno-omit-frame- #-Wall -Wextra -Werror
 
 all:			$(NAME)
 

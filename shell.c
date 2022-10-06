@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gitpod <gitpod@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/23 23:22:05 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/06 06:45:05 by gitpod           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,20 @@ int	main(int ac, char **argv, char **envp)
 		add_history(buffer);
 		ps = buffer;
 		cmd = parser(&ps, es, envp);
-		// print_tree(cmd);
-		// exit(1);
 		if (!cmd)
 			continue;
-		if (cmd->type == REDIR || cmd->type == EXEC)
-		{	
-			execute_builtins(cmd);
-		}
-		else 
-		{	
-			executer(cmd);
-			while (waitpid(-1, NULL, 0) != -1)
-				;
+		print_tree(cmd);
+		// if (cmd->type == REDIR || cmd->type == EXEC)
+		// {	
+		// 	execute_builtins(cmd);
+		// }
+		// else 
+		// {	
+		// 	executer(cmd);
+		// 	while (waitpid(-1, NULL, 0) != -1)
+		// 		;
 
-		}
+		// }
 		// printf("exit status: %d\n", gb.exit_statut);    
 		// print_tree(cmd);
 	}

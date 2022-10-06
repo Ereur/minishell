@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gitpod <gitpod@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/24 04:26:38 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/06 05:47:24 by gitpod           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,91 +78,6 @@ int skip_$(char *str)
 	return (i);
 }
 
-// char *find_first(char *str)
-// {
-// 	char *ret;
-// 	char tmp[0];
-// 	char *first;
-
-// 	ret = ft_strchr(str, '$');
-// 	ret = ret + skip_$(ret);
-// 	tmp[0] = *ret;
-// 	*ret = 0;
-// 	first = ft_strdup(str);
-// 	*ret = tmp[0];
-// 	return (first);
-// }
-
-// char *join_all(char *first, char *sec, char *third)
-// {
-// 	char *str;
-
-// 	if (!sec)
-// 	{	
-// 		sec = (char *)malloc(1);
-// 		sec[0] = 0;
-// 	}
-// 	if (!first)
-// 	{
-// 		first = (char *)malloc(1);
-// 		first[0] = 0;
-// 	}
-// 	if(!third)
-// 	{
-// 		third = (char *)malloc(1);
-// 		third[0] = 0;
-// 	}
-// 	str = ft_strjoin(first, sec);
-// 	str = ft_strjoin(str, third);
-// 	return (str);
-// }
-
-
-
-// int	expand_dq(char **q, char **eq, char **envp)
-// {
-// 	char *ret;
-// 	char tmp[0];
-// 	char *name;
-// 	char *first;
-// 	int		i;
-// 	char	*variabl;
-// 	char	*after;
-
-// 	i = 0;
-// 	ret = NULL;
-// 	variabl = NULL;
-// 	first = NULL;
-// 	tmp[0] = *eq[0];
-// 	name = NULL;
-// 	*eq[0] = 0;
-// 	ret = ft_strchr(*q, '$');
-// 	if (ret)
-// 	{	
-// 		ret = ret + skip_$(ret);
-// 		first = find_first(*q);
-// 		first[ft_strlen(first) - 1] = 0;
-// 		name = find_name(ret, &after);
-// 		while (envp[i])
-// 		{
-// 			if (ft_strnstr(envp[i], name, ft_strlen(envp[i])))
-// 				break;
-// 			i++;
-// 		}
-// 		printf("test : %s\n",*q);
-// 		if(envp[i])
-// 		{	
-// 			variabl = (ft_strchr(envp[i], '=') + 1);
-// 		}
-// 		ret = ret + (ft_strlen(name) - 1);
-// 		*q = join_all(first, variabl, ret);
-		
-// 	}
-// 	else 
-// 		return (0);
-// 	expand_dq(q, eq, envp);
-// 	return (1);
-// }
 void put_zero_in_null(char **str)
 {
 	char *tmp;
@@ -196,47 +111,6 @@ char *join(char *str, size_t i, char *name, char *ret)
 	return (result);
 }
 
-// void expand_dq(char **q, char **eq, char **envp)
-// {
-// 	char *scanning;
-// 	char *variable_name;
-// 	size_t scanning_lenght;
-// 	char	*result;
-// 	int		i;
-// 	char	*value;
-
-// 	i = 0;
-// 	result = NULL;
-// 	variable_name = NULL;
-// 	scanning = NULL;
-// 	value = NULL;
-// 	while (scanning < *eq)
-// 	{
-// 		scanning = ft_strchr(*q, '$');
-// 		if (!scanning)
-// 			break;
-// 		scanning = scanning + skip_$(*q);
-// 		variable_name = find_name(scanning);
-// 		scanning_lenght = scanning - *q;	
-// 		scanning = scanning + (ft_strlen(variable_name) - 1);
-// 		i = 0;
-// 		while (envp[i])
-// 		{
-// 			if (ft_strnstr(envp[i], variable_name, ft_strlen(envp[i])))
-// 				break;
-// 			i++;
-// 		}
-// 		printf("test : %s\n",*q);
-//  	if(envp[i])
-// 		{	
-// 			value = (ft_strchr(envp[i], '=') + 1);
-// 		}
-// 		result = join(*q, scanning_lenght - 1, value, result);
-// 		*q = scanning;
-// 	}
-// 	if (result)
-// 		*q = ft_strjoin(result, *q);
-// }
 
 void quote_parser(char **q, char **eq, char *quote_type, char **ps, char **envp)
 {
@@ -286,29 +160,6 @@ void quote_parser(char **q, char **eq, char *quote_type, char **ps, char **envp)
 	}
 }
 
-// void nullterminating(t_cmd *cmd)
-// {
-// 	t_execcmd	*execcmd;
-// 	t_redircmd	*redir;
-// 	t_pipecmd	*pipecmd;
-// 	int			i;
-
-// 	i = 0;
-// 	if (!cmd)
-// 		return ;
-// 	if (cmd->type == REDIR)
-// 	{
-// 		redir = (t_redircmd *)cmd;
-// 		nullterminating(redir->cmd);
-// 	}
-// 	if (cmd->type == PIPE)
-// 	{
-// 		pipecmd = (t_pipecmd *)(cmd);
-// 		nullterminating(pipecmd->left);
-// 		nullterminating(pipecmd->right);
-// 	}
-// }
-
 void ft_print_som(char *q, char *eq)
 {
 	while (q < eq)
@@ -331,16 +182,16 @@ void print_tree(t_cmd *cmd)
 	i = 0;
 	// if (!cmd)
 	// 	return ;
-	if (cmd->type == REDIR)
-	{
-			redir = (t_redircmd *)(cmd);
-			printf("\n----------redirection-------\n");
-			// ft_print_som(redir->file, redir->efile);
-			printf("|%s|\n", redir->filee->content);
-			printf("fd %d\n", redir->fd);
-			printf(" \nmode %d\n", redir->mode);
-			print_tree(redir->cmd);
-	}
+	// if (cmd->type == REDIR)
+	// {
+	// 		redir = (t_redircmd *)(cmd);
+	// 		printf("\n----------redirection-------\n");
+	// 		// ft_print_som(redir->file, redir->efile);
+	// 		printf("|%s|\n", redir->filee->content);
+	// 		printf("fd %d\n", redir->fd);
+	// 		printf(" \nmode %d\n", redir->mode);
+	// 		print_tree(redir->cmd);
+	// }
 	if (cmd->type == EXEC)
 	{
 		int	i;
@@ -363,6 +214,7 @@ void print_tree(t_cmd *cmd)
 			printf("|%s|\n",execcm->argument[i]);
 			i++;
 		}
+		printf("output : %d \n input : %d \n", execcm->output, execcm->input);
 	}
 	if (cmd->type == PIPE)
 	{
@@ -380,7 +232,11 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 	char	*eq;
 	char	*here_doc_lim;
 	int		her_doc_len;
+	int		fd;
+	t_execcmd	*exec;
+	char	*file;
 
+	exec = (t_execcmd *)cmd;
 	here_doc_lim = NULL;
 	her_doc_len = 0;
 	// t_cmd		*cmd;
@@ -396,7 +252,18 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 				raise_error("syntax error near unexpected token", 258, tok);
 				return (NULL);
 			}
-			cmd = redirecmd(cmd, q, eq, O_RDONLY, 0);
+			file = ft_substr(q, 0, (eq - q));
+			fd = open(file, O_RDWR, 0644);
+			if (fd == -1)
+			{
+				printf("%s", file);
+				perror("");
+				return (NULL);
+			}
+			close(exec->input);
+			exec->input = fd;
+			free(file);
+			// cmd = redirecmd(cmd, q, eq, O_RDONLY, 0);
 		}
 		else if (tok == '>')
 		{
@@ -406,7 +273,18 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 				raise_error("syntax error near unexpected token", 258, tok);
 				return (NULL);
 			}
-			cmd = redirecmd(cmd, q, eq, O_RDWR|O_TRUNC|O_CREAT, 1);
+			file = ft_substr(q, 0, (eq - q));
+			fd = open(file, O_RDWR|O_TRUNC|O_CREAT, 0644);
+			if (fd == -1)
+			{
+				printf("%s", file);
+				perror("");
+				return (NULL);
+			}
+			close(exec->output);
+			exec->output = fd;
+			free(file);
+			// cmd = redirecmd(cmd, q, eq, O_RDWR|O_TRUNC|O_CREAT, 1);
 		}
 		else if (tok == '-')
 		{
@@ -416,10 +294,10 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 				raise_error("syntax error near unexpected token", 258, tok);
 				return (NULL);
 			}
-			her_doc_len = (eq - q);
-			here_doc_lim = ft_substr(q, 0, her_doc_len);
-			here_doc(here_doc_lim);
-			cmd = redirecmd(cmd, q, eq, O_RDONLY, 0);
+			// her_doc_len = (eq - q);
+			// here_doc_lim = ft_substr(q, 0, her_doc_len);
+			// here_doc(here_doc_lim);
+			// cmd = redirecmd(cmd, q, eq, O_RDONLY, 0);
 		}
 		else if (tok == '+')
 		{
@@ -429,12 +307,22 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 				raise_error("syntax error near unexpected token", 1, tok);
 				return (NULL);
 			}
-			cmd = redirecmd(cmd, q,eq, O_RDWR|O_APPEND|O_CREAT, 1);
+			file = ft_substr(q, 0, (eq - q));
+			fd = open(file, O_RDWR|O_APPEND|O_CREAT, 0644);
+			if (fd == -1)
+			{
+				printf("%s", file);
+				perror("");
+				return (NULL);
+			}
+			close(exec->output);
+			exec->output = fd;
+			free(file);
+			// cmd = redirecmd(cmd, q,eq, O_RDWR|O_APPEND|O_CREAT, 1);
 		}
 	}
-	return (t_cmd *)(cmd);
+	return (t_cmd *)(exec);
 }
-
 
 void quotes_pareser(char **q, char **eq, char **ps, char **envp)
 {

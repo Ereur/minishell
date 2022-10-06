@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gitpod <gitpod@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/24 04:20:11 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/06 04:41:08 by gitpod           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_cmd
 typedef struct s_execcmd {
 	int		type;
 	t_list	*args;
+	int		output;
+	int		input;
 	char	**argument;
 		
 }	t_execcmd;
