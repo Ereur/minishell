@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 08:58:45 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/07 10:20:23 by zoukaddo         ###   ########.fr       */
+/*   Created: 2022/10/09 15:07:11 by zoukaddo          #+#    #+#             */
+/*   Updated: 2022/10/09 18:44:24 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../parser.h"
+#include "../parser.h"
 
-void    env(void)
+void	sig_handler(int signal)
 {
-	t_senv *head;
-
-	head = gb.env;
-    while (head)
+	if (signal == SIGINT)
 	{
-		if (head->value)
-			printf("%s=%s\n", head->key, head->value);
-		head = head->next;
+		rl_replace_line("", 0);
+		printf("\n");
+		rl_on_new_line();
+		rl_redisplay();
 	}
+	return ;
+}
+
+void	signals(void)
+{
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
