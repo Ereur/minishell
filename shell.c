@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitpod <gitpod@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/06 06:45:05 by gitpod           ###   ########.fr       */
+/*   Updated: 2022/10/09 21:59:18 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,16 @@ int	main(int ac, char **argv, char **envp)
 	gb.envp = 0;
 	int j = 0;
 	gb.status = 0;
+	gb.input = 0;
+	gb.output = 1;
 	setup_env(envp);
 	// env();
 	while (again)
 	{
+		signals();
 		buffer = readline(getprompt(envp));
+		if (!buffer)
+			break;
 		if (!buffer[0])
 			continue ;
 		es = &buffer[ft_strlen(buffer)];
@@ -55,18 +60,15 @@ int	main(int ac, char **argv, char **envp)
 		cmd = parser(&ps, es, envp);
 		if (!cmd)
 			continue;
-		print_tree(cmd);
-		// if (cmd->type == REDIR || cmd->type == EXEC)
-		// {	
-		// 	execute_builtins(cmd);
-		// }
-		// else 
-		// {	
-		// 	executer(cmd);
-		// 	while (waitpid(-1, NULL, 0) != -1)
-		// 		;
-
-		// }
+		// print_tree(cmd);
+		if (cmd->type == EXEC)
+			execute_builtins(cmd);
+		else 
+		{
+			executer(cmd);
+			while (waitpid(-1, NULL, 0) != -1)
+				;
+		}
 		// printf("exit status: %d\n", gb.exit_statut);    
 		// print_tree(cmd);
 	}

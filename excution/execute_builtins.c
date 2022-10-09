@@ -6,39 +6,27 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 06:25:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/22 19:16:53 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/09 23:30:27 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parser.h"
 
-void	redirection_built(t_redircmd *redir)
+void	redirection_built(t_execcmd *cmd)
 {
 	int fd;
 
-	if (redir->fd == 0)
+	if (cmd->input != -1)
 	{
 		gb.input = dup(0);
-		fd = open(redir->filee->content, redir->mode, 0644);
-		if (fd == -1)
-		{
-			printf("minishell: %s: No such file or directory\n", redir->filee->content);
-			exit(1);
-		}
-		dup2(fd, 0);
-		close(fd);
+		dup2(cmd->input, 0);
+		close(cmd->input);
 	}
-	if (redir->fd == 1)
+	if (cmd->output != -1)
 	{
 		gb.output = dup(1);
-		fd = open(redir->filee->content, redir->mode, 0644);
-		if (fd == -1)
-		{
-			printf("minishell: %s: No such file or directory\n", redir->filee->content);
-			exit(1);
-		}
-		dup2(fd, 1);
-		close(fd);
+		dup2(cmd->output, 1);
+		close(cmd->output);
 	}
 }
 
@@ -53,18 +41,28 @@ void execute_builtins(t_cmd *cmd)
 	{
 		exec = (t_execcmd *)(cmd);
 		if (checifbuiltin(exec))
-		{	
+		{
+			if (exec->input != -1 || exec->output != 1)
+				redirection_built(exec);
 			if (my_fork() == 0)
 				execute_cmd(exec);
 			wait(NULL);
 		}
+		// printf("%d\n",gb.output);
+		// printf("%d\n",gb.input);
 		dup2(gb.output, 1);
 		dup2(gb.input, 0);
+		if (gb.input != 0)
+			close(gb.input);
+		if (gb.output != 1)
+			close(gb.output);
+		// close(gb.output);
+		// close(gb.input);
 	}
-	if (cmd->type == REDIR)
-	{
-		redir = (t_redircmd *)(cmd);
-		redirection_built(redir);
-		execute_builtins(redir->cmd);
-	}
+	// if (cmd->type == REDIR)
+	// {
+	// 	redir = (t_redircmd *)(cmd);
+	// 	redirection_built(redir);
+	// 	execute_builtins(redir->cmd);
+	// }
 }

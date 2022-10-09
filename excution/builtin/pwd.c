@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 22:35:49 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/25 13:48:02 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/09 16:28:10 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	built_in_pwd(char **str)
 	if (!pwd)	
 		pwd = reserve;
 	else
-	{
-		// if (reserve)
-		// 	free(reserve);
 		reserve = pwd;
-	}
+	// {
+	// 	// if (reserve)
+	// 	// 	free(reserve);
+	// }
 	printf("%s\n", pwd);
 	free(pwd);
 	return (0);
