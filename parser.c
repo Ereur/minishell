@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/24 04:26:38 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:44:30 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -418,7 +418,8 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 			}
 			her_doc_len = (eq - q);
 			here_doc_lim = ft_substr(q, 0, her_doc_len);
-			here_doc(here_doc_lim);
+			printf("here doc %d\n",here_doc(here_doc_lim));
+			exit(1);
 			cmd = redirecmd(cmd, q, eq, O_RDONLY, 0);
 		}
 		else if (tok == '+')

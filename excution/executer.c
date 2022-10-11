@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/23 23:28:41 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/07 23:23:31 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,7 @@ void executer(t_cmd *cmd)
 		i = my_fork();
 		if (i == 0)
 		{	
-			sleep(60);
+			// sleep(60);
 			dup2(fd[1], 1);
 			close(fd[1]);
 			close(fd[0]);
@@ -189,7 +189,7 @@ void executer(t_cmd *cmd)
 		i = my_fork();
 		if (i == 0)
 		{
-			sleep(60);
+			// sleep(60);
 			dup2(fd[0], 0);
 			close(fd[0]);
 			close(fd[1]);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   her_doc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 04:15:04 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/24 04:18:32 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:21:51 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	here_doc(char *lim)
+int	here_doc(char *lim)
 {
 	int		end[2];
 	char	*line;
@@ -36,5 +36,6 @@ void	here_doc(char *lim)
 	free(line);
 	dup2(end[0], 0);
 	close(end[0]);
-	close(end[1]);
+	return (end[1]);
+	// close(end[1]);
 }

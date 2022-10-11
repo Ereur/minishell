@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/23 23:22:05 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/07 23:29:26 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,9 @@ int	main(int ac, char **argv, char **envp)
 			execute_builtins(cmd);
 		}
 		else 
-		{	
+		{
 			executer(cmd);
 			while (waitpid(-1, NULL, 0) != -1)
-				;
 
 		}
 		// printf("exit status: %d\n", gb.exit_statut);    

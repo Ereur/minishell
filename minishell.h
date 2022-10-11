@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:11:41 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/20 07:23:01 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/05 20:44:29 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include "parser.h"
 # include "token.h"
 
-#include <fcntl.h>
+# include <fcntl.h>
 
 int			built_in_pwd(char **str);
 const char	*getprompt(char **envp);
