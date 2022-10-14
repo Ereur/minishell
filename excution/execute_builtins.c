@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtins.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 06:25:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/14 16:51:28 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:36:11 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ void execute_builtins(t_cmd *cmd)
 	if (cmd->type == EXEC)
 	{
 		exec = (t_execcmd *)(cmd);
-		if (exec->input != -1 || exec->output != 1)
+		if (exec->input > 0 || exec->output > 1)
 			redirection_built(exec);
+		if (exec->input == -1 || exec->output == -1)
+			return ;
 		if (checifbuiltin(exec))
 		{
 			if (my_fork() == 0)

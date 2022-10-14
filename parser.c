@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/14 17:06:21 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:19:10 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -257,7 +257,8 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 			{
 				printf("%s : No such file or directory\n", file);
 			}
-			close(exec->input);
+			if (exec->input != 0)
+				close(exec->input);
 			exec->input = fd;
 			free(file);
 			// cmd = redirecmd(cmd, q, eq, O_RDONLY, 0);
@@ -276,7 +277,8 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 			{
 				printf("%s : No such file or directory\n", file);
 			}
-			close(exec->output);
+			if (exec->output != 1)
+				close(exec->output);
 			exec->output = fd;
 			free(file);
 			// cmd = redirecmd(cmd, q, eq, O_RDWR|O_TRUNC|O_CREAT, 1);
@@ -308,7 +310,8 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 			{
 				printf("%s No such file or directory\n", file);
 			}
-			close(exec->output);
+			if (exec->output !=  1)
+				close(exec->output);
 			exec->output = fd;
 			free(file);
 			// cmd = redirecmd(cmd, q,eq, O_RDWR|O_APPEND|O_CREAT, 1);
