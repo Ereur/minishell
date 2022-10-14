@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/14 16:53:51 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:06:21 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,8 +255,7 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 			fd = open(file, O_RDWR, 0644);
 			if (fd == -1)
 			{
-				printf("%s", file);
-				perror("");
+				printf("%s : No such file or directory\n", file);
 			}
 			close(exec->input);
 			exec->input = fd;
@@ -275,8 +274,7 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 			fd = open(file, O_RDWR|O_TRUNC|O_CREAT, 0644);
 			if (fd == -1)
 			{
-				printf("%s", file);
-				perror("");
+				printf("%s : No such file or directory\n", file);
 			}
 			close(exec->output);
 			exec->output = fd;
@@ -308,8 +306,7 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 			fd = open(file, O_RDWR|O_APPEND|O_CREAT, 0644);
 			if (fd == -1)
 			{
-				printf("%s", file);
-				perror("");
+				printf("%s No such file or directory\n", file);
 			}
 			close(exec->output);
 			exec->output = fd;

@@ -6,11 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/11 23:59:26 by aamoussa         ###   ########.fr       */
-=======
-/*   Updated: 2022/10/14 11:24:00 by zoukaddo         ###   ########.fr       */
->>>>>>> 2a5cadd44e1dbc5ef653c596e194b57119f7921c
+/*   Updated: 2022/10/14 17:00:54 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,29 +148,6 @@ void excute_pipes(t_cmd *cmd, int flag)
 	if (cmd->type == EXEC)
 	{
 		exec = (t_execcmd *)(cmd);
-<<<<<<< HEAD
-		checifbuiltin(exec);
-		execute_cmd(exec);
-	}
-	if (cmd->type == REDIR)
-	{
-		redir = (t_redircmd *)(cmd);
-		redirection(redir);
-		executer(redir->cmd);
-	}
-	if (cmd->type == PIPE)
-	{
-		pipecmd = (t_pipecmd *)(cmd);
-		pipe(fd);
-		i = my_fork();
-		if (i == 0)
-		{	
-			// sleep(60);
-			dup2(fd[1], 1);
-			close(fd[1]);
-			close(fd[0]);
-			executer(pipecmd->left);
-=======
 		
 		if (flag == 0)
 		{
@@ -187,17 +160,9 @@ void excute_pipes(t_cmd *cmd, int flag)
 					execute_cmd((t_execcmd *)cmd);
 				close(fd[1]);
 			}
->>>>>>> 2a5cadd44e1dbc5ef653c596e194b57119f7921c
 		}
 		if (flag == 1)
 		{
-<<<<<<< HEAD
-			// sleep(60);
-			dup2(fd[0], 0);
-			close(fd[0]);
-			close(fd[1]);
-			executer(pipecmd->right);
-=======
 			i = my_fork();
 			if (i == 0)
 			{
@@ -208,7 +173,6 @@ void excute_pipes(t_cmd *cmd, int flag)
 					execute_cmd((t_execcmd *)cmd);
 				close(fd[0]);
 			}
->>>>>>> 2a5cadd44e1dbc5ef653c596e194b57119f7921c
 		}
 		close(fd[1]);
 		close(fd[0]);
