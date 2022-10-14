@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/09 21:59:18 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/14 09:57:10 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ int	main(int ac, char **argv, char **envp)
 		// print_tree(cmd);
 		if (cmd->type == EXEC)
 			execute_builtins(cmd);
-		else 
+		else
 		{
-			executer(cmd);
+			// executer(cmd);
+			// pipe_executer(cmd);
 			while (waitpid(-1, NULL, 0) != -1)
 				;
 		}
