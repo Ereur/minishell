@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/07 23:23:31 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/11 23:59:26 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,26 @@
 
 int	checifbuiltin(t_execcmd *exec)
 {
-	if (ft_strcmp(exec->argument[0], "cd") == 0)
-	{		
+	if (ft_strcmp(exec->argument[0], "cd") == 0)	
 		cd_cmd(exec->argument);
-		return (0);
-	}
-	if (ft_strcmp(exec->argument[0], "pwd") == 0)
-	{		
+	else if (ft_strcmp(exec->argument[0], "pwd") == 0)
 		built_in_pwd(exec->argument);
-		return (0);
-	}
-	if (ft_strcmp(exec->argument[0], "env") == 0)
-	{		
+	else if  (ft_strcmp(exec->argument[0], "env") == 0)	
 		env();
-		return (0);
-	}
-	if (ft_strcmp(exec->argument[0], "echo") == 0)
-	{		
+	else if (ft_strcmp(exec->argument[0], "echo") == 0)	
 		ft_echo(exec->argument);
-		return (0);
-	}
-	if (ft_strcmp(exec->argument[0], "export") == 0)
+	else if (ft_strcmp(exec->argument[0], "export") == 0)
 	{		
 		ft_export(exec->argument);
 		get_envp();
-		return (0);
 	}
-	if (ft_strcmp(exec->argument[0], "unset") == 0)
-	{	
+	else if (ft_strcmp(exec->argument[0], "unset") == 0)
 		unset_cmd(exec->argument);
-		return (0);
-	}
-	if (ft_strcmp(exec->argument[0], "exit") == 0)
-	{	
+	else if (ft_strcmp(exec->argument[0], "exit") == 0)
 		gb.exit_statut = exit_cmd(exec->argument);
-		return (0);
-	}
-	return (1);
+	else
+		return (1);
+	return (0);
 	// else (execve(exec->argument[0], exec->argument, gb.envp) == -1)		
 	// {
 	// 	printf("minishell: %s: command not found\n", exec->argument[0]);

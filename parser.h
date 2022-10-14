@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/05 16:24:42 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/12 00:27:44 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_cmd
 typedef struct s_execcmd {
 	int		type;
 	t_list	*args;
+	int		output;
+	int		input;
 	char	**argument;
 		
 }	t_execcmd;

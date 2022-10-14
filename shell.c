@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/07 23:29:26 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/12 00:00:49 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,32 @@ int	main(int ac, char **argv, char **envp)
 	gb.envp = 0;
 	int j = 0;
 	gb.status = 0;
+	gb.input = 0;
+	gb.output = 1;
 	setup_env(envp);
 	// env();
 	while (again)
 	{
+		signals();
 		buffer = readline(getprompt(envp));
+		if (!buffer)
+			break;
 		if (!buffer[0])
 			continue ;
 		es = &buffer[ft_strlen(buffer)];
 		add_history(buffer);
 		ps = buffer;
 		cmd = parser(&ps, es, envp);
-		// print_tree(cmd);
-		// exit(1);
 		if (!cmd)
 			continue;
-		if (cmd->type == REDIR || cmd->type == EXEC)
-		{	
+		// print_tree(cmd);
+		if (cmd->type == EXEC)
 			execute_builtins(cmd);
-		}
 		else 
 		{
 			executer(cmd);
 			while (waitpid(-1, NULL, 0) != -1)
-
+				;
 		}
 		// printf("exit status: %d\n", gb.exit_statut);    
 		// print_tree(cmd);

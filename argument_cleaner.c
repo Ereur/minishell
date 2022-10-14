@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument_cleaner.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gitpod <gitpod@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/23 23:24:38 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/06 06:36:44 by gitpod           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,15 +222,15 @@ void make_quotes(t_list	*args)
 
 	
 
-	if (!check_quotes((args)->content))
-	{	
-		raise_error("syntax error unclosed quotes", 258, 0);
-		return ;
-	}
 
 	tmp = args;
 	while (tmp)
 	{
+		if (!check_quotes((tmp)->content))
+		{	
+			raise_error("syntax error unclosed quotes", 258, 0);
+			return ;
+		}
 		split_args = NULL;
 		i = 0;
 		line = tmp->content;

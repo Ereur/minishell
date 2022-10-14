@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:11:41 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/05 20:44:29 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/12 00:35:22 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include "excution/utils/execution.h"
 # include "parser.h"
 # include "token.h"
-
+# include <signal.h>
 # include <fcntl.h>
 
 int			built_in_pwd(char **str);
