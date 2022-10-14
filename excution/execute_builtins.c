@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 06:25:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/14 10:20:52 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:51:28 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	redirection_built(t_execcmd *cmd)
 {
 	int fd;
 
-	printf("%d\n",cmd->input);
-	printf("%d\n",cmd->output);
 	if (cmd->input != -1)
 	{
 		gb.input = dup(0);
