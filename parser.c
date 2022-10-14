@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitpod <gitpod@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/06 05:47:24 by gitpod           ###   ########.fr       */
+/*   Updated: 2022/10/14 16:48:02 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,6 @@ void ft_print_som(char *q, char *eq)
 	printf("\n");
 
 }
-
 
 void print_tree(t_cmd *cmd)
 {

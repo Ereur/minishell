@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitpod <gitpod@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/06 04:41:08 by gitpod           ###   ########.fr       */
+/*   Updated: 2022/10/14 09:57:21 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,9 @@ void	ft_print_som(char *q, char *eq);
 t_cmd	*parser(char **ps, char *es, char **envp);
 void	print_tree(t_cmd *cmd);
 
+// trying
+//trying
+void	pipe_executer(t_cmd *cmd);
+void 	excute_pipes(t_cmd *cmd, int flag);
+void	sig_handler(int signal); 
 #endif

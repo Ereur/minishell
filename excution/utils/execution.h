@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:10:59 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/09 18:25:24 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/11 20:12:21 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ int     unset_cmd(char **args);
 // singals header
 void	rl_replace_line(const char *text, int clear_undo);
 void	signals(void);
+
 #endif 
