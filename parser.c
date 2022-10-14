@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/14 16:43:08 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:53:51 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,6 @@ void ft_print_som(char *q, char *eq)
 	printf("\n");
 
 }
-
 
 void print_tree(t_cmd *cmd)
 {

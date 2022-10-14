@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/12 00:00:49 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:54:06 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,10 @@ int	main(int ac, char **argv, char **envp)
 		// print_tree(cmd);
 		if (cmd->type == EXEC)
 			execute_builtins(cmd);
-		else 
+		else
 		{
-			executer(cmd);
+			// executer(cmd);
+			// pipe_executer(cmd);
 			while (waitpid(-1, NULL, 0) != -1)
 				;
 		}

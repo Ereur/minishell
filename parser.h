@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/12 00:27:44 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/14 16:54:00 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,9 @@ void	ft_print_som(char *q, char *eq);
 t_cmd	*parser(char **ps, char *es, char **envp);
 void	print_tree(t_cmd *cmd);
 
+// trying
+//trying
+void	pipe_executer(t_cmd *cmd);
+void 	excute_pipes(t_cmd *cmd, int flag);
+void	sig_handler(int signal); 
 #endif

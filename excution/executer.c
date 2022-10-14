@@ -6,7 +6,11 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/10/11 23:59:26 by aamoussa         ###   ########.fr       */
+=======
+/*   Updated: 2022/10/14 11:24:00 by zoukaddo         ###   ########.fr       */
+>>>>>>> 2a5cadd44e1dbc5ef653c596e194b57119f7921c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,25 +132,27 @@ void	execute_cmd(t_execcmd *cmd)
 	paths = get_paths();
 	check_access(paths, cmd);
 	// fprintf(stderr,"%s\n", cmd->argument[0]);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (execve(cmd->argument[0], cmd->argument, gb.envp) == -1)
 	{
-		perror("execve failed");
+		perror("command not found");
 		exit(1);
 	}
 }
 
-
-void executer(t_cmd *cmd)
+void excute_pipes(t_cmd *cmd, int flag)
 {
 	int			fd[2];
-	pid_t		i;
+	pipe(fd);
+	int i;
 	t_execcmd	*exec;
-	t_redircmd	*redir;
 	t_pipecmd	*pipecmd;
 
 	if (cmd->type == EXEC)
 	{
 		exec = (t_execcmd *)(cmd);
+<<<<<<< HEAD
 		checifbuiltin(exec);
 		execute_cmd(exec);
 	}
@@ -168,17 +174,94 @@ void executer(t_cmd *cmd)
 			close(fd[1]);
 			close(fd[0]);
 			executer(pipecmd->left);
-		}
-		i = my_fork();
-		if (i == 0)
+=======
+		
+		if (flag == 0)
 		{
+			i = my_fork();
+			if (i == 0)
+			{
+				close(fd[0]);
+				dup2(fd[1], 1);
+				if (checifbuiltin((t_execcmd *)cmd) == 0)
+					execute_cmd((t_execcmd *)cmd);
+				close(fd[1]);
+			}
+>>>>>>> 2a5cadd44e1dbc5ef653c596e194b57119f7921c
+		}
+		if (flag == 1)
+		{
+<<<<<<< HEAD
 			// sleep(60);
 			dup2(fd[0], 0);
 			close(fd[0]);
 			close(fd[1]);
 			executer(pipecmd->right);
+=======
+			i = my_fork();
+			if (i == 0)
+			{
+				close(fd[1]);
+				dup2(fd[0], 0);
+				
+				if (checifbuiltin((t_execcmd *)cmd) == 0)
+					execute_cmd((t_execcmd *)cmd);
+				close(fd[0]);
+			}
+>>>>>>> 2a5cadd44e1dbc5ef653c596e194b57119f7921c
 		}
-		// close(fd[0]);
 		close(fd[1]);
+		close(fd[0]);
+		wait(NULL);
+		wait(NULL);
 	}
 }
+
+void	pipe_executer(t_cmd *cmd)
+{
+	t_pipecmd *pipecmd;
+	pipecmd = (t_pipecmd *)(cmd);
+	excute_pipes(((t_pipecmd *)cmd)->left, 0);
+	excute_pipes(((t_pipecmd *)cmd)->right, 1);
+}
+
+// void executer(t_cmd *cmd)
+// {
+// 	int			fd[2];
+// 	pid_t		i;
+// 	t_execcmd	*exec;
+// 	t_redircmd	*redir;
+// 	t_pipecmd	*pipecmd;
+
+// 	// if (cmd->type == EXEC)
+// 	// {
+// 	// 	exec = (t_execcmd *)(cmd);
+// 	// 	checifbuiltin(exec);
+// 	// 	execute_cmd(exec);
+// 	// }
+// 	if (cmd->type == PIPE)
+// 	{
+// 		pipecmd = (t_pipecmd *)(cmd);
+// 		pipe(fd);
+// 		i = my_fork();
+// 		if (i == 0)
+// 		{	
+// 			sleep(60);
+// 			dup2(fd[1], 1);
+// 			close(fd[1]);
+// 			close(fd[0]);
+// 			executer(pipecmd->left);
+// 		}
+// 		i = my_fork();
+// 		if (i == 0)
+// 		{
+// 			sleep(60);
+// 			dup2(fd[0], 0);
+// 			close(fd[0]);
+// 			close(fd[1]);
+// 			executer(pipecmd->right);
+// 		}
+// 		// close(fd[0]);
+// 		close(fd[1]);
+// 	}
+// }

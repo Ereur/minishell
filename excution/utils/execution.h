@@ -6,7 +6,11 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:10:59 by zoukaddo          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/10/12 00:33:50 by aamoussa         ###   ########.fr       */
+=======
+/*   Updated: 2022/10/11 20:12:21 by zoukaddo         ###   ########.fr       */
+>>>>>>> 2a5cadd44e1dbc5ef653c596e194b57119f7921c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +51,5 @@ int     unset_cmd(char **args);
 // singals header
 void rl_replace_line (const char *text, int clear_undo);
 void	signals(void);
+
 #endif 

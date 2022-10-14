@@ -6,7 +6,7 @@
 #    By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by zoukaddo          #+#    #+#              #
-#    Updated: 2022/10/11 23:59:55 by aamoussa         ###   ########.fr        #
+#    Updated: 2022/10/14 16:54:24 by aamoussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,9 @@ CC				= gcc -g
 
 RM				= rm -f
 
-READLINE_PATH =  -lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include
+READLINE_PATH =  -lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/readline/include
+#-lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include
 #-lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/readline/include
-#-lreadline -L /opt/vagrant/embedded/lib/ -I /opt/vagrant/embedded/include 
-#-lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/readline/include 
 
 
 BUILTIN 		= ./excution/builtin/
