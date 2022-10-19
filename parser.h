@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/14 16:54:00 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/18 09:53:11 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_gb_variable	gb;
 int		checifbuiltin(t_execcmd *exec);
 void	execute_cmd(t_execcmd *cmd);
 
-int	here_doc(char *lim);
+int		here_doc(char *);
 t_cmd	*parsepipe(char **ps, char *es, char **envp);
 t_cmd	*redirecmd(t_cmd *cmd, char *file, char *efile, int mode, int fd);
 t_cmd	*execcmd(void);
@@ -82,7 +82,7 @@ void	execute_builtins(t_cmd *cmd);
 void    executer(t_cmd *cmd);
 char	check_quotes(char *line);
 void	clean_arguments(t_cmd *cmd);
-int		skip_$(char *str);
+int		skip_$(char *test);
 int		find_name(char *s);
 void 	put_zero_in_null(char **str);
 void 	add_arg(t_list **head, char **q, char **eq);

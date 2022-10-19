@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/14 17:19:10 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/19 14:54:11 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 		
 // 	}	
 // }
-
 char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
 	unsigned int	i;
@@ -50,6 +49,8 @@ int find_name(char *s)
 	i = 0;
 	tmp = s;
 	name = NULL;
+	if (*tmp == '?')
+		return (1);
 	while (*tmp)
 	{
 		if (!ft_isalpha(*tmp) && *tmp!='_')
@@ -110,7 +111,6 @@ char *join(char *str, size_t i, char *name, char *ret)
 	result = ft_strjoin(ret, result);
 	return (result);
 }
-
 
 void quote_parser(char **q, char **eq, char *quote_type, char **ps, char **envp)
 {
@@ -324,39 +324,108 @@ void quotes_pareser(char **q, char **eq, char **ps, char **envp)
 {
 	char *single_quotes;
 	char *double_quotes;
-	
+	char spec;
+	int		i = 0;
+	int	counter = 0;
+	char *str;
+	char *tmp;
+	int check;
+	str = "<|> \t\r\n\v";
 	single_quotes = ft_strchr(*q, '\'');
 	double_quotes = ft_strchr(*q, '\"');
-
-	if (single_quotes && double_quotes)
-	{	
-		if (single_quotes < double_quotes)
-		{	
-			quote_parser(q, eq, "\'", ps, envp);
-			if (!q)
-				return ;
-		}
-		else if (double_quotes > single_quotes)
-		{	
-			quote_parser(q, eq, "\"", ps, envp);
-			if (!q)
-				return ;
-		}
-	}
-	else
+	// printf("%c", (*q)[1]);
+	// exit(1);
+	if (single_quotes || double_quotes)
 	{
-		if (single_quotes)
-		{	
-			quote_parser(q, eq, "\'", ps, envp);
-			if (!q)
-				return ;
+		while ((*q)[i])
+		{
+			spec = (*q)[i];
+			i++;
+			if (spec != '\'' && spec != '\"')
+			{
+				while ((*q)[i])
+				{
+					if ((*q)[i] == '\'')
+					{
+						spec = (*q)[i];
+						i++;
+						break;
+					}
+					if ((*q)[i] == '\"')
+					{
+						spec = (*q)[i];
+						i++;
+						break;
+					}
+					tmp = str;
+					while (*tmp)
+					{
+						check = (*q)[i] == *tmp;
+						if (check)
+						{
+							*eq = *q + i; 
+							*ps = *eq;
+							return ;
+						}
+						tmp++;
+					}
+					i++;
+				}
+			}
+			if (spec == '\'')
+			{
+				while ((*q)[i])
+				{
+					if ((*q)[i] == '\"')
+					{
+						i++;
+						if (!(*q)[i])
+						{
+							*eq = *q + i; 
+							*ps = *eq;
+							return;
+						}
+						break;
+					}
+					i++;
+				}
+				if (!(*q)[i])
+				{
+					raise_error("syntax error unclosed quotes", 258, 0);	
+					*q = NULL;
+					return ;
+				}
+			}
+			if (spec == '\"')
+			{
+				// printf("q = %p eq : %p", *q + i, *eq);
+				while ((*q)[i])
+				{
+					if ((*q)[i] == '\"')
+					{
+						i++;
+						if (!(*q)[i])
+						{
+							*eq = *q + i; 
+							*ps = *eq;
+							return;
+						}
+						break;
+					}
+					i++;
+				}
+				if (!(*q)[i])
+				{
+					raise_error("syntax error unclosed quotes", 258, 0);	
+					*q = NULL;
+					return ;
+				}
+			
+			}
 		}
-		if (double_quotes)
-		{	
-			quote_parser(q, eq, "\"", ps, envp);
-			if (!q)
-				return ;
-		}
+
+		*eq = *q + i;
+		*ps = *eq;
 	}
 }
 
@@ -462,9 +531,15 @@ char check_quotes(char *line)
 t_cmd *parser(char **ps, char *es, char **envp)
 {
 	t_cmd *cmd;
-	
+	char *s;
+	s = *ps;
+	while(s < es && ft_strchr(WHITESPACE, *s))
+		s++;
+	if (s >= es)
+		return (NULL);
 	cmd = parsepipe(ps, es, envp);
-	clean_arguments(cmd);
+	// print_tree(cmd);
+	 clean_arguments(cmd);
 	if (gb.status)
 		return (NULL);
 	return (cmd);

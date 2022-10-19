@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/14 17:36:51 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:17:02 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,10 @@ void	execute_cmd(t_execcmd *cmd)
 
 	paths = get_paths();
 	check_access(paths, cmd);
-	// fprintf(stderr,"%s\n", cmd->argument[0]);
+	fprintf(stderr,"%s\ntest\n", cmd->argument[0]);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+
 	if (execve(cmd->argument[0], cmd->argument, gb.envp) == -1)
 	{
 		perror("command not found");

@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/14 17:21:49 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/19 15:12:22 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	main(int ac, char **argv, char **envp)
 	again = true;
 	gb.envp = 0;
 	int j = 0;
-	gb.status = 0;
 	gb.input = 0;
 	gb.output = 1;
 	setup_env(envp);
 	// env();
 	while (again)
 	{
+		gb.status = 0;
 		signals();
 		buffer = readline(getprompt(envp));
 		if (!buffer)
@@ -61,7 +61,7 @@ int	main(int ac, char **argv, char **envp)
 		if (!cmd)
 			continue;
 		// print_tree(cmd);
-		// continue ;
+		// exit(1);
 		if (cmd->type == EXEC)
 			execute_builtins(cmd);
 		else

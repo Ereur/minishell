@@ -6,11 +6,13 @@
 #    By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by zoukaddo          #+#    #+#              #
-#    Updated: 2022/10/14 17:01:47 by aamoussa         ###   ########.fr        #
+#    Updated: 2022/10/18 10:32:28 by aamoussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
+
+# CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 SRCS			= shell.c token.c parser.c build_nodes.c argument_cleaner.c \
 				  $(BUILTIN)echo_cmd.c  $(BUILTIN)env.c $(BUILTIN)cd_cmd.c $(EXECUTION)utils/env_handler.c  $(EXECUTION)/utils/utils.c \
@@ -19,7 +21,7 @@ SRCS			= shell.c token.c parser.c build_nodes.c argument_cleaner.c \
 
 OBJS			= $(SRCS:.c=.o)
 
-CC				= gcc -g
+CC				= cc -g
 
 RM				= rm -f
 
@@ -32,7 +34,7 @@ BUILTIN 		= ./excution/builtin/
 
 EXECUTION		= ./excution/
 
-CFLAGS			=  #-fsanitize=address -fno-omit-frame- #-Wall -Wextra -Werror
+CFLAGS			=  -fsanitize=address #-Wall -Wextra -Werror
 
 all:			$(NAME)
 
