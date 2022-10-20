@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:09:50 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/23 21:44:54 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/19 00:46:57 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return (0);
 }
 
-int	env_size()
+int	env_size(void)
 {
-	t_senv *head;
-	int i;
+	t_senv	*head;
+	int		i;
 
 	head = gb.env;
 	i = 0;
@@ -39,15 +39,13 @@ int	env_size()
 		head = head->next;
 	}
 	return (i);
-	
 }
 
 t_senv	*env_grabber(char *keyword)
 {
-	t_senv *head;
-	
-	head = gb.env;
+	t_senv	*head;
 
+	head = gb.env;
 	while (head)
 	{
 		if (!ft_strcmp(keyword, head->key))
@@ -59,7 +57,7 @@ t_senv	*env_grabber(char *keyword)
 
 t_senv	*env_new(char *str)
 {
-	t_senv *node;
+	t_senv	*node;
 	char	*sepp;
 
 	node = (t_senv *)malloc(sizeof(t_senv));
@@ -84,8 +82,8 @@ t_senv	*env_new(char *str)
 
 void	env_add_back(t_senv **env, t_senv *node)
 {
-	t_senv *head;
-	
+	t_senv	*head;
+
 	if (!(*env))
 	{
 		*env = node;
@@ -95,12 +93,12 @@ void	env_add_back(t_senv **env, t_senv *node)
 	while (head->next)
 		head = head->next;
 	head->next = node;
-	
+
 }
 
-int track_env(char *keyword)
+int	track_env(char *keyword)
 {
-	t_senv *head;
+	t_senv	*head;
 
 	head = gb.env;
 
@@ -115,7 +113,7 @@ int track_env(char *keyword)
 
 void	setup_env(char **envp)
 {
-	int i;
+	int		i;
 	char	*tmp;
 
 	i = 0;
@@ -153,16 +151,15 @@ void get_envp(void)
 	char	*hold;
 	char	*holdt;
 	t_senv	*tmp;
-	
-	i = 0;
 
+	i = 0;
 	tmp = gb.env;
-	gb.envp = (char**)malloc(sizeof(char*) * (env_size() + 1));
+	gb.envp = (char **)malloc(sizeof(char *) * (env_size() + 1));
 	while (tmp)
 	{
 		// exit(1);
-		hold = ft_strjoin(tmp->key,"=");
-		holdt = ft_strjoin(hold,tmp->value);
+		hold = ft_strjoin(tmp->key, "=");
+		holdt = ft_strjoin(hold, tmp->value);
 		// free(hold);
 		gb.envp[i] = holdt;
 		// free(holdt);

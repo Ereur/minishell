@@ -6,15 +6,15 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:59:57 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/17 19:27:06 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/19 00:39:33 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../parser.h"
 
-int valid_unset_name(char *var)
+int	valid_unset_name(char *var)
 {
-	int i;
+	int	i;
 
 	if (!ft_isalpha(var[0]) && var[0] != '_')
 		return (0);
@@ -30,10 +30,9 @@ int valid_unset_name(char *var)
 
 int	unset_name_exist(char *var, t_senv **prenode)
 {
-	t_senv *head;
-	
-	head = gb.env;
-	
+	t_senv	*head;
+
+	head = gb.env;	
 	while (head)
 	{
 		if (!ft_strcmp(head->key, var))
@@ -46,9 +45,9 @@ int	unset_name_exist(char *var, t_senv **prenode)
 
 void	unset_handler(char *var, int *exit_code)
 {
-	t_senv *prenode;
-	t_senv *tmp;
-	
+	t_senv	*prenode;
+	t_senv	*tmp;
+
 	prenode = 0;
 	if (!valid_unset_name(var))
 	{
@@ -71,9 +70,9 @@ void	unset_handler(char *var, int *exit_code)
 
 int	unset_cmd(char **args)
 {
-	int i;
-	int exit_code;
-	
+	int	i;
+	int	exit_code;
+
 	if (!args[1])
 		return (0);
 	i = 1;

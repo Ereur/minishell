@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/14 16:54:00 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/15 15:42:59 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ typedef struct s_gb_variable
 	t_senv	*env;
 	int		status;
 	int		exit_statut;
+	int		npipe;
+	int		fd_input_prev;
+	pid_t	last_pid;
 	int		fdg;
 	int		input;
 	int		output;
@@ -94,7 +97,8 @@ void	print_tree(t_cmd *cmd);
 
 // trying
 //trying
-void	pipe_executer(t_cmd *cmd);
+void	pipe_executer(t_cmd *first_cmd, t_cmd *cmd , int npipe, int cpipe);
+void	close_all_fds(t_cmd *cmd);
 void 	excute_pipes(t_cmd *cmd, int flag);
 void	sig_handler(int signal); 
 #endif
