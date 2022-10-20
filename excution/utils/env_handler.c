@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:09:50 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/19 00:46:57 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 06:50:15 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_senv	*env_new(char *str)
 	char	*sepp;
 
 	node = (t_senv *)malloc(sizeof(t_senv));
-
 	sepp = ft_strchr(str, '=');
 	if (sepp)
 	{
@@ -77,7 +76,6 @@ t_senv	*env_new(char *str)
 	}
 	node->next = 0;
 	return (node);
-
 }
 
 void	env_add_back(t_senv **env, t_senv *node)

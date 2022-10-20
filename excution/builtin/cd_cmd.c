@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/19 00:07:34 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 06:58:36 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,3 @@ int	cd_cmd(char **argument)
 	set_pwd(env_grabber("PWD"), 1);
 	return (0);
 }
-

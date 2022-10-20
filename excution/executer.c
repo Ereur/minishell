@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 05:53:26 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 07:50:28 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,19 +113,41 @@ void	check_access(char **paths, t_execcmd *cmd)
 	}
 }
 
+void	error_display(char *message, char *cmd, int fd)
+{
+	if (cmd)
+	{
+		if (ft_strchr(cmd, '/'))
+		{
+			write(fd, "no such file or directory : ", 28);
+			write(fd, cmd, ft_strlen(cmd));
+			write(fd, "\n", 1);
+			exit(1);
+		}
+		write(fd, message, ft_strlen(message));
+		write(fd, cmd, ft_strlen(cmd));
+		write(fd, "\n", 1);
+		exit(1);
+	}
+	else
+	{
+		write(fd, message, ft_strlen(message));
+		exit(1);
+	}
+}
+
 void	execute_cmd(t_execcmd *cmd)
 {
 	char	**paths;
 
 	paths = get_paths();
 	check_access(paths, cmd);
-	// fprintf(stderr,"%s\n", cmd->argument[0]);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-
 	if (execve(cmd->argument[0], cmd->argument, gb.envp) == -1)
 	{
 		perror("");
+		// error_display("command not found: ", cmd->argument[0], 2);
 		exit(1);
 	}
 }
@@ -201,7 +223,7 @@ void	exec_command(t_cmd *first_cmd, t_execcmd *cmd, int npipe, int cpipe)
 	pid = my_fork();
 	if (!pid)
 	{
-		printf("%d pid\n",pid);
+		// printf("%d pid\n",pid);
 		if (cmd->input < 0 || cmd->output < 0)
 			exit(69);
 		if (cmd->input != 0)
