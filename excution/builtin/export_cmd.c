@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:54:48 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/10 16:38:05 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/19 00:37:46 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ int	export_name_exist(char *var, int *mode)
 
 void	export_append(char *var)
 {
-	t_senv *head;
+	t_senv	*head;
 	char	*addr_var;
-	char *tmp;
+	char	*tmp;
 
 	head = gb.env;
 	addr_var = ft_strchr(var, '+');
@@ -107,9 +107,9 @@ void	export_append(char *var)
 
 void	export_replace(char *var)
 {
-	t_senv *head;
+	t_senv	*head;
 	char	*addr_var;
-	char *tmp;
+	char	*tmp;
 
 	head = gb.env;
 	addr_var = ft_strchr(var, '=');
@@ -148,7 +148,7 @@ void	export_add(char *var, int mode)
 
 void	export_handler(char *var, int *exit_code)
 {
-	int mode;
+	int	mode;
 
 	mode = 0;
 	if (!valid_export_name(var, &mode))
@@ -191,8 +191,9 @@ void	export_declare(void)
 
 int	ft_export(char **args)
 {
-	int i;
-	int exit_code;
+	int	i;
+	int	exit_code;
+
 	if (!args[1])
 	{
 		export_declare();
@@ -202,6 +203,6 @@ int	ft_export(char **args)
 	exit_code = 0;
 	while (args[i])
 		export_handler(args[i++], &exit_code);
-	
+
 	return (exit_code);
 }

@@ -6,13 +6,11 @@
 #    By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by zoukaddo          #+#    #+#              #
-#    Updated: 2022/10/20 07:10:31 by aamoussa         ###   ########.fr        #
+#    Updated: 2022/10/20 07:55:28 by aamoussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
-
-# CFLAGS = -fsanitize=address -g
 
 SRCS			= shell.c token.c parser.c build_nodes.c argument_cleaner.c \
 				  $(BUILTIN)echo_cmd.c  $(BUILTIN)env.c $(BUILTIN)cd_cmd.c $(EXECUTION)utils/env_handler.c  $(EXECUTION)/utils/utils.c \
@@ -25,7 +23,7 @@ CC				= cc -g
 
 RM				= rm -f
 
-READLINE_PATH =  -lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include
+READLINE_PATH =  -lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/readline/include
 #-lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include
 #-lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/readline/include
 
@@ -34,12 +32,13 @@ BUILTIN 		= ./excution/builtin/
 
 EXECUTION		= ./excution/
 
+CFLAGS			=  #-fsanitize=address -Wall -Wextra -Werror -g
+
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
 				
-				cc ${CFLAGS} ${OBJS} ./libft/libft.a -o ${NAME} $(READLINE_PATH)  
-				#-fsanitize=address
+				$(CC) ${OBJS} $(CFLAGS) ./libft/libft.a -o ${NAME} $(READLINE_PATH)
 
 clean:
 				$(RM) $(OBJS) 
