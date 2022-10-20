@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/19 15:11:56 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/20 07:07:48 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,15 +292,16 @@ void convert_list_to_args(t_execcmd *execcmd)
 
 	i = 0;
 	size = ft_lstsize(execcmd->args);
-
 	execcmd->argument = malloc(sizeof(char *) * (size + 1));
 	execcmd->argument[size] = NULL;
+	// printf("%p\n", execcmd->argument[size]);
 	while (execcmd->args)
 	{
 		execcmd->argument[i] = execcmd->args->content;		
 		execcmd->args = execcmd->args->next;
 		i++;
-	}		
+	}
+	// printf("%s\n", execcmd->argument[1]);
 }
 
 void clean_arguments(t_cmd *cmd)
