@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/19 02:30:37 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 05:51:14 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	main(int ac, char **argv, char **envp)
 	again = true;
 	gb.envp = 0;
 	int j = 0;
-	gb.status = 0;
 	gb.input = 0;
 	gb.output = 1;
 	gb.fd_input_prev = 0;
@@ -52,6 +51,7 @@ int	main(int ac, char **argv, char **envp)
 	// env();
 	while (again)
 	{
+		gb.status = 0;
 		signals();
 		buffer = readline(getprompt(envp));
 		if (!buffer)
@@ -65,7 +65,7 @@ int	main(int ac, char **argv, char **envp)
 		if (!cmd)
 			continue ;
 		// print_tree(cmd);
-		// continue ;
+		// exit(1);
 		if (cmd->type == EXEC)
 			execute_builtins(cmd);
 		else

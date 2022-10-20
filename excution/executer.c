@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/19 01:14:16 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 05:53:26 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,10 @@ void	execute_cmd(t_execcmd *cmd)
 
 	paths = get_paths();
 	check_access(paths, cmd);
+	// fprintf(stderr,"%s\n", cmd->argument[0]);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
+
 	if (execve(cmd->argument[0], cmd->argument, gb.envp) == -1)
 	{
 		perror("");

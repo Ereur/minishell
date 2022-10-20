@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument_cleaner.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gitpod <gitpod@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/06 06:36:44 by gitpod           ###   ########.fr       */
+/*   Updated: 2022/10/19 15:11:56 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ char *grep_name(char *s)
 
 	i = 0;
 	tmp = s;
+	if (*s == '?')
+	{
+		return (ft_strdup("?"));	
+	}
 	if (!*s)
 		return (s);
 	name = NULL;
@@ -81,6 +85,11 @@ char *grep_variable(char *str)
 	}
 	// exit(1);
 	// printf("|%p|\n", tmp);
+	if (*name == '?')
+	{	
+		variabl = ft_itoa(gb.exit_statut);
+		return (variabl);
+	}
 	if(tmp)
 		variabl = tmp->value;
 	put_zero_in_null(&variabl);
@@ -237,7 +246,6 @@ void make_quotes(t_list	*args)
 		q = '\"';
 		while (line[i])
 		{
-			
 			if (line[i] != q)
 			{
 				start = i;
