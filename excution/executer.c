@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/20 06:52:51 by aamoussa         ###   ########.fr       */
-=======
-/*   Updated: 2022/10/20 07:50:28 by zoukaddo         ###   ########.fr       */
->>>>>>> ad332cbd8b7fdfd6694de3d0117d7359ec30b0c7
+/*   Updated: 2022/10/20 10:33:29 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,23 +142,12 @@ void	execute_cmd(t_execcmd *cmd)
 
 	paths = get_paths();
 	check_access(paths, cmd);
-<<<<<<< HEAD
-	// fprintf(stderr,"%s\ntest\n", cmd->argument[0]);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	int i = 0;
-	while (cmd->argument[i])
-	{
-		printf("test %s\n", cmd->argument[i++]);
-	}
-=======
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
->>>>>>> ad332cbd8b7fdfd6694de3d0117d7359ec30b0c7
 	if (execve(cmd->argument[0], cmd->argument, gb.envp) == -1)
 	{
-		perror("");
-		// error_display("command not found: ", cmd->argument[0], 2);
+		perror("execve :");
+		error_display("command not found: ", cmd->argument[0], 2);
 		exit(1);
 	}
 }

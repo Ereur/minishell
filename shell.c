@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/20 06:51:50 by aamoussa         ###   ########.fr       */
-=======
-/*   Updated: 2022/10/20 05:51:14 by zoukaddo         ###   ########.fr       */
->>>>>>> ad332cbd8b7fdfd6694de3d0117d7359ec30b0c7
+/*   Updated: 2022/10/20 14:01:56 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +48,12 @@ int	main(int ac, char **argv, char **envp)
 	gb.output = 1;
 	gb.fd_input_prev = 0;
 	setup_env(envp);
-	// env();
+	buffer = NULL;
 	while (again)
 	{
 		gb.status = 0;
 		signals();
+		ft_free(&buffer);
 		buffer = readline(getprompt(envp));
 		if (!buffer)
 			break ;
@@ -70,6 +67,8 @@ int	main(int ac, char **argv, char **envp)
 			continue ;
 		// print_tree(cmd);
 		// exit(1);
+		// while (1)
+		// 	;
 		if (cmd->type == EXEC)
 			execute_builtins(cmd);
 		else

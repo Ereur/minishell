@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:09:50 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 06:50:15 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 09:03:59 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void get_envp(void)
 		// exit(1);
 		hold = ft_strjoin(tmp->key, "=");
 		holdt = ft_strjoin(hold, tmp->value);
-		// free(hold);
+		ft_free(&hold);
 		gb.envp[i] = holdt;
 		// free(holdt);
 		// printf("%s \n", gb.envp[i]);

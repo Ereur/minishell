@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   her_doc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 04:15:04 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 05:50:14 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 14:10:48 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ int	here_doc(char *lim)
 		free(tmp);
 		if (!ft_strncmp(lim, line, ft_strlen(line)))
 			break ;
+		write(1,"<",1);
 		write(end[1], line, ft_strlen(line));
 	}
 	free(lim);
 	free(line);
 	dup2(end[0], 0);
 	close(end[0]);
-	return (end[1]);
-	// close(end[1]);
+	close(end[1]);
+	return (end[0]);
 }
