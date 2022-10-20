@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtins.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 06:25:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/19 14:35:21 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/20 05:51:21 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	redirection_built(t_execcmd *cmd)
 {
-	int fd;
+	int	fd;
 
 	if (cmd->input != -1)
 	{
@@ -30,7 +30,7 @@ void	redirection_built(t_execcmd *cmd)
 	}
 }
 
-void execute_builtins(t_cmd *cmd)
+void	execute_builtins(t_cmd *cmd)
 {
 	int			pipe[2];
 	t_execcmd	*exec;
@@ -64,7 +64,6 @@ void execute_builtins(t_cmd *cmd)
 		}
 		else
 			gb.exit_statut = WEXITSTATUS(exit_value);
-		
 		signal(SIGINT, sig_handler);
 		signal(SIGQUIT, SIG_IGN);
 		dup2(gb.output, 1);

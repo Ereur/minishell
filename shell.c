@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/19 15:12:22 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/20 05:51:14 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,15 @@ int	main(int ac, char **argv, char **envp)
 	char	*ps;
 	char	*es;
 	pid_t	pid;
+	t_pipecmd *tmppipcmd;
+	t_cmd *tmp;
+	int npipe;
 	again = true;
 	gb.envp = 0;
 	int j = 0;
 	gb.input = 0;
 	gb.output = 1;
+	gb.fd_input_prev = 0;
 	setup_env(envp);
 	// env();
 	while (again)
@@ -51,7 +55,7 @@ int	main(int ac, char **argv, char **envp)
 		signals();
 		buffer = readline(getprompt(envp));
 		if (!buffer)
-			break;
+			break ;
 		if (!buffer[0])
 			continue ;
 		es = &buffer[ft_strlen(buffer)];
@@ -59,7 +63,7 @@ int	main(int ac, char **argv, char **envp)
 		ps = buffer;
 		cmd = parser(&ps, es, envp);
 		if (!cmd)
-			continue;
+			continue ;
 		// print_tree(cmd);
 		// exit(1);
 		if (cmd->type == EXEC)
@@ -67,7 +71,20 @@ int	main(int ac, char **argv, char **envp)
 		else
 		{
 			// executer(cmd);
-			// pipe_executer(cmd);
+			npipe = 0;
+			tmp = cmd;
+			while (tmp->type == PIPE)
+			{
+				tmppipcmd = (t_pipecmd *)(tmp);
+				tmp = tmppipcmd->right;
+				npipe++;
+			}
+			pipe_executer(cmd, cmd, npipe, 0);
+			close_all_fds(cmd);
+			close(gb.fd_input_prev);
+			gb.fd_input_prev = 0;
+			signal(SIGINT, SIG_IGN);
+			signal(SIGQUIT, SIG_IGN);
 			while (waitpid(-1, NULL, 0) != -1)
 				;
 		}

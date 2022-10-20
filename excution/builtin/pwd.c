@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 22:35:49 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/09 16:28:10 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/19 00:38:25 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	built_in_pwd(char **str)
 	if (*str == NULL)
 		return (0);
 	pwd = getcwd(NULL, 0);
-	if (!pwd)	
+	if (!pwd)
 		pwd = reserve;
 	else
 		reserve = pwd;

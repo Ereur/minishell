@@ -3,16 +3,14 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+         #
+#    By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by zoukaddo          #+#    #+#              #
-#    Updated: 2022/10/18 10:32:28 by aamoussa         ###   ########.fr        #
+#    Updated: 2022/10/20 06:40:54 by zoukaddo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
-
-# CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 
 SRCS			= shell.c token.c parser.c build_nodes.c argument_cleaner.c \
 				  $(BUILTIN)echo_cmd.c  $(BUILTIN)env.c $(BUILTIN)cd_cmd.c $(EXECUTION)utils/env_handler.c  $(EXECUTION)/utils/utils.c \
@@ -21,11 +19,11 @@ SRCS			= shell.c token.c parser.c build_nodes.c argument_cleaner.c \
 
 OBJS			= $(SRCS:.c=.o)
 
-CC				= cc -g
+CC				= cc
 
 RM				= rm -f
 
-READLINE_PATH =  -lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include
+READLINE_PATH =  -lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/readline/include
 #-lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include
 #-lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/readline/include
 
@@ -34,13 +32,13 @@ BUILTIN 		= ./excution/builtin/
 
 EXECUTION		= ./excution/
 
-CFLAGS			=  -fsanitize=address #-Wall -Wextra -Werror
+CFLAGS			=  #-fsanitize=address -Wall -Wextra -Werror -g
 
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
 				
-				gcc ${CFLAGS} ${OBJS} ./libft/libft.a -o ${NAME} $(READLINE_PATH) -g
+				$(CC) ${OBJS} $(CFLAGS) ./libft/libft.a -o ${NAME} $(READLINE_PATH)
 
 clean:
 				$(RM) $(OBJS) 

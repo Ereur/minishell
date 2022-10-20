@@ -6,15 +6,16 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 19:05:45 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/18 19:29:17 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/19 00:52:23 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../parser.h"
 
-# define EXIT_SUC 0
-# define EXIT_FAIL 1
-# define EXIT_FAIL_DOUBLE 2
+#define EXIT_SUC 0
+#define EXIT_FAIL 1
+#define EXIT_FAIL_DOUBLE 2
+
 // fail double joj na9is
 
 int	exit_atoi(const char *str, int *mod)
@@ -31,28 +32,29 @@ int	exit_atoi(const char *str, int *mod)
 		*mod = EXIT_FAIL_DOUBLE;
 		return (0);
 	}
-	while ((*(str + i) >= '\t' && str[i] <= '\r') || str[i] == ' ')
+	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
 		i++;
-	if (*(str + i) == '-')
+	if (str[i] == '-')
 		sign = -1;
-	if (!(*(str + i + 1)))
+	if (!ft_isdigit(str[i]) && !(str[i + 1]))
 	{
 		*mod = EXIT_FAIL;
 		return (0);
 	}
-	if (*(str + i) == '-' || *(str + i) == '+')
+	if (str[i] == '-' || str[i] == '+')
 		i++;
-	while (*(str + i) && *(str + i) >= '0' && *(str + i) <= '9')
+	while (str[i] && str[i] >= '0' && str[i] <= '9')
 	{
+		*mod = EXIT_FAIL;
 		if (num > LONG_MAX)
 		{
 			if (sign == 1)
 				return (-1);
 			return (0);
 		}
-		num = num * 10 + (*(str + i++) - '0');
+		num = num * 10 + (str[i++] - '0');
 	}
-	if (*(str + i))
+	if (str[i])
 	{
 		*mod = EXIT_FAIL;
 		return (0);
@@ -71,9 +73,9 @@ void	numeric_argument_required(char *arg)
 
 int	exit_cmd(char **args)
 {
-	int exit_num;
-	int mod;
-	
+	int	exit_num;
+	int	mod;
+
 	mod = EXIT_SUC;
 	if (!args[1])
 		exit(gb.exit_statut);

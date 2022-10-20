@@ -6,15 +6,16 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/17 12:48:00 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 06:58:36 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../parser.h"
 
-void	set_pwd(t_senv* pwd, int mod)
+void	set_pwd(t_senv *pwd, int mod)
 {
 	char	*tmp;
+
 	if (pwd)
 	{
 		free(pwd->value);
@@ -33,9 +34,9 @@ void	set_pwd(t_senv* pwd, int mod)
 	}
 }
 
-int cd_cmd(char **argument)
+int	cd_cmd(char **argument)
 {
-	t_senv *home;
+	t_senv	*home;
 
 	set_pwd(env_grabber("OLDPWD"), 0);
 	if (!argument[1])
@@ -54,7 +55,7 @@ int cd_cmd(char **argument)
 			return (1);
 		}
 		return (0);
-  	}
+	}
 	if (chdir(argument[1]))
 	{
 		ft_putstr_fd("Minishell: cd: ", 2);
@@ -63,6 +64,5 @@ int cd_cmd(char **argument)
 		return (1);
 	}
 	set_pwd(env_grabber("PWD"), 1);
-  return (0);
+	return (0);
 }
-
