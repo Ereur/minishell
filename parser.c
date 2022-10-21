@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/20 13:23:38 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/21 06:24:45 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -377,7 +377,7 @@ void quotes_pareser(char **q, char **eq, char **ps, char **envp)
 			{
 				while ((*q)[i])
 				{
-					if ((*q)[i] == '\"')
+					if ((*q)[i] == '\'')
 					{
 						i++;
 						if (!(*q)[i])

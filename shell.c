@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 14:01:56 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/21 06:22:09 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int	main(int ac, char **argv, char **envp)
 		cmd = parser(&ps, es, envp);
 		if (!cmd)
 			continue ;
-		// print_tree(cmd);
-		// exit(1);
 		// while (1)
 		// 	;
 		if (cmd->type == EXEC)
