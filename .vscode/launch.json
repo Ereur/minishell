@@ -2,24 +2,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "lldb",
-      "request": "launch",
-      "name": "Launch",
-      "program": "${workspaceFolder}/minishell",
-      "args": [],
-      "cwd": "${workspaceFolder}"
-    },
-    {
-      "name": "C/C++ Runner: Debug Session",
+      "name": "(lldb) Launch",
       "type": "cppdbg",
       "request": "launch",
+      "program": "${workspaceFolder}/minishell",
       "args": [],
-      "stopAtEntry": true,
-      "externalConsole": false,
-      "cwd": "/Users/aamoussa/Desktop/minishell",
-      "program": "/Users/aamoussa/Desktop/minishell/build/Debug/outDebug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb"
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": true,
+      "MIMode": "lldb"
     }
+    
+    
   ]
 }

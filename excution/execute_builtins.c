@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 06:25:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 05:51:21 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/21 08:30:51 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	redirection_built(t_execcmd *cmd)
 {
 	int	fd;
 
-	if (cmd->input != -1)
+	if (cmd->input > 0)
 	{
 		gb.input = dup(0);
 		dup2(cmd->input, 0);
 		close(cmd->input);
 	}
-	if (cmd->output != -1)
+	if (cmd->output > 1)
 	{
 		gb.output = dup(1);
 		dup2(cmd->output, 1);
@@ -55,15 +55,15 @@ void	execute_builtins(t_cmd *cmd)
 			signal(SIGINT, SIG_IGN);
 			signal(SIGQUIT, SIG_IGN);
 			wait(&exit_value);
+			if (WIFSIGNALED(exit_value))
+			{
+				if (WTERMSIG(exit_value) == 3)
+					printf("Quit: 3\n");
+				gb.exit_statut = WTERMSIG(exit_value) + 128;
+			}
+			else if (WIFEXITED(exit_value))
+				gb.exit_statut = WEXITSTATUS(exit_value);
 		}
-		if (WIFSIGNALED(exit_value))
-		{
-			if (WTERMSIG(exit_value) == 3)
-				printf("Quit: 3\n");
-			gb.exit_statut = WTERMSIG(exit_value) + 128;
-		}
-		else
-			gb.exit_statut = WEXITSTATUS(exit_value);
 		signal(SIGINT, sig_handler);
 		signal(SIGQUIT, SIG_IGN);
 		dup2(gb.output, 1);

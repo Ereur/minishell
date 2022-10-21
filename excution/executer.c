@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/21 06:31:40 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/21 07:44:29 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@
 
 int	checifbuiltin(t_execcmd *exec)
 {
-	if (ft_strcmp(exec->argument[0], "cd") == 0)	
+	if (exec->argument[0] == NULL)
+		return (1);
+	if (ft_strcmp(exec->argument[0], "cd") == 0)
 		cd_cmd(exec->argument);
 	else if (ft_strcmp(exec->argument[0], "pwd") == 0)
 		built_in_pwd(exec->argument);
-	else if (ft_strcmp(exec->argument[0], "env") == 0)	
+	else if (ft_strcmp(exec->argument[0], "env") == 0)
 		env();
-	else if (ft_strcmp(exec->argument[0], "echo") == 0)	
+	else if (ft_strcmp(exec->argument[0], "echo") == 0)
 		ft_echo(exec->argument);
 	else if (ft_strcmp(exec->argument[0], "export") == 0)
 	{		
@@ -154,7 +156,11 @@ void	execute_cmd(t_execcmd *cmd)
 
 	paths = get_paths();
 	if (!paths)
-		printf("Minishell: No such file or directory\n");
+	{
+		ft_putstr_fd("Minishell: No such file or directory\n", 2);
+		gb.exit_statut = 127;
+		exit(gb.exit_statut);
+	}
 	check_access(paths, cmd);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
