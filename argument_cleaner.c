@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/19 15:11:56 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/20 12:01:57 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,8 @@ char *merge_list(t_list **head)
 	t_list *lst;
 	t_list	*tmp;
 	char	*content;
-	
+	t_list	*del;
+
 	lst = *head;
 	tmp = lst;
 	content = NULL;
@@ -150,9 +151,15 @@ char *merge_list(t_list **head)
 		while (tmp->next)
 		{
 			(tmp->next)->content = ft_strjoin(tmp->content, (tmp->next)->content);
+			del = tmp;			
 			tmp = tmp->next;
+			ft_free(&del->content);
+			free(del);
 		}
+		ft_free(&content);
 		content = ft_strdup(tmp->content);
+		ft_free(&tmp->content);
+		free(tmp);
 	}
 	return (content);
 }
@@ -170,6 +177,7 @@ void split_dollar(t_list *args)
 
 	i = 0;
 	tmp = args;
+	content = NULL;
 	lst_of_dollar = NULL;
 	while (tmp)
 	{
@@ -193,6 +201,7 @@ void split_dollar(t_list *args)
 			{
 				content = ft_substr(arg, start, len);
 				ft_lstadd_back(&lst_of_dollar, ft_lstnew(content, tmp->state));
+				// ft_free(&content);
 			}	
 			if (arg[i] == '$')
 			{
@@ -204,17 +213,14 @@ void split_dollar(t_list *args)
 			}
 			
 		}
+		
 		expand_lst(lst_of_dollar);
+		ft_free(&tmp->content);
 		tmp->content = merge_list(&lst_of_dollar);
+		// ft_free_list(lst_of_dollar);
 		lst_of_dollar = NULL;
 		tmp = tmp->next;
 	}
-	// while (args)
-	// {
-	// 	printf("|%s|\n", args->content);
-	// 	args = args->next;
-	// }
-	// exit(1);
 }
 
 void make_quotes(t_list	*args)
@@ -233,6 +239,7 @@ void make_quotes(t_list	*args)
 
 
 	tmp = args;
+	content = NULL;
 	while (tmp)
 	{
 		if (!check_quotes((tmp)->content))
@@ -261,6 +268,7 @@ void make_quotes(t_list	*args)
 				{	
 					content = ft_substr(line, start, counter);
 					ft_lstadd_back(&split_args, ft_lstnew(content, NOTHING));
+					// ft_free(&content);
 				}
 			}
 			if (line[i] && (line[i] == '\'' || line[i] == '\"'))
@@ -275,6 +283,7 @@ void make_quotes(t_list	*args)
 			i++;
 		}
 		split_dollar(split_args);
+		ft_free(&tmp->content);
 		tmp->content = merge_list(&split_args);
 		tmp = tmp->next;
 	}
@@ -289,18 +298,24 @@ void convert_list_to_args(t_execcmd *execcmd)
 {
 	size_t	size;
 	int		i;
-
+	t_list	*args;
 	i = 0;
 	size = ft_lstsize(execcmd->args);
-
 	execcmd->argument = malloc(sizeof(char *) * (size + 1));
 	execcmd->argument[size] = NULL;
+	// printf("%p\n", execcmd->argument[size]);
 	while (execcmd->args)
 	{
 		execcmd->argument[i] = execcmd->args->content;		
+		args = execcmd->args;
 		execcmd->args = execcmd->args->next;
+		// ft_free(&args->content);
+		free(args);
 		i++;
-	}		
+	}
+	// ft_free(&execcmd->args->content);
+	free(execcmd->args);
+	// printf("%s\n", execcmd->argument[1]);
 }
 
 void clean_arguments(t_cmd *cmd)

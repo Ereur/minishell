@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 13:13:00 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/21 06:30:49 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ int	main(int ac, char **argv, char **envp)
 	gb.output = 1;
 	gb.fd_input_prev = 0;
 	setup_env(envp);
-	// env();
+	buffer = NULL;
 	while (again)
 	{
 		gb.status = 0;
 		signals();
+		ft_free(&buffer);
 		buffer = readline(getprompt(envp));
 		if (!buffer)
 			break ;
@@ -66,8 +67,8 @@ int	main(int ac, char **argv, char **envp)
 		cmd = parser(&ps, es, envp);
 		if (!cmd)
 			continue ;
-		// print_tree(cmd);
-		// exit(1);
+		// while (1)
+		// 	;
 		get_envp();
 		if (cmd->type == EXEC)
 			execute_builtins(cmd);
