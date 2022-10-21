@@ -6,12 +6,13 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 07:50:28 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 16:05:33 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./utils/execution.h"
 #include "../parser.h"
+#include <dirent.h>
 
 int	checifbuiltin(t_execcmd *exec)
 {
@@ -112,43 +113,57 @@ void	check_access(char **paths, t_execcmd *cmd)
 		i++;
 	}
 }
-
-void	error_display(char *message, char *cmd, int fd)
+void	error_displayer(t_execcmd *cmd)
 {
-	if (cmd)
+	if (ft_strchr(cmd->argument[0], '/'))
 	{
-		if (ft_strchr(cmd, '/'))
+		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd(cmd->argument[0], 2);
+		if (opendir(cmd->argument[0]))
 		{
-			write(fd, "no such file or directory : ", 28);
-			write(fd, cmd, ft_strlen(cmd));
-			write(fd, "\n", 1);
-			exit(1);
+			ft_putstr_fd(": is a directory\n", 2);
+			gb.exit_statut = 126;
 		}
-		write(fd, message, ft_strlen(message));
-		write(fd, cmd, ft_strlen(cmd));
-		write(fd, "\n", 1);
-		exit(1);
+		else
+		{
+			if (!access(cmd->argument[0], F_OK) && \
+				access(cmd->argument[0], X_OK))
+			{
+				ft_putstr_fd(": Permision denied\n", 2);
+				gb.exit_statut = 1;
+			}
+			else
+			{
+				ft_putstr_fd(": No such file or directory\n", 2);
+				gb.exit_statut = 127;
+			}
+		}
 	}
 	else
 	{
-		write(fd, message, ft_strlen(message));
-		exit(1);
+		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd(cmd->argument[0], 2);
+		ft_putstr_fd(": command not found\n", 2);
+		gb.exit_statut = 127;
 	}
+	exit(gb.exit_statut);
 }
-
 void	execute_cmd(t_execcmd *cmd)
 {
 	char	**paths;
 
 	paths = get_paths();
+	if (!paths)
+		printf("Minishell: No such file or directory\n");
 	check_access(paths, cmd);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	if (execve(cmd->argument[0], cmd->argument, gb.envp) == -1)
 	{
-		perror("");
+		error_displayer(cmd);
+		// perror("");
 		// error_display("command not found: ", cmd->argument[0], 2);
-		exit(1);
+		// exit(1);
 	}
 }
 
@@ -214,7 +229,7 @@ void	close_all_fds(t_cmd *cmd)
 	}
 }
 
-void	exec_command(t_cmd *first_cmd, t_execcmd *cmd, int npipe, int cpipe)
+pid_t	exec_command(t_cmd *first_cmd, t_execcmd *cmd, int npipe, int cpipe)
 {
 	int		fd[2];
 	pid_t	pid;
@@ -223,7 +238,7 @@ void	exec_command(t_cmd *first_cmd, t_execcmd *cmd, int npipe, int cpipe)
 	pid = my_fork();
 	if (!pid)
 	{
-		// printf("%d pid\n",pid);
+		printf("%d pid\n",pid);
 		if (cmd->input < 0 || cmd->output < 0)
 			exit(69);
 		if (cmd->input != 0)
@@ -249,13 +264,14 @@ void	exec_command(t_cmd *first_cmd, t_execcmd *cmd, int npipe, int cpipe)
 	if (gb.fd_input_prev != 0)
 		close(gb.fd_input_prev);
 	gb.fd_input_prev = fd[0];
-	return ;
+	return (pid);
 }
 
 void	pipe_executer(t_cmd *first_cmd, t_cmd *cmd, int npipe, int cpipe)
 {
 	t_pipecmd	*pipecmd;
 	int			i;
+	int			pid;
 
 	i = 0;
 	pipecmd = (t_pipecmd *)(cmd);
@@ -266,7 +282,8 @@ void	pipe_executer(t_cmd *first_cmd, t_cmd *cmd, int npipe, int cpipe)
 		pipe_executer(first_cmd, pipecmd->left, npipe, cpipe);
 		pipe_executer(first_cmd, pipecmd->right, npipe, cpipe + 1);
 	}
-	exec_command(first_cmd, (t_execcmd *)cmd, npipe, cpipe);
+	if (cmd->type == EXEC)
+		gb.last_pid = exec_command(first_cmd, (t_execcmd *)cmd, npipe, cpipe);
 }
 
 // void executer(t_cmd *cmd)

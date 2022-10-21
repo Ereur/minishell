@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:09:50 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 06:50:15 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:44:50 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	env_add_back(t_senv **env, t_senv *node)
 	while (head->next)
 		head = head->next;
 	head->next = node;
-
 }
 
 int	track_env(char *keyword)
@@ -99,7 +98,6 @@ int	track_env(char *keyword)
 	t_senv	*head;
 
 	head = gb.env;
-
 	while (head)
 	{
 		if (!ft_strcmp(head->key, keyword))
@@ -152,6 +150,8 @@ void get_envp(void)
 
 	i = 0;
 	tmp = gb.env;
+	if (gb.envp)
+		free(gb.envp);
 	gb.envp = (char **)malloc(sizeof(char *) * (env_size() + 1));
 	while (tmp)
 	{
@@ -165,6 +165,7 @@ void get_envp(void)
 		tmp = tmp->next;
 		i++;
 	}
+	gb.envp[i] = 0;
 	// i = 0;
 	// while(gb.envp[i])
 	// {

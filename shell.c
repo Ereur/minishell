@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 05:51:14 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:13:00 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	main(int ac, char **argv, char **envp)
 	bool	again;
 	char	*ps;
 	char	*es;
+	int		catch_last_pid;
 	pid_t	pid;
 	t_pipecmd *tmppipcmd;
 	t_cmd *tmp;
@@ -44,6 +45,7 @@ int	main(int ac, char **argv, char **envp)
 	again = true;
 	gb.envp = 0;
 	int j = 0;
+	int	exit_value = 0;
 	gb.input = 0;
 	gb.output = 1;
 	gb.fd_input_prev = 0;
@@ -66,11 +68,11 @@ int	main(int ac, char **argv, char **envp)
 			continue ;
 		// print_tree(cmd);
 		// exit(1);
+		get_envp();
 		if (cmd->type == EXEC)
 			execute_builtins(cmd);
 		else
 		{
-			// executer(cmd);
 			npipe = 0;
 			tmp = cmd;
 			while (tmp->type == PIPE)
@@ -85,10 +87,8 @@ int	main(int ac, char **argv, char **envp)
 			gb.fd_input_prev = 0;
 			signal(SIGINT, SIG_IGN);
 			signal(SIGQUIT, SIG_IGN);
-			while (waitpid(-1, NULL, 0) != -1)
-				;
+			waitforcprocess();
 		}
-		// printf("exit status: %d\n", gb.exit_statut);    
 		// print_tree(cmd);
 	}
 	return (0);

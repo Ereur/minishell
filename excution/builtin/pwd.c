@@ -6,10 +6,9 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 22:35:49 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/19 00:38:25 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:40:58 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../../parser.h"
 
@@ -17,7 +16,6 @@ int	built_in_pwd(char **str)
 {
 	char		*pwd;
 	static char	*reserve;
-
 
 	if (*str == NULL)
 		return (0);

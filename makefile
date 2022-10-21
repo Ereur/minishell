@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    makefile                                           :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by zoukaddo          #+#    #+#              #
-#    Updated: 2022/10/20 06:40:54 by zoukaddo         ###   ########.fr        #
+#    Updated: 2022/10/20 13:50:48 by zoukaddo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ BUILTIN 		= ./excution/builtin/
 
 EXECUTION		= ./excution/
 
-CFLAGS			=  #-fsanitize=address -Wall -Wextra -Werror -g
+CFLAGS			=  #-fsanitize=address -g # -Wall -Wextra -Werror
 
 all:			$(NAME)
 
