@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:08 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/09/17 17:08:11 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:40:47 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_putstr_fd(char *s, int fd)
 
 int	check_new_line(char *str)
 {
-	int i;
+	int	i;
 
 	if (str[0] != '-' || !str[1])
 		return (0);

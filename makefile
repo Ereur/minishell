@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+         #
+#    By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by zoukaddo          #+#    #+#              #
-#    Updated: 2022/10/20 13:26:41 by aamoussa         ###   ########.fr        #
+#    Updated: 2022/10/21 07:24:02 by zoukaddo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ CC				= cc -g
 
 RM				= rm -f
 
-READLINE_PATH =  -lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include
+READLINE_PATH =  -lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/readline/include
 #-lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include
 #-lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/readline/include
 
@@ -32,7 +32,7 @@ BUILTIN 		= ./excution/builtin/
 
 EXECUTION		= ./excution/
 
-CFLAGS			=  #-fsanitize=address -Wall -Wextra -Werror -g
+CFLAGS			=  #-fsanitize=address -g # -Wall -Wextra -Werror
 
 all:			$(NAME)
 

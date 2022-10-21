@@ -6,20 +6,20 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:54:48 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/19 00:37:46 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:42:03 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../parser.h"
 
-# define EXPORT_NO_EQUAL 0
-# define EXPORT_ADD 1
-# define EXPORT_REPLACE 2
-# define EXPORT_APPEND 3
+#define EXPORT_NO_EQUAL 0
+#define EXPORT_ADD 1
+#define EXPORT_REPLACE 2
+#define EXPORT_APPEND 3
 
-int valid_export_name(char *var, int *mode)
+int	valid_export_name(char *var, int *mode)
 {
-	int i;
+	int	i;
 
 	if (!ft_isalpha(var[0]) && var[0] != '_')
 		return (0);
@@ -45,7 +45,7 @@ int valid_export_name(char *var, int *mode)
 
 int	export_name_exist(char *var, int *mode)
 {
-	t_senv *head;
+	t_senv	*head;
 	char	*addr_var;
 	char	*new_var;
 
@@ -203,6 +203,5 @@ int	ft_export(char **args)
 	exit_code = 0;
 	while (args[i])
 		export_handler(args[i++], &exit_code);
-
 	return (exit_code);
 }
