@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/21 08:13:15 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/21 09:31:48 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	cd_cmd(char **argument)
 	set_pwd(env_grabber("OLDPWD"), 0);
 	if (!argument[1])
 	{
-		gb.exit_statut = 1;
 		home = env_grabber("HOME");
 		if (!home)
 		{
+			gb.exit_statut = 1;
 			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 			return (1);
 		}
