@@ -14,13 +14,15 @@
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
+      "program": "${workspaceFolder}/minishell",
       "args": [],
-      "stopAtEntry": true,
-      "externalConsole": false,
-      "cwd": "/Users/aamoussa/Desktop/minishell",
-      "program": "/Users/aamoussa/Desktop/minishell/build/Debug/outDebug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb"
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "externalConsole": true,
+      "MIMode": "lldb"
     }
+    
+    
   ]
 }

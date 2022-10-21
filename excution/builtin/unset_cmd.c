@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:59:57 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/19 00:39:33 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/20 13:40:00 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	unset_name_exist(char *var, t_senv **prenode)
 {
 	t_senv	*head;
 
-	head = gb.env;	
+	head = gb.env;
 	while (head)
 	{
 		if (!ft_strcmp(head->key, var))

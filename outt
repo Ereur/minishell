@@ -1,4 +1,6 @@
+Makefile
 New Document.tldr
+aa.sh
 argument_cleaner.c
 argument_cleaner.o
 build_nodes.c
@@ -7,9 +9,10 @@ excution
 file
 her_doc.c
 libft
-makefile
 minishell
 minishell.h
+outt
+outtt
 parser.c
 parser.h
 parser.o

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:10:59 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 07:59:53 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/21 06:31:09 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,8 @@ int		unset_cmd(char **args);
 // singals header
 void	rl_replace_line(const char *text, int clear_undo);
 void	signals(void);
+
+//exit codes
+void	waitforcprocess(void);
 
 #endif 

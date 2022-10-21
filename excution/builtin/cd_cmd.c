@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 06:58:36 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/21 08:13:15 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ int	cd_cmd(char **argument)
 	set_pwd(env_grabber("OLDPWD"), 0);
 	if (!argument[1])
 	{
+		gb.exit_statut = 1;
 		home = env_grabber("HOME");
 		if (!home)
 		{
-			ft_putstr_fd("minishell: cd: HOME not set", 2);
+			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 			return (1);
 		}
 		if (chdir(home->value))
@@ -54,15 +55,17 @@ int	cd_cmd(char **argument)
 			ft_putstr_fd(": No such file or directory\n", 2);
 			return (1);
 		}
-		return (0);
+		return (1);
 	}
 	if (chdir(argument[1]))
 	{
+		gb.exit_statut = 1;
 		ft_putstr_fd("Minishell: cd: ", 2);
 		ft_putstr_fd(argument[1], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 		return (1);
 	}
 	set_pwd(env_grabber("PWD"), 1);
+	// gb.exit_statut = 0;
 	return (0);
 }
