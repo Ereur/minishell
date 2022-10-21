@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtins.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 06:25:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 05:51:21 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/21 07:55:55 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ void	redirection_built(t_execcmd *cmd)
 	if (cmd->input != -1)
 	{
 		gb.input = dup(0);
-		dup2(cmd->input, 0);
+		if (dup2(cmd->input, 0) == -1)
+		{
+			perror("dup filed :");
+			exit(1);
+		}
 		close(cmd->input);
 	}
 	if (cmd->output != -1)

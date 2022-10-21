@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_nodes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 23:43:08 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/19 00:54:28 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/21 07:11:48 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ t_cmd	*execcmd(void)
 	cmd->type = EXEC;
 	cmd->output = 1;
 	cmd->input = 0;
+	cmd->args = NULL;
+	cmd->argument = NULL;
 	return ((t_cmd *)(cmd));
 }
 
