@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/21 06:24:45 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/21 09:30:37 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,7 +208,7 @@ void print_tree(t_cmd *cmd)
 		// 	printf("|%s|\n", tmp->content);
 		// 	tmp = tmp->next;
 		// }
-		while (execcm->argument[i])
+		while (execcm->argument && execcm->argument[i])
 		{
 			printf("|%s|\n",execcm->argument[i]);
 			i++;
@@ -449,7 +449,9 @@ t_cmd *parseexec(char **ps, char *es, char **envp)
 	char		*eq;
 	int			tok;
 	int			argc;
-	
+	int			i;
+
+	i = 0;
 	argc = 0;
 	cmd = execcmd();
 	ret = (t_execcmd *)(cmd);
@@ -463,8 +465,6 @@ t_cmd *parseexec(char **ps, char *es, char **envp)
 		if (gb.exit_statut == 258)
 			return (NULL);
 	}
-	// if(skip_and_find_0(ps, es))
-	// 		raise_error("syntax error near unexpected token", 1, '|');
 	while (!skip_and_find(ps , es, "|"))
 	{
 		tok = gettoken(ps, es, &q, &eq);
@@ -486,6 +486,13 @@ t_cmd *parseexec(char **ps, char *es, char **envp)
  		cmd = parseredirec(ps ,es, cmd);
 		if (!cmd)
 			return (NULL);
+	}
+	if(skip_and_find(ps , es, "|"))
+	{	
+		while((*ps + 1)[i] && ft_strchr(WHITESPACE, (*ps + 1)[i]))
+			i++;
+		if (!(*ps + 1)[i])
+			raise_error("syntax error near unexpected token", 1, '|');
 	}
 	return (cmd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:58:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/09/16 18:37:01 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/21 09:25:08 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	raise_error(char *message, int exitcode, int tok)
 	gb.status = 1;
 }
 
-int skip_and_find_0(char **ps, char *es)
+int	skip_and_find_0(char **ps, char *es)
 {
 	char	*s;
 	int		ret;
