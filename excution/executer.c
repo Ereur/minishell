@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/21 07:44:29 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/27 07:46:11 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	checifbuiltin(t_execcmd *exec)
 	else if (ft_strcmp(exec->argument[0], "unset") == 0)
 		unset_cmd(exec->argument);
 	else if (ft_strcmp(exec->argument[0], "exit") == 0)
-		gb.exit_statut = exit_cmd(exec->argument);
+		g_gb.exit_statut = exit_cmd(exec->argument);
 	else
 		return (1);
 	return (0);
@@ -77,7 +77,7 @@ char	**get_paths(void)
 	char	**paths;
 
 	i = 0;
-	tmp = gb.env;
+	tmp = g_gb.env;
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->key, "PATH"))
@@ -124,7 +124,7 @@ void	error_displayer(t_execcmd *cmd)
 		if (opendir(cmd->argument[0]))
 		{
 			ft_putstr_fd(": is a directory\n", 2);
-			gb.exit_statut = 126;
+			g_gb.exit_statut = 126;
 		}
 		else
 		{
@@ -132,12 +132,12 @@ void	error_displayer(t_execcmd *cmd)
 				access(cmd->argument[0], X_OK))
 			{
 				ft_putstr_fd(": Permision denied\n", 2);
-				gb.exit_statut = 1;
+				g_gb.exit_statut = 1;
 			}
 			else
 			{
 				ft_putstr_fd(": No such file or directory\n", 2);
-				gb.exit_statut = 127;
+				g_gb.exit_statut = 127;
 			}
 		}
 	}
@@ -146,9 +146,9 @@ void	error_displayer(t_execcmd *cmd)
 		ft_putstr_fd("Minishell: ", 2);
 		ft_putstr_fd(cmd->argument[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
-		gb.exit_statut = 127;
+		g_gb.exit_statut = 127;
 	}
-	exit(gb.exit_statut);
+	exit(g_gb.exit_statut);
 }
 void	execute_cmd(t_execcmd *cmd)
 {
@@ -158,13 +158,13 @@ void	execute_cmd(t_execcmd *cmd)
 	if (!paths)
 	{
 		ft_putstr_fd("Minishell: No such file or directory\n", 2);
-		gb.exit_statut = 127;
-		exit(gb.exit_statut);
+		g_gb.exit_statut = 127;
+		exit(g_gb.exit_statut);
 	}
 	check_access(paths, cmd);
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	if (execve(cmd->argument[0], cmd->argument, gb.envp) == -1)
+	if (execve(cmd->argument[0], cmd->argument, g_gb.envp) == -1)
 	{
 		error_displayer(cmd);
 		// perror("");
@@ -250,7 +250,7 @@ pid_t	exec_command(t_cmd *first_cmd, t_execcmd *cmd, int npipe, int cpipe)
 		if (cmd->input != 0)
 			dup2(cmd->input, 0);
 		else
-			dup2(gb.fd_input_prev, 0);
+			dup2(g_gb.fd_input_prev, 0);
 		if (cmd->output != 1)
 			dup2(cmd->output, 1);
 		else if (cpipe < npipe)
@@ -267,9 +267,9 @@ pid_t	exec_command(t_cmd *first_cmd, t_execcmd *cmd, int npipe, int cpipe)
 		exit(1);
 	}
 	close(fd[1]);
-	if (gb.fd_input_prev != 0)
-		close(gb.fd_input_prev);
-	gb.fd_input_prev = fd[0];
+	if (g_gb.fd_input_prev != 0)
+		close(g_gb.fd_input_prev);
+	g_gb.fd_input_prev = fd[0];
 	return (pid);
 }
 
@@ -289,7 +289,7 @@ void	pipe_executer(t_cmd *first_cmd, t_cmd *cmd, int npipe, int cpipe)
 		pipe_executer(first_cmd, pipecmd->right, npipe, cpipe + 1);
 	}
 	if (cmd->type == EXEC)
-		gb.last_pid = exec_command(first_cmd, (t_execcmd *)cmd, npipe, cpipe);
+		g_gb.last_pid = exec_command(first_cmd, (t_execcmd *)cmd, npipe, cpipe);
 }
 
 // void executer(t_cmd *cmd)

@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/20 12:01:57 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:11:07 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,15 @@ char *grep_variable(char *str)
 	t_senv	*tmp;
 
 	tmp = NULL;
-	tmp = gb.env;
+	tmp = g_gb.env;
 	i = 0;
 	name = grep_name(str);
 	if (!*name)
 		return (name);
 	variabl = NULL;
-	// while (gb.env)
+	// while (g_gb.env)
 	// {
-	// 	printf("%s\n", gb.env->value)
+	// 	printf("%s\n", g_gb.env->value)
 	// }
 	while (tmp)
 	{
@@ -87,7 +87,7 @@ char *grep_variable(char *str)
 	// printf("|%p|\n", tmp);
 	if (*name == '?')
 	{	
-		variabl = ft_itoa(gb.exit_statut);
+		variabl = ft_itoa(g_gb.exit_statut);
 		return (variabl);
 	}
 	if(tmp)
@@ -185,7 +185,7 @@ void split_dollar(t_list *args)
 		if (tmp->state == SQ)
 		{
 			tmp = tmp->next;
-			continue;
+			continue ;
 		}
 		arg = tmp->content;
 		while (arg[i])
@@ -201,23 +201,20 @@ void split_dollar(t_list *args)
 			{
 				content = ft_substr(arg, start, len);
 				ft_lstadd_back(&lst_of_dollar, ft_lstnew(content, tmp->state));
-				// ft_free(&content);
 			}	
 			if (arg[i] == '$')
 			{
 				start = i;
-				len = skip_$(&arg[i]) + find_name(&arg[skip_$(&arg[i]) + i]);
+				len = skip_dollar(&arg[i])
+					+ find_name(&arg[skip_dollar(&arg[i]) + i]);
 				content = ft_substr(arg, start, len);
 				ft_lstadd_back(&lst_of_dollar, ft_lstnew(content, tmp->state));
 				i += len;
 			}
-			
 		}
-		
 		expand_lst(lst_of_dollar);
 		ft_free(&tmp->content);
 		tmp->content = merge_list(&lst_of_dollar);
-		// ft_free_list(lst_of_dollar);
 		lst_of_dollar = NULL;
 		tmp = tmp->next;
 	}
@@ -225,7 +222,6 @@ void split_dollar(t_list *args)
 
 void make_quotes(t_list	*args)
 {
-
 	t_list		*split_args;
 	int			i;
 	char		q;
@@ -234,9 +230,6 @@ void make_quotes(t_list	*args)
 	int			start;
 	int			counter;
 	t_list		*tmp;
-
-	
-
 
 	tmp = args;
 	content = NULL;
@@ -279,7 +272,7 @@ void make_quotes(t_list	*args)
 				i += count_len(i, line, line[i]) + 1;
 			}
 			if (!line[i])
-				break;
+				break ;
 			i++;
 		}
 		split_dollar(split_args);
@@ -287,11 +280,6 @@ void make_quotes(t_list	*args)
 		tmp->content = merge_list(&split_args);
 		tmp = tmp->next;
 	}
-	// while(split_args)
-	// {
-	// 	printf("%s state : %c\n", split_args->content, split_args->state);
-	// 	split_args = split_args->next;
-	// }
 }
 
 void convert_list_to_args(t_execcmd *execcmd)
@@ -335,7 +323,7 @@ void clean_arguments(t_cmd *cmd)
 		if (execcmd->args)
 		{	
 			make_quotes(execcmd->args);
-			if (gb.status)
+			if (g_gb.status)
 				return;
 			convert_list_to_args(execcmd);
 		}
@@ -344,20 +332,20 @@ void clean_arguments(t_cmd *cmd)
 	{
 		redir = (t_redircmd *)cmd;
 		make_quotes(redir->filee);
-		if(gb.status)
+		if(g_gb.status)
 			return;
 		clean_arguments(redir->cmd);
-		if (gb.status)
+		if (g_gb.status)
 			return ;
 	}
 	if (cmd->type == PIPE)
 	{
 		pipecmd = (t_pipecmd *)(cmd);
 		clean_arguments(pipecmd->left);
-		if (gb.status)
+		if (g_gb.status)
 			return;
 		clean_arguments(pipecmd->right);
-		if (gb.status)
+		if (g_gb.status)
 			return;
 	}
 }

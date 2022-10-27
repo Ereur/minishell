@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:59:57 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 13:40:00 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:07:35 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	unset_name_exist(char *var, t_senv **prenode)
 {
 	t_senv	*head;
 
-	head = gb.env;
+	head = g_gb.env;
 	while (head)
 	{
 		if (!ft_strcmp(head->key, var))

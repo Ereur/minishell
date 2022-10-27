@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/20 05:51:10 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/27 14:19:51 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@
 # define	SQ '\''
 # define	NOTHING 0
 
-typedef struct s_gb_variable
+typedef struct s_g_gb_variable
 {
-	char **envp;
+	char	**envp;
 	t_senv	*env;
 	int		status;
 	int		exit_statut;
@@ -38,8 +38,7 @@ typedef struct s_gb_variable
 	int		fdg;
 	int		input;
 	int		output;
-} t_gb_variable;
-
+}	t_g_gb_variable;
 
 typedef struct s_cmd
 {
@@ -51,8 +50,7 @@ typedef struct s_execcmd {
 	t_list	*args;
 	int		output;
 	int		input;
-	char	**argument;
-		
+	char	**argument;		
 }	t_execcmd;
 
 typedef struct s_redircmd {
@@ -69,7 +67,13 @@ typedef struct s_pipecmd {
 	t_cmd	*right;
 }	t_pipecmd;
 
-t_gb_variable	gb;
+typedef struct s_ends_of_tok
+{
+	char	*q;
+	char	*eq;
+}	t_ends_of_tok;
+
+t_g_gb_variable	g_gb;
 
 int		checifbuiltin(t_execcmd *exec);
 void	execute_cmd(t_execcmd *cmd);
@@ -85,7 +89,7 @@ void	execute_builtins(t_cmd *cmd);
 void    executer(t_cmd *cmd);
 char	check_quotes(char *line);
 void	clean_arguments(t_cmd *cmd);
-int		skip_$(char *test);
+int		skip_dollar(char *test);
 int		find_name(char *s);
 void 	put_zero_in_null(char **str);
 void 	add_arg(t_list **head, char **q, char **eq);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:54:48 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 13:42:03 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:07:35 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	export_name_exist(char *var, int *mode)
 	}
 	else
 		*mode = EXPORT_NO_EQUAL;
-	head = gb.env;
+	head = g_gb.env;
 	while (head)
 	{
 		if (!ft_strcmp(head->key, new_var))
@@ -86,7 +86,7 @@ void	export_append(char *var)
 	char	*addr_var;
 	char	*tmp;
 
-	head = gb.env;
+	head = g_gb.env;
 	addr_var = ft_strchr(var, '+');
 	*addr_var = 0;
 	addr_var += 2;
@@ -111,7 +111,7 @@ void	export_replace(char *var)
 	char	*addr_var;
 	char	*tmp;
 
-	head = gb.env;
+	head = g_gb.env;
 	addr_var = ft_strchr(var, '=');
 	*addr_var = 0;
 	addr_var += 1;
@@ -135,14 +135,14 @@ void	export_add(char *var, int mode)
 
 	if (mode == EXPORT_NO_EQUAL || mode == EXPORT_REPLACE)
 	{
-		env_add_back(&gb.env, env_new(var));
+		env_add_back(&g_gb.env, env_new(var));
 		return ;
 	}
 	addr_var = ft_strchr(var, '+');
 	*addr_var = 0;
 	addr_var += 1;
 	tmp = ft_strjoin(var, addr_var);
-	env_add_back(&gb.env, env_new(tmp));
+	env_add_back(&g_gb.env, env_new(tmp));
 	free(tmp);
 }
 
@@ -178,7 +178,7 @@ void	export_declare(void)
 	t_senv	*head;
 	/* linked list should be sorted to be displayed */
 	// sort linked list by the key alphabetically
-	head = gb.env;
+	head = g_gb.env;
 	while (head)
 	{
 		if (head->value)

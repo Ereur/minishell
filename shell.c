@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/21 10:50:33 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:31:46 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ int	main(int ac, char **argv, char **envp)
 	t_cmd *tmp;
 	int npipe;
 	again = true;
-	gb.envp = 0;
+	g_gb.envp = 0;
 	int j = 0;
 	int	exit_value = 0;
-	gb.input = 0;
-	gb.output = 1;
-	gb.fd_input_prev = 0;
+	g_gb.input = 0;
+	g_gb.output = 1;
+	g_gb.fd_input_prev = 0;
 	setup_env(envp);
 	buffer = NULL;
 	while (again)
 	{
-		gb.status = 0;
+		g_gb.status = 0;
 		signals();
 		ft_free(&buffer);
 		buffer = readline(getprompt(envp));
@@ -67,7 +67,8 @@ int	main(int ac, char **argv, char **envp)
 		cmd = parser(&ps, es, envp);
 		if (!cmd)
 			continue ;
-		// print_tree(cmd);
+		print_tree(cmd);
+		continue ;
 		// exit(1);
 		// while (1)
 		// 	;
@@ -86,8 +87,8 @@ int	main(int ac, char **argv, char **envp)
 			}
 			pipe_executer(cmd, cmd, npipe, 0);
 			close_all_fds(cmd);
-			close(gb.fd_input_prev);
-			gb.fd_input_prev = 0;
+			close(g_gb.fd_input_prev);
+			g_gb.fd_input_prev = 0;
 			signal(SIGINT, SIG_IGN);
 			signal(SIGQUIT, SIG_IGN);
 			waitforcprocess();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 08:58:45 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/19 00:33:32 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:07:35 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	env(void)
 {
 	t_senv	*head;
 
-	head = gb.env;
+	head = g_gb.env;
 	while (head)
 	{
 		if (head->value)

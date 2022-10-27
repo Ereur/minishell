@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 19:05:45 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 11:24:39 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:07:35 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	exit_cmd(char **args)
 
 	mod = EXIT_SUC;
 	if (!args[1])
-		exit(gb.exit_statut);
+		exit(g_gb.exit_statut);
 	if (args[2])
 	{
 		exit_num = exit_atoi(args[1], &mod);
@@ -91,7 +91,7 @@ int	exit_cmd(char **args)
 					numeric_argument_required(args[2]);
 				exit(exit_num);
 			}
-			exit(gb.exit_statut);
+			exit(g_gb.exit_statut);
 		}
 		if (mod == EXIT_FAIL)
 			numeric_argument_required(args[1]);
@@ -103,5 +103,5 @@ int	exit_cmd(char **args)
 		numeric_argument_required(args[1]);
 	if (mod == EXIT_SUC)
 		exit(exit_num);
-	exit(gb.exit_statut);
+	exit(g_gb.exit_statut);
 }

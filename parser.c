@@ -6,22 +6,12 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/21 09:30:37 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:54:26 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// char *find_dq(char **q, char **eq, char *es)
-// {
-// 	char *ret;
-
-// 	ret = ft_strchr(*q, '\"');
-// 	while (ret)
-// 	{
-		
-// 	}	
-// }
 char	*ft_strncpy(char *dest, char *src, unsigned int n)
 {
 	unsigned int	i;
@@ -58,14 +48,10 @@ int find_name(char *s)
 		tmp++;
 		i++;
 	}
-	// name = (char *)malloc(i + 2);
-	// name = ft_strncpy(name, s, i);
-	// name[i + 1] = 0;
-	// name[i] = '=';
 	return (i);
 }
 
-int skip_$(char *str)
+int skip_dollar(char *str) 
 {
 	int i;
 	
@@ -110,54 +96,6 @@ char *join(char *str, size_t i, char *name, char *ret)
 	result = ft_strjoin(result, name);
 	result = ft_strjoin(ret, result);
 	return (result);
-}
-
-void quote_parser(char **q, char **eq, char *quote_type, char **ps, char **envp)
-{
-	char *ret;
-	char *str;
-	char *double_quotes;
-	str = "<|> \t\r\n\v";
-	char	*estr;
-	char tmp[0];
-	
-	ret = NULL;
-	estr = NULL;
-	double_quotes = NULL;
-	tmp[0] = *eq[0];
-	*eq[0] = 0;
-	double_quotes = ft_strchr(*q, *quote_type);
-	if (!double_quotes)
-	{	
-		*eq[0] = *tmp;
-		return;
-	}
-	*eq[0] = *tmp;
-	ret = ft_strchr((ft_strchr(*q, *quote_type) + 1), *quote_type);
-	if (!ret)
-	{	
-		raise_error("syntax error unclosed quotes", 258, 0);
-		*q = NULL;
-		return ;
-	}
-	if (ret)
-	{	
-		ret = ret + 1;
-		while (*str)
-		{
-			estr = ft_strchr(ret , *str);
-			if (estr)
-				break;
-			str++;
-		}
-		if (!*str)
-			ret = ft_strchr(ret , *str);
-		else
-			ret = estr;	
-		*eq = ret;
-		*ps = ret;
-		// expand_dq(q, eq, envp);
-	}
 }
 
 void ft_print_som(char *q, char *eq)
@@ -239,7 +177,7 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 	here_doc_lim = NULL;
 	her_doc_len = 0;
 	// t_cmd		*cmd;
-	
+
 	while (skip_and_find(ps, es, "<>"))
 	{
 		tok = gettoken(ps, es, 0, 0);
@@ -321,112 +259,119 @@ t_cmd *parseredirec(char **ps, char *es, t_cmd *cmd)
 	return (t_cmd *)(exec);
 }
 
-void quotes_pareser(char **q, char **eq, char **ps, char **envp)
+char *skip_word(int *i, t_ends_of_tok **str, char **ps)
 {
-	char *single_quotes;
-	char *double_quotes;
-	char spec;
-	int		i = 0;
-	int	counter = 0;
-	char *str;
-	char *tmp;
-	int check;
-	str = "<|> \t\r\n\v";
-	single_quotes = ft_strchr(*q, '\'');
-	double_quotes = ft_strchr(*q, '\"');
-	// printf("%c", (*q)[1]);
-	// exit(1);
+	char	*tmp;
+	int		check;
+
+	while ((*q)[*i])
+	{
+		if ((*q)[*i] == '\'' || (*q)[*i] == '\"')
+			break ;
+		if (ft_strchr("<|> \t\r\n\v", (*q)[*i]))
+		{
+			*eq = *q + (*i);
+			*ps = *eq;
+			return (NULL);
+		}
+		(*i)++;
+	}
+	return (&(*q)[*i]);
+}
+
+// char *skip_word(int *i, char **q, char **eq, char **ps)
+// {
+// 	char	*tmp;
+// 	char	*str;
+// 	int		check;
+//
+// 	str = "<|> \t\r\n\v";
+// 	while ((*q)[*i])
+// 	{
+// 		if ((*q)[*i] == '\'' || (*q)[*i] == '\"')
+// 			break ;
+// 		if (ft_strchr("<|> \t\r\n\v", (*q)[*i]))
+// 		{
+// 			*eq = *q + (*i);
+// 			*ps = *eq;
+// 			return (NULL);
+// 		}
+// 		(*i)++;
+// 	}
+// 	return (&(*q)[*i]);
+// }
+
+bool	check_quot(int *i, char *spec, t_ends_of_tok **str, char **ps)
+{
+	while (((*str)->q)[*i])
+	{
+		if (((*str)->q)[*i] == *spec)
+		{
+			(*i)++;
+			if (!(((*str)->q)[*i]))
+			{
+				(*str)->eq = (*str)->q + (*i);
+				*ps = (*str)->eq;
+				return (true);
+			}
+			break ;
+		}
+		(*i)++;
+	}
+	if (!((*str)->q)[*i])
+	{
+		raise_error("syntax error unclosed quotes", 258, 0);	
+		(*str)->q = NULL;
+		return (true);
+	}
+	return (false);
+}
+
+void	quotes_pareser(t_ends_of_tok **str, char **ps)
+{
+	char	*single_quotes;
+	char	*double_quotes;
+	char	*spec;
+	int		i;
+
+	i = 0;
+	single_quotes = ft_strchr((*str)->q, '\'');
+	double_quotes = ft_strchr((*str)->q, '\"');
+
 	if (single_quotes || double_quotes)
 	{
-		while ((*q)[i])
+		while (((*str)->q)[i])
 		{
-			spec = (*q)[i];
+			spec = &((*str)->q)[i];
+			if (ft_strchr("<|> \t\r\n\v", ((*str)->q)[i]))
+			{
+				(*str)->eq = (*str)->q + i;
+				*ps = (*str)->eq;
+				return ;
+			}
 			i++;
-			if (spec != '\'' && spec != '\"')
+			if (*spec != '\'' && *spec != '\"')
 			{
-				while ((*q)[i])
-				{
-					if ((*q)[i] == '\'')
-					{
-						spec = (*q)[i];
-						i++;
-						break;
-					}
-					if ((*q)[i] == '\"')
-					{
-						spec = (*q)[i];
-						i++;
-						break;
-					}
-					tmp = str;
-					while (*tmp)
-					{
-						check = (*q)[i] == *tmp;
-						if (check)
-						{
-							*eq = *q + i; 
-							*ps = *eq;
-							return ;
-						}
-						tmp++;
-					}
-					i++;
-				}
-			}
-			if (spec == '\'')
-			{
-				while ((*q)[i])
-				{
-					if ((*q)[i] == '\'')
-					{
-						i++;
-						if (!(*q)[i])
-						{
-							*eq = *q + i; 
-							*ps = *eq;
-							return;
-						}
-						break;
-					}
-					i++;
-				}
-				if (!(*q)[i])
-				{
-					raise_error("syntax error unclosed quotes", 258, 0);	
-					*q = NULL;
+				spec = skip_word(&i, str, ps);
+				// spec = skip_word(&i, &((*str)->q), &((*str)->eq), ps);
+				if (!spec)
 					return ;
-				}
-			}
-			if (spec == '\"')
-			{
-				// printf("q = %p eq : %p", *q + i, *eq);
-				while ((*q)[i])
-				{
-					if ((*q)[i] == '\"')
-					{
-						i++;
-						if (!(*q)[i])
-						{
-							*eq = *q + i; 
-							*ps = *eq;
-							return;
-						}
-						break;
-					}
+				if (((*str)->q)[i])
 					i++;
-				}
-				if (!(*q)[i])
-				{
-					raise_error("syntax error unclosed quotes", 258, 0);	
-					*q = NULL;
+			}
+			if (*spec == '\'')
+			{
+				if (check_quot(&i, spec, str, ps))
 					return ;
-				}
-			
+			}
+			if (*spec == '\"')
+			{
+				if (check_quot(&i, spec, str, ps))
+					return ;
 			}
 		}
-
-		*eq = *q + i;
-		*ps = *eq;
+		(*str)->eq = (*str)->q + i;
+		*ps = (*str)->eq;
 	}
 }
 
@@ -441,84 +386,95 @@ void add_arg(t_list **head, char **q, char **eq)
 	// ft_free(&str);
 }
 
-t_cmd *parseexec(char **ps, char *es, char **envp)
+bool parse_exec_helper(char **ps, char *es)
 {
-	t_cmd		*cmd;
-	t_execcmd	*ret;
-	char		*q;
-	char		*eq;
-	int			tok;
-	int			argc;
-	int			i;
+	int	i;
 
 	i = 0;
-	argc = 0;
+	if (skip_and_find(ps, es, "|"))
+	{
+		while ((*ps + 1)[i] && ft_strchr(WHITESPACE, (*ps + 1)[i]))
+			i++;
+		if (!(*ps + 1)[i])
+		{	
+			raise_error("syntax error near unexpected token", 1, '|');
+			return (true);
+		}
+		// if (g_gb.exit_statut == 258)
+		// 	return (true);
+	}
+	return (false);
+}
+
+t_cmd	*parse_exec_he(t_ends_of_tok *q_eq, char **ps, t_list **args, char *es, t_cmd *cmd)
+{
+	quotes_pareser(&q_eq, ps);
+	if (!q_eq->q)
+		return (NULL);
+	add_arg(args, &(q_eq->q), &(q_eq->eq));
+	if (!parseredirec(ps, es, cmd))
+		return (NULL);
+	return (cmd);
+}
+
+bool	check_tok(int tok)
+{
+	if (tok != 'a')
+	{
+		raise_error("syntax test error ", 258, 0);
+		return (false);
+	}
+	return (true);
+}
+
+t_cmd	*parseexec(char **ps, char *es, char **envp)
+{
+	t_cmd			*cmd;
+	t_execcmd		*ret;
+	int				tok;
+	t_ends_of_tok	q_eq;
+
 	cmd = execcmd();
 	ret = (t_execcmd *)(cmd);
 	ret->args = NULL;
 	cmd = parseredirec(ps, es, cmd);
 	if (!cmd)
 		return (NULL);
-	if (skip_and_find(ps,es, "|"))
-	{		
-		raise_error("syntax error near unexpected token", 258, '|');
-		if (gb.exit_statut == 258)
-			return (NULL);
-	}
-	while (!skip_and_find(ps , es, "|"))
+	while (!skip_and_find(ps, es, "|"))
 	{
-		tok = gettoken(ps, es, &q, &eq);
+		tok = gettoken(ps, es, &q_eq.q, &q_eq.eq);
 		if (!tok)
-			break;
-		// skip_and_find_quotes(ps, );
-		if (tok != 'a')
-		{
-			raise_error("syntax error ", 258, 0);
-			return (NULL);
-		}
-		quotes_pareser(&q, &eq, ps, envp);
-		if (!q)
-			return (NULL);
-		add_arg(&ret->args, &q, &eq);
-		// ret->argv[argc] = q;
-		// ret->eargv[argc] = eq;
-		argc++;
- 		cmd = parseredirec(ps ,es, cmd);
-		if (!cmd)
+			break ;
+		if (!parse_exec_he(&q_eq, ps, &ret->args, es, cmd))
 			return (NULL);
 	}
-	if(skip_and_find(ps , es, "|"))
-	{	
-		while((*ps + 1)[i] && ft_strchr(WHITESPACE, (*ps + 1)[i]))
-			i++;
-		if (!(*ps + 1)[i])
-			raise_error("syntax error near unexpected token", 1, '|');
-	}
+	if (parse_exec_helper(ps, es))
+		return (NULL);
 	return (cmd);
 }
 
 t_cmd *parsepipe(char **ps, char *es, char **envp)
 {
 	t_cmd	*cmd;
+
 	cmd = NULL;
 	cmd = parseexec(ps, es, envp);
 	if (!cmd)
 		return (NULL);
-	if (skip_and_find(ps , es, "|"))
+	if (skip_and_find(ps, es, "|"))
 	{	
-		gettoken(ps , es, 0, 0);
+		gettoken(ps, es, 0, 0);
 		cmd = pipecmd(cmd, parsepipe(ps, es, envp));
 		if (!cmd)
 			return (NULL);
-		// printf("hehe%d\n", cmd->type);
 	}
 	return (cmd);
 }
 
 char check_quotes(char *line)
 {
-	int i;	
-	char q;
+	int		i;	
+	char	q;
 
 	i = 0;
 	while (line[i])
@@ -539,16 +495,17 @@ char check_quotes(char *line)
 
 t_cmd *parser(char **ps, char *es, char **envp)
 {
-	t_cmd *cmd;
-	char *s;
+	t_cmd	*cmd;
+	char	*s;
+
 	s = *ps;
-	while(s < es && ft_strchr(WHITESPACE, *s))
+	while (s < es && ft_strchr(WHITESPACE, *s))
 		s++;
 	if (s >= es)
 		return (NULL);
 	cmd = parsepipe(ps, es, envp);
 	clean_arguments(cmd);
-	if (gb.status)
+	if (g_gb.status)
 		return (NULL);
 	return (cmd);
 }

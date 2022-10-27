@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 06:25:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/21 08:45:55 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/21 12:07:35 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	redirection_built(t_execcmd *cmd)
 
 	if (cmd->input > 0)
 	{
-		gb.input = dup(0);
+		g_gb.input = dup(0);
 		if (dup2(cmd->input, 0) == -1)
 		{
 			perror("dup filed :");
@@ -28,7 +28,7 @@ void	redirection_built(t_execcmd *cmd)
 	}
 	if (cmd->output > 1)
 	{
-		gb.output = dup(1);
+		g_gb.output = dup(1);
 		dup2(cmd->output, 1);
 		close(cmd->output);
 	}
@@ -63,19 +63,19 @@ void	execute_builtins(t_cmd *cmd)
 			{
 				if (WTERMSIG(exit_value) == 3)
 					printf("Quit: 3\n");
-				gb.exit_statut = WTERMSIG(exit_value) + 128;
+				g_gb.exit_statut = WTERMSIG(exit_value) + 128;
 			}
 			else if (WIFEXITED(exit_value))
-				gb.exit_statut = WEXITSTATUS(exit_value);
+				g_gb.exit_statut = WEXITSTATUS(exit_value);
 		}
 		signal(SIGINT, sig_handler);
 		signal(SIGQUIT, SIG_IGN);
-		dup2(gb.output, 1);
-		dup2(gb.input, 0);
-		if (gb.input != 0)
-			close(gb.input);
-		if (gb.output != 1)
-			close(gb.output);
+		dup2(g_gb.output, 1);
+		dup2(g_gb.input, 0);
+		if (g_gb.input != 0)
+			close(g_gb.input);
+		if (g_gb.output != 1)
+			close(g_gb.output);
 	}
 	// if (cmd->type == REDIR)
 	// {
