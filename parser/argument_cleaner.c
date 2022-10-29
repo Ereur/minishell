@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/29 15:19:15 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:38:33 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ bool	clen_arguments_helper(t_execcmd *execcmd)
 {
 	if (execcmd->args)
 	{	
-		make_quotes(execcmd->args);
+		make_quotes(execcmd->args, true);
 		if (g_gb.status)
 			return (true);
 		convert_list_to_args(execcmd);
-	}	
+	}
 	return (false);
 }
 

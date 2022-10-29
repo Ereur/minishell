@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:09:58 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/29 14:14:14 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:29:42 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ bool	parse_input_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 	if (tok != '<')
 		return (false);
 	tok = gettoken(buff->ps, buff->es, &(str)->q, &(str)->eq);
+	quotes_pareser(&str, buff->ps);
 	if (ft_strchr(FORBIDEN_REDIR, tok))
 	{	
 		raise_error("syntax error near unexpected token", 258, tok);
 		return (true);
 	}
 	file = ft_substr((str)->q, 0, ((str)->eq - (str)->q));
+	here_doc_expander(&file, true);
 	fd = open(file, O_RDWR, 0644);
 	if (fd == -1)
 		printf("%s : No such file or directory\n", file);
@@ -46,12 +48,16 @@ bool	parse_output_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 	if (tok != '>')
 		return (false);
 	tok = gettoken(buff->ps, buff->es, &(str)->q, &(str)->eq);
+	quotes_pareser(&str, buff->ps);
+	if (!str->q)
+		return (true);
 	if (ft_strchr(FORBIDEN_REDIR, tok))
 	{	
 		raise_error("syntax error near unexpected token", 258, tok);
 		return (true);
 	}
 	file = ft_substr((str)->q, 0, ((str)->eq - (str)->q));
+	here_doc_expander(&file, true);
 	fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (fd == -1)
 		printf("%s : No such file or directory\n", file);
@@ -62,24 +68,49 @@ bool	parse_output_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 	return (false);
 }
 
-bool	parse_heredoc(t_ends_of_buff *buff, t_ends_of_tok *str,
-		t_execcmd *exec, int tok)
+void	here_doc_expander(char **here_doc_lim, bool i)
 {
-	char	*here_doc_lim;
-	int		her_doc_len;
+	t_list	*args;
 
-	if (tok != '-')
-		return (false);
-	here_doc_lim = NULL;
-	tok = gettoken(buff->ps, buff->es, &(str)->q, &(str)->eq);
+	args = ft_lstnew(*here_doc_lim, NOTHING);
+	make_quotes(args, i);
+	// ft_free(here_doc_lim);
+	*here_doc_lim = args->content;
+}
+
+bool	check_tok(int tok)
+{
 	if (ft_strchr(FORBIDEN_REDIR, tok))
 	{	
 		raise_error("syntax error near unexpected token", 258, tok);
 		return (true);
 	}
+	return (false);
+}
+
+bool	parse_heredoc(t_ends_of_buff *buff, t_ends_of_tok *str,
+		t_execcmd *exec, int tok)
+{
+	char	*here_doc_lim;
+	int		her_doc_len;
+	bool	flag;
+
+	flag = true;
+	if (tok != '-')
+		return (false);
+	here_doc_lim = NULL;
+	tok = gettoken(buff->ps, buff->es, &(str)->q, &(str)->eq);
+	quotes_pareser(&str, buff->ps);
+	if (!str->q)
+		return (true);
+	if (check_tok(tok))
+		return (true);
 	her_doc_len = ((str)->eq - (str)->q);
 	here_doc_lim = ft_substr((str)->q, 0, her_doc_len);
-	exec->input = here_doc(here_doc_lim);
+	if (ft_strchr(here_doc_lim, '\"') || ft_strchr(here_doc_lim, '\''))
+		flag = false;
+	here_doc_expander(&here_doc_lim, false);
+	exec->input = here_doc(here_doc_lim, flag);
 	ft_free(&here_doc_lim);
 	return (false);
 }
@@ -93,12 +124,16 @@ bool	parse_output_append(t_ends_of_buff *buff, t_ends_of_tok *str,
 	if (tok != '+')
 		return (false);
 	tok = gettoken(buff->ps, buff->es, &(str)->q, &(str)->eq);
+	quotes_pareser(&str, buff->ps);
+	if (!str->q)
+		return (true);
 	if (ft_strchr(FORBIDEN_REDIR, tok))
 	{	
 		raise_error("syntax error near unexpected token", 1, tok);
 		return (true);
 	}
 	file = ft_substr((str)->q, 0, ((str)->eq - (str)->q));
+	here_doc_expander(&file, true);
 	fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0644);
 	if (fd == -1)
 		printf("%s No such file or directory\n", file);

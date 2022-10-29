@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:19 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/29 14:42:46 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:58:09 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	collect_sq_and_dq(t_list **split_args, char *line, char q)
 	}
 }
 
-void	make_quotes(t_list	*args)
+void	make_quotes(t_list	*args, bool i)
 {
 	t_list		*split_args;
 	char		q;
@@ -128,7 +128,8 @@ void	make_quotes(t_list	*args)
 		line = tmp->content;
 		q = '\"';
 		collect_sq_and_dq(&split_args, line, q);
-		split_dollar(split_args);
+		if (i)
+			split_dollar(split_args);
 		ft_free(&tmp->content);
 		tmp->content = merge_list(&split_args);
 		tmp = tmp->next;

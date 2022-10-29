@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/29 15:19:44 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:24:29 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define DQ '\"'
 # define SQ '\''
 # define NOTHING 0
+# define REMOVEQUOTE 1
+# define EXPAND 2
 
 
 typedef struct s_gb_variable
@@ -88,22 +90,26 @@ typedef struct s_ends_of_buff
 int		checifbuiltin(t_execcmd *exec);
 void	execute_cmd(t_execcmd *cmd);
 
+
+void	split_dollar(t_list *args);
+void	here_doc_expander(char **here_doc_lim, bool i);
+void	quotes_pareser(t_ends_of_tok **str, char **ps);
 void	convert_list_to_args(t_execcmd *execcmd);
 char	*grep_variable(char *str);
 int		count_len(int i, char *line, char q);
 void	collect_word(t_list **split_args, char *line, int *i, char q);
-void	make_quotes(t_list	*args);
+void	make_quotes(t_list	*args, bool i);
 void	word_len(char *arg, int *i, int *len);
 void	collect_var(t_list **lst_of_dollar, int *i, char *arg, t_list *tmp);
 void	expand_lst(t_list *dollars);
 t_cmd	*parseredirec(char **ps, char *es, t_cmd *cmd);
 t_cmd	*parse_exec_he(t_ends_of_tok *q_eq, char **ps, t_list **args, char *es, t_cmd *cmd);
-int		here_doc(char *);
+// int		here_doc(char *);
 t_cmd	*parsepipe(char **ps, char *es, char **envp);
 t_cmd	*redirecmd(t_cmd *cmd, char *file, char *efile, int mode, int fd);
 t_cmd	*execcmd(void);
 t_cmd	*pipecmd(t_cmd *left, t_cmd *right);
-int		here_doc(char *lim);
+int		here_doc(char *lim, bool falg);
 int     cd_cmd(char **argument);
 void	execute_builtins(t_cmd *cmd);
 void    executer(t_cmd *cmd);
