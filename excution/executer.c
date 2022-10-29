@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/29 15:23:46 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 18:29:03 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	**get_paths(void)
 	char	**paths;
 
 	i = 0;
-	tmp =g_gb.env;
+	tmp = g_gb.env;
 	while (tmp)
 	{
 		if (!ft_strcmp(tmp->key, "PATH"))
@@ -113,6 +113,7 @@ void	check_access(char **paths, t_execcmd *cmd)
 		i++;
 	}
 }
+
 void	execute_cmd(t_execcmd *cmd)
 {
 	char	**paths;
