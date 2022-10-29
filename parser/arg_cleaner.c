@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_cleaner.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:19 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/29 14:42:46 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:46:51 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*merge_list(t_list **head)
 		{
 			(tmp->next)->content = ft_strjoin(tmp->content,
 					(tmp->next)->content);
-			del = tmp;			
+			del = tmp;
 			tmp = tmp->next;
 			ft_free(&del->content);
 			free(del);

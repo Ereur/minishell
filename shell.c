@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/29 15:19:15 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 17:49:41 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 const char	*getprompt(char **envp)
 {
@@ -30,28 +30,44 @@ pid_t	fork_process(void)
 	return (pid);
 }
 
-int	main(int ac, char **argv, char **envp)
+void	exuctionsudo(t_cmd *cmd)
+{
+	int			npipe;
+	t_cmd		*tmp;
+	t_pipecmd	*tmppipcmd;
+
+	get_envp();
+	if (cmd->type == EXEC)
+		execute_builtins(cmd);
+	else
+	{
+		npipe = 0;
+		tmp = cmd;
+		while (tmp->type == PIPE)
+		{
+			tmppipcmd = (t_pipecmd *)(tmp);
+			tmp = tmppipcmd->right;
+			npipe++;
+		}
+		pipe_executer(cmd, cmd, npipe, 0);
+		close_all_fds(cmd);
+		close(g_gb.fd_input_prev);
+		g_gb.fd_input_prev = 0;
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+		waitforcprocess();
+	}
+}
+
+void	parser_sudo(char **envp)
 {
 	char	*buffer;
-	t_cmd	*cmd;
-	bool	again;
 	char	*ps;
 	char	*es;
-	int		catch_last_pid;
-	pid_t	pid;
-	t_pipecmd *tmppipcmd;
-	t_cmd *tmp;
-	int npipe;
-	again = true;
-	g_gb.envp = 0;
-	int j = 0;
-	int	exit_value = 0;
-	g_gb.input = 0;
-	g_gb.output = 1;
-	g_gb.fd_input_prev = 0;
-	setup_env(envp);
+	t_cmd	*cmd;
+
 	buffer = NULL;
-	while (again)
+	while (42)
 	{
 		g_gb.status = 0;
 		signals();
@@ -67,33 +83,19 @@ int	main(int ac, char **argv, char **envp)
 		cmd = parser(&ps, es, envp);
 		if (!cmd)
 			continue ;
-		// print_tree(cmd);
-		// continue ;
-		// exit(1);
-		// while (1)
-		// 	;
-		get_envp();
-		if (cmd->type == EXEC)
-			execute_builtins(cmd);
-		else
-		{
-			npipe = 0;
-			tmp = cmd;
-			while (tmp->type == PIPE)
-			{
-				tmppipcmd = (t_pipecmd *)(tmp);
-				tmp = tmppipcmd->right;
-				npipe++;
-			}
-			pipe_executer(cmd, cmd, npipe, 0);
-			close_all_fds(cmd);
-			close(g_gb.fd_input_prev);
-			g_gb.fd_input_prev = 0;
-			signal(SIGINT, SIG_IGN);
-			signal(SIGQUIT, SIG_IGN);
-			waitforcprocess();
-		}
-		// print_tree(cmd);
+		exuctionsudo(cmd);
 	}
+}
+
+int	main(int ac, char **argv, char **envp)
+{
+	t_cmd	*cmd;
+
+	g_gb.envp = 0;
+	g_gb.input = 0;
+	g_gb.output = 1;
+	g_gb.fd_input_prev = 0;
+	setup_env(envp);
+	parser_sudo(envp);
 	return (0);
 }
