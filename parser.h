@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/20 05:51:10 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/28 14:10:22 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,6 @@ void	pipe_executer(t_cmd *first_cmd, t_cmd *cmd , int npipe, int cpipe);
 void	close_all_fds(t_cmd *cmd);
 void 	excute_pipes(t_cmd *cmd, int flag);
 void	sig_handler(int signal); 
+void	error_displayer(t_execcmd *cmd);
+void	rl_replace_line(const char *text, int clear_undo);
 #endif

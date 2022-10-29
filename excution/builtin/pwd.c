@@ -6,13 +6,13 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 22:35:49 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 13:40:58 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/27 15:36:21 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../parser.h"
 
-int	built_in_pwd(char **str)
+int	built_in_pwd(char **str, char *current)
 {
 	char		*pwd;
 	static char	*reserve;
@@ -21,24 +21,14 @@ int	built_in_pwd(char **str)
 		return (0);
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
+	{
 		pwd = reserve;
+		printf("%s\n", current);
+		return (1);
+	}
 	else
 		reserve = pwd;
-	// {
-	// 	// if (reserve)
-	// 	// 	free(reserve);
-	// }
 	printf("%s\n", pwd);
 	free(pwd);
 	return (0);
 }
-
-// int	main(void)
-// {
-// 	char	*str[2];
-
-// 	str[0] = "pwd";
-// 	str[1] = NULL;
-// 	built_in_pwd(str);
-// 	return (0);
-// }

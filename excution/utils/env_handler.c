@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:09:50 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/21 06:31:02 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/27 00:19:37 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,87 +91,4 @@ void	env_add_back(t_senv **env, t_senv *node)
 	while (head->next)
 		head = head->next;
 	head->next = node;
-}
-
-int	track_env(char *keyword)
-{
-	t_senv	*head;
-
-	head = gb.env;
-	while (head)
-	{
-		if (!ft_strcmp(head->key, keyword))
-			return (1);
-		head = head->next;
-	}
-	return (0);
-}
-
-void	setup_env(char **envp)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	gb.env = 0;
-	while (envp[i])
-		env_add_back(&gb.env, env_new(envp[i++]));
-	i = 0;
-	if (!track_env("PWD"))
-	{
-		tmp = ft_strjoin("PWD=", getcwd(NULL, 0));
-		if (tmp)
-		{
-			env_add_back(&gb.env, env_new(tmp));
-			free(tmp);
-		}
-	}
-	if (!track_env("SHLVL"))
-	{
-		tmp = ft_strdup("SHLVL=1");
-		env_add_back(&gb.env, env_new(tmp));
-		free(tmp);
-	}
-	if (!track_env("_"))
-	{
-		tmp = ft_strdup("_=/usr/bin/env");
-		env_add_back(&gb.env, env_new(tmp));
-		free(tmp);
-	}	
-	get_envp();
-}
-
-void get_envp(void)
-{
-	int		i;
-	char	*hold;
-	char	*holdt;
-	t_senv	*tmp;
-
-	i = 0;
-	tmp = gb.env;
-	if (gb.envp)
-		free(gb.envp);
-	gb.envp = (char **)malloc(sizeof(char *) * (env_size() + 1));
-	while (tmp)
-	{
-		// exit(1);
-		hold = ft_strjoin(tmp->key, "=");
-		holdt = ft_strjoin(hold, tmp->value);
-		ft_free(&hold);
-		gb.envp[i] = holdt;
-		// free(holdt);
-		// printf("%s \n", gb.envp[i]);
-		tmp = tmp->next;
-		i++;
-	}
-	gb.envp[i] = 0;
-	// i = 0;
-	// while(gb.envp[i])
-	// {
-	// 	free(gb.envp[i]);
-	// 	i++;
-	// }
-	// free(gb.envp);
-	// print list
 }

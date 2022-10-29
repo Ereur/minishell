@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:59:57 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 13:40:00 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/28 11:35:51 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,24 @@ int	unset_name_exist(char *var, t_senv **prenode)
 	return (0);
 }
 
-void	unset_handler(char *var, int *exit_code)
+void	node_remover(t_senv *prenode, t_senv *node)
+{
+	if (!prenode)
+	{
+		node = gb.env;
+		gb.env = gb.env->next;
+	}
+	else
+	{
+		node = prenode->next;
+		prenode->next = node->next;
+	}
+	free(node->key);
+	free(node->value);
+	free(node);
+}
+
+void	unset_handler(char *var, int *exit_code, int *faila)
 {
 	t_senv	*prenode;
 	t_senv	*tmp;
@@ -51,33 +68,34 @@ void	unset_handler(char *var, int *exit_code)
 	prenode = 0;
 	if (!valid_unset_name(var))
 	{
+		*faila = 1;
 		if (!(*exit_code))
 			(*exit_code)++;
-		ft_putstr_fd("bash: unset: `", 2);
+		ft_putstr_fd("Minishell: unset: `", 2);
 		ft_putstr_fd(var, 2);
 		ft_putendl_fd("': not a valid identifier", 2);
 		return ;
 	}
 	if (unset_name_exist(var, &prenode))
-	{
-		tmp = prenode->next;
-		prenode->next = tmp->next;
-		free(tmp->key);
-		free(tmp->value);
-		free(tmp);
-	}
+		node_remover(prenode, tmp);
 }
 
 int	unset_cmd(char **args)
 {
 	int	i;
 	int	exit_code;
+	int	faila;
 
+	faila = 0;
 	if (!args[1])
 		return (0);
 	i = 1;
 	exit_code = 0;
 	while (args[i])
-		unset_handler(args[i++], &exit_code);
+		unset_handler(args[i++], &exit_code, &faila);
+	if (faila)
+		gb.exit_statut = 1;
+	else
+		gb.exit_statut = 0;
 	return (exit_code);
 }

@@ -6,19 +6,11 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:08 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 13:40:47 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/26 22:21:13 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../parser.h"
-
-// int ft_strlen(char *s)
-// {
-//     int i = 0;
-//     while(s[i])
-//         i++;
-//     return (i);
-// }
 
 void	ft_putchar_fd(char c, int fd)
 {
@@ -69,11 +61,6 @@ int	ft_echo(char **av)
 	}
 	if (!n)
 		ft_putchar_fd('\n', 1);
+	gb.exit_statut = 0;
 	return (0);
 }
-
-// int     main(int ac, char **av)
-// {
-//     ft_echo(av);
-//     return (0);
-// }

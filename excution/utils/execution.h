@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:10:59 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/21 06:31:09 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/27 18:15:29 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,22 @@ typedef struct s_envstruct
 	struct s_envstruct	*next;
 }	t_senv;
 
-// void execute_builtins(t_cmd *cmd);
+typedef struct s_cord
+{
+	int				npipe;
+	int				cpipe;
+	int				i;
+	int				mod;
+	unsigned long	num;
+}t_cord;
+
+/**********************BUILTINS************************/
+
 pid_t	my_fork(void);
-void	env(void);
+void	env(char **arg);
 int		exit_cmd(char **args);
 int		cd_cmd(char **argument);
-int		built_in_pwd(char **str);
+int		built_in_pwd(char **str, char *current);
 int		ft_echo(char **av);
 void	setup_env(char **envp);
 t_senv	*env_new(char *str);
@@ -44,11 +54,25 @@ int		ft_strcmp(const char *s1, const char *s2);
 void	get_envp(void);
 int		ft_export(char **args);
 int		unset_cmd(char **args);
-// singals header
+int		valid_export_name(char *var, int *mode);
+int		export_name_exist(char *var, int *mode);
+void	export_append(char *var);
+void	export_replace(char *var);
+void	export_add(char *var, int mode);
+
+/*********************SIGNALS************************/
 void	rl_replace_line(const char *text, int clear_undo);
 void	signals(void);
 
-//exit codes
+/***********************EXIT_CODES******************/
 void	waitforcprocess(void);
+
+/***************************************************/
+int		ft_strcmp(const char *s1, const char *s2);
+int		env_size(void);
+t_senv	*env_grabber(char *keyword);
+t_senv	*env_new(char *str);
+void	env_add_back(t_senv **env, t_senv *node);
+/**********************UTILS************************/
 
 #endif 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:11:41 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/12 00:35:22 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/26 22:10:39 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 # include "token.h"
 # include <signal.h>
 # include <fcntl.h>
+# include <dirent.h>
 
-int			built_in_pwd(char **str);
+int			built_in_pwd(char **str, char *current);
 const char	*getprompt(char **envp);
 #endif

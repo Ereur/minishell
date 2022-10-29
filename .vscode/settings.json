@@ -3,7 +3,8 @@
     "parser.h": "c",
     "minishell.h": "c",
     "unistd.h": "c",
-    "execution.h": "c"
+    "execution.h": "c",
+    "dirent.h": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
