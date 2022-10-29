@@ -6,11 +6,11 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/27 15:31:46 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/28 19:02:30 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 const char	*getprompt(char **envp)
 {
@@ -67,8 +67,8 @@ int	main(int ac, char **argv, char **envp)
 		cmd = parser(&ps, es, envp);
 		if (!cmd)
 			continue ;
-		print_tree(cmd);
-		continue ;
+		// print_tree(cmd);
+		// continue ;
 		// exit(1);
 		// while (1)
 		// 	;

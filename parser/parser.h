@@ -6,15 +6,15 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/27 14:19:51 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 14:56:01 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-# include "minishell.h"
-# include "./excution/utils/execution.h"
+# include "../minishell.h"
+# include "../excution/utils/execution.h"
 // # include ".git/exe"
 # define EXEC  1
 # define REDIR 2
@@ -22,9 +22,9 @@
 # define SYMBOLE "<|>"
 # define WHITESPACE " \t\r\n\v"
 # define FORBIDEN_REDIR	"<>|+-"
-# define	DQ '\"'
-# define	SQ '\''
-# define	NOTHING 0
+# define DQ '\"'
+# define SQ '\''
+# define NOTHING 0
 
 typedef struct s_g_gb_variable
 {
@@ -73,11 +73,27 @@ typedef struct s_ends_of_tok
 	char	*eq;
 }	t_ends_of_tok;
 
+typedef struct s_ends_of_buff
+{
+	char	**ps;
+	char	*es;
+}	t_ends_of_buff;
+
 t_g_gb_variable	g_gb;
 
 int		checifbuiltin(t_execcmd *exec);
 void	execute_cmd(t_execcmd *cmd);
 
+void	convert_list_to_args(t_execcmd *execcmd);
+char	*grep_variable(char *str);
+int		count_len(int i, char *line, char q);
+void	collect_word(t_list **split_args, char *line, int *i, char q);
+void	make_quotes(t_list	*args);
+void	word_len(char *arg, int *i, int *len);
+void	collect_var(t_list **lst_of_dollar, int *i, char *arg, t_list *tmp);
+void	expand_lst(t_list *dollars);
+t_cmd	*parseredirec(char **ps, char *es, t_cmd *cmd);
+t_cmd	*parse_exec_he(t_ends_of_tok *q_eq, char **ps, t_list **args, char *es, t_cmd *cmd);
 int		here_doc(char *);
 t_cmd	*parsepipe(char **ps, char *es, char **envp);
 t_cmd	*redirecmd(t_cmd *cmd, char *file, char *efile, int mode, int fd);
@@ -87,7 +103,6 @@ int		here_doc(char *lim);
 int     cd_cmd(char **argument);
 void	execute_builtins(t_cmd *cmd);
 void    executer(t_cmd *cmd);
-char	check_quotes(char *line);
 void	clean_arguments(t_cmd *cmd);
 int		skip_dollar(char *test);
 int		find_name(char *s);
@@ -95,7 +110,6 @@ void 	put_zero_in_null(char **str);
 void 	add_arg(t_list **head, char **q, char **eq);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
 void	nullterminating(t_cmd *cmd);
-void	ft_print_som(char *q, char *eq);
 t_cmd	*parser(char **ps, char *es, char **envp);
 void	print_tree(t_cmd *cmd);
 

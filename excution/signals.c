@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 15:07:11 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/18 22:23:04 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/28 19:08:06 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parser.h"
+#include "../parser/parser.h"
 
 void	rl_replace_line(const char *text, int clear_undo);
 

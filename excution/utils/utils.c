@@ -6,11 +6,11 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:40:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/21 12:07:35 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/28 19:06:45 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../parser.h"
+#include "../../parser/parser.h"
 
 pid_t	my_fork(void)
 {

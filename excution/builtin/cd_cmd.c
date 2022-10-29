@@ -6,11 +6,11 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/21 12:07:35 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/28 19:05:58 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../parser.h"
+#include "../../parser/parser.h"
 
 void	set_pwd(t_senv *pwd, int mod)
 {

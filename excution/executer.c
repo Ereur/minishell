@@ -6,12 +6,12 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/27 07:46:11 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/28 19:07:42 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./utils/execution.h"
-#include "../parser.h"
+#include "../parser/parser.h"
 #include <dirent.h>
 
 int	checifbuiltin(t_execcmd *exec)

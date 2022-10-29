@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:11:41 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/12 00:35:22 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/28 19:04:11 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <readline/history.h>
 # include <stdbool.h>
 # include "excution/utils/execution.h"
-# include "parser.h"
-# include "token.h"
+# include "./parser/parser.h"
+# include "./parser/token.h"
 # include <signal.h>
 # include <fcntl.h>
 

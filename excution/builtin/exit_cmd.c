@@ -6,11 +6,11 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 19:05:45 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/21 12:07:35 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/28 19:06:14 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../parser.h"
+#include "../../parser/parser.h"
 
 #define EXIT_SUC 0
 #define EXIT_FAIL 1

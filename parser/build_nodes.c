@@ -6,11 +6,11 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 23:43:08 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/21 07:11:48 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/28 19:02:57 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 t_cmd	*redirecmd(t_cmd *cmd, char *file, char *efile, int mode, int fd)
 {

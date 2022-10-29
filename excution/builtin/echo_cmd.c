@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   echo_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:08 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/20 13:40:47 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/28 19:05:27 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../parser.h"
+#include "../../parser/parser.h"
 
 // int ft_strlen(char *s)
 // {
