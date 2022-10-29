@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/29 14:56:01 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 15:19:44 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # define SQ '\''
 # define NOTHING 0
 
-typedef struct s_g_gb_variable
+
+typedef struct s_gb_variable
 {
 	char	**envp;
 	t_senv	*env;
@@ -38,7 +39,9 @@ typedef struct s_g_gb_variable
 	int		fdg;
 	int		input;
 	int		output;
-}	t_g_gb_variable;
+}	t_gb_variable;
+
+t_gb_variable 	g_gb;
 
 typedef struct s_cmd
 {
@@ -67,6 +70,7 @@ typedef struct s_pipecmd {
 	t_cmd	*right;
 }	t_pipecmd;
 
+
 typedef struct s_ends_of_tok
 {
 	char	*q;
@@ -79,7 +83,7 @@ typedef struct s_ends_of_buff
 	char	*es;
 }	t_ends_of_buff;
 
-t_g_gb_variable	g_gb;
+
 
 int		checifbuiltin(t_execcmd *exec);
 void	execute_cmd(t_execcmd *cmd);
@@ -119,4 +123,6 @@ void	pipe_executer(t_cmd *first_cmd, t_cmd *cmd , int npipe, int cpipe);
 void	close_all_fds(t_cmd *cmd);
 void 	excute_pipes(t_cmd *cmd, int flag);
 void	sig_handler(int signal); 
+void	error_displayer(t_execcmd *cmd);
+void	rl_replace_line(const char *text, int clear_undo);
 #endif

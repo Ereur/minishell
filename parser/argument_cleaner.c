@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/29 14:56:29 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 15:19:15 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*grep_variable(char *str)
 	t_senv	*tmp;
 
 	tmp = NULL;
-	tmp = g_gb.env;
+	tmp =g_gb.env;
 	name = grep_name(str);
 	if (!*name)
 		return (name);

@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/28 19:05:58 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 15:19:15 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,28 @@ void	set_pwd(t_senv *pwd, int mod)
 	}
 }
 
+int	check_home(char **argument)
+{
+	t_senv	*home;
+
+	home = env_grabber("HOME");
+	if (!home)
+	{
+		g_gb.exit_statut = 1;
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		return (1);
+	}
+	if (chdir(home->value))
+	{
+		g_gb.exit_statut = 1;
+		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd(home->value, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		return (1);
+	}
+	return (0);
+}
+
 int	cd_cmd(char **argument)
 {
 	t_senv	*home;
@@ -41,20 +63,7 @@ int	cd_cmd(char **argument)
 	set_pwd(env_grabber("OLDPWD"), 0);
 	if (!argument[1])
 	{
-		g_gb.exit_statut = 1;
-		home = env_grabber("HOME");
-		if (!home)
-		{
-			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-			return (1);
-		}
-		if (chdir(home->value))
-		{
-			ft_putstr_fd("minishell: cd: ", 2);
-			ft_putstr_fd(home->value, 2);
-			ft_putstr_fd(": No such file or directory\n", 2);
-			return (1);
-		}
+		check_home(argument);
 		return (1);
 	}
 	if (chdir(argument[1]))
@@ -66,6 +75,8 @@ int	cd_cmd(char **argument)
 		return (1);
 	}
 	set_pwd(env_grabber("PWD"), 1);
-	// g_gb.exit_statut = 0;
+	g_gb.exit_statut = 0;
+	if (argument[1][0] == '.' && !argument[1][1])
+		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 06:25:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/28 19:07:53 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 15:19:15 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,36 @@ void	redirection_built(t_execcmd *cmd)
 	}
 }
 
+void	exitcodesandwait(void)
+{
+	int			exit_value;
+
+	exit_value = 0;
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	wait(&exit_value);
+	if (WIFSIGNALED(exit_value))
+	{
+		if (WTERMSIG(exit_value) == 3)
+			printf("Quit: 3\n");
+		g_gb.exit_statut = WTERMSIG(exit_value) + 128;
+	}
+	else if (WIFEXITED(exit_value))
+		g_gb.exit_statut = WEXITSTATUS(exit_value);
+}
+
+void	dupandclosefds(void)
+{
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
+	dup2(g_gb.output, 1);
+	dup2(g_gb.input, 0);
+	if (g_gb.input != 0)
+		close(g_gb.input);
+	if (g_gb.output != 1)
+		close(g_gb.output);
+}
+
 void	execute_builtins(t_cmd *cmd)
 {
 	int			pipe[2];
@@ -53,34 +83,9 @@ void	execute_builtins(t_cmd *cmd)
 		if (checifbuiltin(exec))
 		{
 			if (my_fork() == 0)
-			{
 				execute_cmd(exec);
-			}
-			signal(SIGINT, SIG_IGN);
-			signal(SIGQUIT, SIG_IGN);
-			wait(&exit_value);
-			if (WIFSIGNALED(exit_value))
-			{
-				if (WTERMSIG(exit_value) == 3)
-					printf("Quit: 3\n");
-				g_gb.exit_statut = WTERMSIG(exit_value) + 128;
-			}
-			else if (WIFEXITED(exit_value))
-				g_gb.exit_statut = WEXITSTATUS(exit_value);
+			exitcodesandwait();
 		}
-		signal(SIGINT, sig_handler);
-		signal(SIGQUIT, SIG_IGN);
-		dup2(g_gb.output, 1);
-		dup2(g_gb.input, 0);
-		if (g_gb.input != 0)
-			close(g_gb.input);
-		if (g_gb.output != 1)
-			close(g_gb.output);
+		dupandclosefds();
 	}
-	// if (cmd->type == REDIR)
-	// {
-	// 	redir = (t_redircmd *)(cmd);
-	// 	redirection_built(redir);
-	// 	execute_builtins(redir->cmd);
-	// }
 }
