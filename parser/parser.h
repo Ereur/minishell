@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/29 18:24:29 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 22:19:47 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int		skip_dollar(char *test);
 int		find_name(char *s);
 void 	put_zero_in_null(char **str);
 void 	add_arg(t_list **head, char **q, char **eq);
-char	*ft_strncpy(char *dest, char *src, unsigned int n);
+char	*ft_strncpy(char *dest, char *src, unsigned int n);	
 void	nullterminating(t_cmd *cmd);
 t_cmd	*parser(char **ps, char *es, char **envp);
 void	print_tree(t_cmd *cmd);

@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/29 17:38:33 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/30 08:46:28 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char	*grep_name(char *s)
 	name = NULL;
 	while (*tmp)
 	{
-		if (!ft_isalpha(*tmp) && *tmp!='_')
-			break;
+		if (!ft_isalpha(*tmp) && *tmp !='_')
+			break ;
 		tmp++;
 		i++;
 	}
@@ -48,7 +48,7 @@ char	*grep_variable(char *str)
 	t_senv	*tmp;
 
 	tmp = NULL;
-	tmp =g_gb.env;
+	tmp = g_gb.env;
 	name = grep_name(str);
 	if (!*name)
 		return (name);
@@ -67,6 +67,7 @@ char	*grep_variable(char *str)
 	if (tmp)
 		variabl = tmp->value;
 	put_zero_in_null(&variabl);
+	ft_free(&name);
 	return (variabl);
 }
 

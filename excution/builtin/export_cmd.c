@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:54:48 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/29 15:20:50 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 16:40:51 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	export_append(char *var)
 	char	*addr_var;
 	char	*tmp;
 
-	head =g_gb.env;
+	head = g_gb.env;
 	addr_var = ft_strchr(var, '+');
 	*addr_var = 0;
 	addr_var += 2;
@@ -120,7 +120,7 @@ void	export_replace(char *var)
 	char	*addr_var;
 	char	*tmp;
 
-	head =g_gb.env;
+	head = g_gb.env;
 	addr_var = ft_strchr(var, '=');
 	*addr_var = 0;
 	addr_var += 1;

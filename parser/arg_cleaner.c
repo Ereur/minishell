@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:19 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/29 17:58:09 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/30 07:54:29 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*merge_list(t_list **head)
 {
 	t_list	*lst;
 	t_list	*tmp;
+	char	*next;
 	char	*content;
 	t_list	*del;
 
@@ -47,10 +48,12 @@ char	*merge_list(t_list **head)
 	if (tmp)
 	{	
 		while (tmp->next)
-		{
+		{	
+			next = (tmp->next)->content;
 			(tmp->next)->content = ft_strjoin(tmp->content,
 					(tmp->next)->content);
-			del = tmp;			
+			ft_free(&(next));
+			del = tmp;
 			tmp = tmp->next;
 			ft_free(&del->content);
 			free(del);

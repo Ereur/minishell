@@ -6,13 +6,13 @@
 #    By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by zoukaddo          #+#    #+#              #
-#    Updated: 2022/10/29 15:24:12 by aamoussa         ###   ########.fr        #
+#    Updated: 2022/10/30 08:01:23 by aamoussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 				  
-SRCS			= ./parser/shell.c ./parser/token.c ./parser/parser.c ./parser/build_nodes.c ./parser/argument_cleaner.c ./parser/her_doc.c  ./parser/parse_cmd.c ./parser/redirection_parser.c\
+SRCS			= shell.c ./parser/token.c ./parser/parser.c ./parser/build_nodes.c ./parser/argument_cleaner.c ./parser/her_doc.c  ./parser/parse_cmd.c ./parser/redirection_parser.c\
 					./parser/utils.c ./parser/arg_cleaner_utils.c ./parser/arg_cleaner.c\
 				  $(BUILTIN)echo_cmd.c  $(BUILTIN)env.c $(BUILTIN)cd_cmd.c $(EXECUTION)utils/env_handler.c  $(EXECUTION)utils/env_handler_utils.c $(EXECUTION)/utils/utils.c \
 				  $(BUILTIN)pwd.c $(BUILTIN)export_cmd.c $(BUILTIN)export_cmd_helper.c $(BUILTIN)unset_cmd.c $(BUILTIN)exit_cmd.c \
@@ -40,7 +40,7 @@ all:			$(NAME)
 $(NAME):		$(OBJS)
 				cd ./libft && make
 				cd ./libft && make bonus
-				$(CC) ${OBJS} $(CFLAGS) ./libft/libft.a -o ${NAME} $(READLINE_PATH)
+				$(CC) ${OBJS} $(CFLAGS) ./libft/libft.a -o ${NAME} $(READLINE_PATH) -g
 
 clean:
 				$(RM) $(OBJS) 

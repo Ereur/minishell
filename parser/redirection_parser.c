@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:09:58 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/29 18:29:42 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 22:37:46 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,12 @@ bool	parse_output_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 void	here_doc_expander(char **here_doc_lim, bool i)
 {
 	t_list	*args;
+	// char	*tmp;
 
 	args = ft_lstnew(*here_doc_lim, NOTHING);
 	make_quotes(args, i);
-	// ft_free(here_doc_lim);
 	*here_doc_lim = args->content;
+	free(args);
 }
 
 bool	check_tok(int tok)

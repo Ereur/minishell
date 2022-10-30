@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 22:53:43 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/29 15:14:24 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/29 19:15:47 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,13 @@ void	get_envp(void)
 	i = 0;
 	tmp = g_gb.env;
 	if (g_gb.envp)
+	{	
+		while (g_gb.envp[i])
+			ft_free(&g_gb.envp[i++]);
 		free(g_gb.envp);
+	}
 	g_gb.envp = (char **)malloc(sizeof(char *) * (env_size() + 1));
+	i = 0;
 	while (tmp)
 	{
 		hold = ft_strjoin(tmp->key, "=");
