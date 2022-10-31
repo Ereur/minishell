@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/30 07:19:44 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/30 15:22:24 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	add_arg(t_list **head, char **q, char **eq)
 	ft_lstadd_back(head,ft_lstnew(str, NOTHING));
 }
 
-bool	parse_exec_helper(char **ps, char *es)
+bool	parse_exec_helper(char **ps, char *es, t_cmd *cmd)
 {
 	int	i;
 
@@ -86,7 +86,7 @@ bool	parse_exec_helper(char **ps, char *es)
 			i++;
 		if (!(*ps + 1)[i])
 		{	
-			raise_error("syntax error near unexpected token", 1, '|');
+			raise_error("syntax error near unexpected token", 1, '|', cmd);
 			return (true);
 		}
 	}
@@ -114,7 +114,7 @@ t_cmd	*parseexec(char **ps, char *es, char **envp)
 		if (!parse_exec_he(&q_eq, ps, &ret->args, es, cmd))
 			return (NULL);
 	}
-	if (parse_exec_helper(ps, es))
+	if (parse_exec_helper(ps, es, cmd))
 		return (NULL);
 	return (cmd);
 }
@@ -141,14 +141,16 @@ t_cmd	*parser(char **ps, char *es, char **envp)
 {
 	t_cmd	*cmd;
 	char	*s;
+	int		counter;
 
+	counter = 0;
 	s = *ps;
 	while (s < es && ft_strchr(WHITESPACE, *s))
 		s++;
 	if (s >= es)
 		return (NULL);
 	cmd = parsepipe(ps, es, envp);
-	clean_arguments(cmd);
+	clean_arguments(cmd, &counter);
 	if (g_gb.status)
 		return (NULL);
 	return (cmd);

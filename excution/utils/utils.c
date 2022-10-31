@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:40:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/29 17:14:59 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/30 13:55:06 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,9 @@ void	error_displayer(t_execcmd *cmd)
 		ft_putstr_fd(cmd->argument[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
 		g_gb.exit_statut = 127;
+		// fprintf(stderr, "expression : %d\n", ft_strcmp(cmd->argument[0],"echo") && first_cmd && first_cmd->type == PIPE);
+		// if (ft_strcmp(cmd->argument[0],"echo") && first_cmd && first_cmd->type == PIPE)
+		// 	g_gb.exit_statut = 0;
 	}
 	exit(g_gb.exit_statut);
 }

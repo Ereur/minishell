@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 04:15:04 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/29 18:32:41 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:20:07 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 void	here_doc_expand(char **line, bool i)
 {
 	t_list	*args;
-	char	*tmp;
 
 	if (i)
 	{
 		args = ft_lstnew(*line, NOTHING);
-		split_dollar(args);
-		tmp = *line;
+		split_dollar(args, 1);
 		*line = args->content;
-		ft_free(&tmp);
+		free(args);
 	}
 }
 
@@ -53,7 +51,7 @@ int	here_doc(char *lim, bool flag)
 		if (!line)
 		{	
 			free(lim);
-			free(line);
+			free(tmp);
 			close(end[1]);
 			return (end[0]);
 		}

@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:19 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/30 07:54:29 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 06:48:48 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,13 @@ char	*merge_list(t_list **head)
 	return (content);
 }
 
-void	split_dollar(t_list *args)
+void	split_dollar(t_list *args, int counter)
 {
 	t_list	*tmp;
 	t_list	*lst_of_dollar;
 	int		i;
 	char	*arg;
+	char	*hold;
 
 	i = 0;
 	tmp = args;
@@ -87,9 +88,10 @@ void	split_dollar(t_list *args)
 		arg = tmp->content;
 		while (arg[i])
 			collect_var(&lst_of_dollar, &i, arg, tmp);
-		expand_lst(lst_of_dollar);
-		ft_free(&tmp->content);
+		expand_lst(lst_of_dollar, counter);
+		hold = tmp->content;
 		tmp->content = merge_list(&lst_of_dollar);
+		ft_free(&hold);
 		lst_of_dollar = NULL;
 		tmp = tmp->next;
 	}
@@ -117,7 +119,7 @@ void	collect_sq_and_dq(t_list **split_args, char *line, char q)
 	}
 }
 
-void	make_quotes(t_list	*args, bool i)
+void	make_quotes(t_list	*args, bool i, int counter)
 {
 	t_list		*split_args;
 	char		q;
@@ -132,7 +134,7 @@ void	make_quotes(t_list	*args, bool i)
 		q = '\"';
 		collect_sq_and_dq(&split_args, line, q);
 		if (i)
-			split_dollar(split_args);
+			split_dollar(split_args, counter);
 		ft_free(&tmp->content);
 		tmp->content = merge_list(&split_args);
 		tmp = tmp->next;

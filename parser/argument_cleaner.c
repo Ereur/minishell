@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/30 08:46:28 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 07:18:59 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*grep_name(char *s)
 		return (ft_strdup("?"));
 	}
 	if (!*s)
-		return (s);
+		return (ft_strdup("$"));
 	name = NULL;
 	while (*tmp)
 	{
@@ -41,7 +41,7 @@ char	*grep_name(char *s)
 	return (name);
 }
 
-char	*grep_variable(char *str)
+char	*grep_variable(char *str, int counter)
 {
 	char	*name;
 	char	*variabl;
@@ -50,6 +50,8 @@ char	*grep_variable(char *str)
 	tmp = NULL;
 	tmp = g_gb.env;
 	name = grep_name(str);
+	if (ft_strcmp(name, "$"))
+		return (name);
 	if (!*name)
 		return (name);
 	variabl = NULL;
@@ -61,11 +63,19 @@ char	*grep_variable(char *str)
 	}
 	if (*name == '?')
 	{	
-		variabl = ft_itoa(g_gb.exit_statut);
+		if (counter == 0)
+			variabl = ft_itoa(g_gb.exit_statut);
+		else
+			variabl = ft_itoa(0);
 		return (variabl);
 	}
 	if (tmp)
-		variabl = tmp->value;
+	{
+		if (!*(tmp->value))
+			variabl = NULL;
+		else
+			variabl = ft_strdup(tmp->value);
+	}
 	put_zero_in_null(&variabl);
 	ft_free(&name);
 	return (variabl);
@@ -80,11 +90,11 @@ void	word_len(char *arg, int *i, int *len)
 	}	
 }
 
-bool	clen_arguments_helper(t_execcmd *execcmd)
+bool	clen_arguments_helper(t_execcmd *execcmd, int counter)
 {
 	if (execcmd->args)
 	{	
-		make_quotes(execcmd->args, true);
+		make_quotes(execcmd->args, true, counter);
 		if (g_gb.status)
 			return (true);
 		convert_list_to_args(execcmd);
@@ -92,7 +102,7 @@ bool	clen_arguments_helper(t_execcmd *execcmd)
 	return (false);
 }
 
-void	clean_arguments(t_cmd *cmd)
+void	clean_arguments(t_cmd *cmd, int *counter)
 {
 	t_execcmd	*execcmd;
 	t_pipecmd	*pipecmd;
@@ -102,16 +112,17 @@ void	clean_arguments(t_cmd *cmd)
 	if (cmd->type == EXEC)
 	{
 		execcmd = (t_execcmd *)cmd;
-		clen_arguments_helper(execcmd);
+		clen_arguments_helper(execcmd, *counter);
 	}
 	if (cmd->type == PIPE)
 	{
 		pipecmd = (t_pipecmd *)(cmd);
-		clean_arguments(pipecmd->left);
+		clean_arguments(pipecmd->left, counter);
 		if (g_gb.status)
 			return ;
-		clean_arguments(pipecmd->right);
+		clean_arguments(pipecmd->right, counter);
 		if (g_gb.status)
 			return ;
 	}
+	(*counter)++;
 }

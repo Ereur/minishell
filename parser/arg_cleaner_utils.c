@@ -6,22 +6,27 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:43:20 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/30 08:13:19 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 07:06:46 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	expand(int len, t_list *tmp, int i, int start)
+void	expand(int len, t_list *tmp, int i, int start, int counter)
 {
 	char	*content;
 	char	*str;
 	char	*free_content;
-	
+
 	str = NULL;
 	if (len > 1)
 		str = ft_substr(tmp->content, start, len - 1);
-	content = grep_variable(&tmp->content[i]);
+	content = grep_variable(&tmp->content[i], counter);
+	if (!content)
+	{
+		ft_free(&str);
+		return ;
+	}
 	free_content = content;
 	put_zero_in_null(&str);
 	content = ft_strjoin(str, content);
@@ -31,7 +36,7 @@ void	expand(int len, t_list *tmp, int i, int start)
 	tmp->content = content;
 }
 
-void	expand_lst(t_list *dollars)
+void	expand_lst(t_list *dollars, int counter)
 {
 	t_list	*tmp;
 	int		start;
@@ -52,7 +57,7 @@ void	expand_lst(t_list *dollars)
 		while (tmp->content[i++] == '$')
 			len++;
 		i--;
-		expand(len, tmp, i, start);
+		expand(len, tmp, i, start, counter);
 		tmp = tmp->next;
 	}
 }

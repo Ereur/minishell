@@ -1,0 +1,12 @@
+cat < $kjfg
+exit 1;
+
+cntrl c + cntrl d + cntrl \
+dasdasd
+echo $? != 0
+
+shell$ export a=abc
+Minishell$ export a=ab
+Minishell$ echo $a
+ab
+Minishell$ export a=a

@@ -6,14 +6,14 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:09:58 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/29 22:37:46 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/30 16:46:26 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 bool	parse_input_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
-		t_execcmd *exec, int tok)
+		t_execcmd *exec, int tok, t_cmd *cmd)
 {
 	char	*file;
 	int		fd;
@@ -24,7 +24,7 @@ bool	parse_input_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 	quotes_pareser(&str, buff->ps);
 	if (ft_strchr(FORBIDEN_REDIR, tok))
 	{	
-		raise_error("syntax error near unexpected token", 258, tok);
+		raise_error("syntax error near unexpected token", 258, tok, cmd);
 		return (true);
 	}
 	file = ft_substr((str)->q, 0, ((str)->eq - (str)->q));
@@ -40,7 +40,7 @@ bool	parse_input_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 }
 
 bool	parse_output_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
-		t_execcmd *exec, int tok)
+		t_execcmd *exec, int tok, t_cmd *cmd)
 {
 	char	*file;
 	int		fd;
@@ -53,7 +53,7 @@ bool	parse_output_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 		return (true);
 	if (ft_strchr(FORBIDEN_REDIR, tok))
 	{	
-		raise_error("syntax error near unexpected token", 258, tok);
+		raise_error("syntax error near unexpected token", 258, tok, cmd);
 		return (true);
 	}
 	file = ft_substr((str)->q, 0, ((str)->eq - (str)->q));
@@ -74,23 +74,23 @@ void	here_doc_expander(char **here_doc_lim, bool i)
 	// char	*tmp;
 
 	args = ft_lstnew(*here_doc_lim, NOTHING);
-	make_quotes(args, i);
+	make_quotes(args, i, 1);
 	*here_doc_lim = args->content;
 	free(args);
 }
 
-bool	check_tok(int tok)
+bool	check_tok(int tok, t_cmd *cmd)
 {
 	if (ft_strchr(FORBIDEN_REDIR, tok))
 	{	
-		raise_error("syntax error near unexpected token", 258, tok);
+		raise_error("syntax error near unexpected token", 258, tok, cmd);
 		return (true);
 	}
 	return (false);
 }
 
 bool	parse_heredoc(t_ends_of_buff *buff, t_ends_of_tok *str,
-		t_execcmd *exec, int tok)
+		t_execcmd *exec, int tok, t_cmd *cmd)
 {
 	char	*here_doc_lim;
 	int		her_doc_len;
@@ -104,7 +104,7 @@ bool	parse_heredoc(t_ends_of_buff *buff, t_ends_of_tok *str,
 	quotes_pareser(&str, buff->ps);
 	if (!str->q)
 		return (true);
-	if (check_tok(tok))
+	if (check_tok(tok, cmd))
 		return (true);
 	her_doc_len = ((str)->eq - (str)->q);
 	here_doc_lim = ft_substr((str)->q, 0, her_doc_len);
@@ -117,7 +117,7 @@ bool	parse_heredoc(t_ends_of_buff *buff, t_ends_of_tok *str,
 }
 
 bool	parse_output_append(t_ends_of_buff *buff, t_ends_of_tok *str,
-		t_execcmd *exec, int tok)
+		t_execcmd *exec, int tok, t_cmd *cmd)
 {
 	char	*file;
 	int		fd;
@@ -130,7 +130,7 @@ bool	parse_output_append(t_ends_of_buff *buff, t_ends_of_tok *str,
 		return (true);
 	if (ft_strchr(FORBIDEN_REDIR, tok))
 	{	
-		raise_error("syntax error near unexpected token", 1, tok);
+		raise_error("syntax error near unexpected token", 1, tok, cmd);
 		return (true);
 	}
 	file = ft_substr((str)->q, 0, ((str)->eq - (str)->q));
@@ -158,13 +158,13 @@ t_cmd	*parseredirec(char **ps, char *es, t_cmd *cmd)
 	while (skip_and_find(buff.ps, buff.es, "<>"))
 	{
 		tok = gettoken(buff.ps, buff.es, 0, 0);
-		if (parse_input_redir(&buff, &q_and_eq, exec, tok))
+		if (parse_input_redir(&buff, &q_and_eq, exec, tok, cmd))
 			return (NULL);
-		if (parse_output_redir(&buff, &q_and_eq, exec, tok))
+		if (parse_output_redir(&buff, &q_and_eq, exec, tok, cmd))
 			return (NULL);
-		if (parse_heredoc(&buff, &q_and_eq, exec, tok))
+		if (parse_heredoc(&buff, &q_and_eq, exec, tok, cmd))
 			return (NULL);
-		if (parse_output_append(&buff, &q_and_eq, exec, tok))
+		if (parse_output_append(&buff, &q_and_eq, exec, tok, cmd))
 			return (NULL);
 	}
 	return ((t_cmd *)(exec));

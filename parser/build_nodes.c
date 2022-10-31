@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 23:43:08 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/28 19:02:57 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/30 15:57:09 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ t_cmd	*pipecmd(t_cmd *left, t_cmd *right)
 {
 	t_pipecmd	*root;
 
+	if (!right)
+	{
+		free_cmd(left);
+		return (NULL);
+	}
 	root = malloc(sizeof(t_pipecmd));
 	ft_memset(root, 0, sizeof(t_pipecmd *));
 	root->type = PIPE;

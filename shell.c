@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/30 07:09:55 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/30 09:20:52 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void free_all(t_cmd *cmd)
 	if (cmd->type == EXEC)
 	{
 		execcmd = (t_execcmd *)(cmd);
-		while (execcmd->argument[i])
+		while (execcmd->argument && execcmd->argument[i])
 			ft_free(&execcmd->argument[i++]);
 		free_args_list(&(execcmd->args));
 		free(execcmd->argument);

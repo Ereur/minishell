@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:04:56 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/28 19:00:22 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:58:32 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 int		gettoken(char **ps, char *es, char **q, char **eq);
 int		skip_and_find(char **ps, char *es, char *tok);
 int		skip_and_find_0(char **ps, char *es);
-void	raise_error(char *message, int exitcode, int tok);
 
 // int	gettoken();
 

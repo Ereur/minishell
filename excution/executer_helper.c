@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 21:21:46 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/29 15:23:46 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:25:24 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	child_process(t_cmd *first_cmd, t_execcmd *cmd, t_cord *cord, int *fd)
 		;
 	else
 		execute_cmd(cmd);
-	exit(1);
+	exit(g_gb.exit_statut);
 }
 
 pid_t	exec_command(t_cmd *first_cmd, t_execcmd *cmd, int npipe, int cpipe)

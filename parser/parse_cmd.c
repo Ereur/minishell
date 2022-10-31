@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 13:53:05 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/30 07:16:40 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/30 14:59:07 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ bool	check_quot(int *i, char *spec, t_ends_of_tok **str, char **ps)
 	}
 	if (!((*str)->q)[*i])
 	{
-		raise_error("syntax error unclosed quotes", 258, 0);	
+		raise_error("syntax error unclosed quotes", 258, 0, NULL);	
 		(*str)->q = NULL;
 		return (true);
 	}

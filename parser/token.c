@@ -6,15 +6,17 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:58:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/29 15:19:15 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/30 15:01:00 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	raise_error(char *message, int exitcode, int tok)
+void	raise_error(char *message, int exitcode, int tok, t_cmd *cmd)
 {
 	printf("%s `%c'\n", message, tok);
+	if (cmd)
+		free_cmd(cmd);
 	g_gb.exit_statut = exitcode;
 	g_gb.status = 1;
 }
