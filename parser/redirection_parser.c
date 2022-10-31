@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:09:58 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/30 16:46:26 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:25:12 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ bool	parse_input_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 {
 	char	*file;
 	int		fd;
+	char	*tmp;
 
 	if (tok != '<')
 		return (false);
 	tok = gettoken(buff->ps, buff->es, &(str)->q, &(str)->eq);
-	quotes_pareser(&str, buff->ps);
+	quotes_pareser(&str, buff->ps, cmd);
 	if (ft_strchr(FORBIDEN_REDIR, tok))
 	{	
 		raise_error("syntax error near unexpected token", 258, tok, cmd);
@@ -29,13 +30,31 @@ bool	parse_input_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 	}
 	file = ft_substr((str)->q, 0, ((str)->eq - (str)->q));
 	here_doc_expander(&file, true);
-	fd = open(file, O_RDWR, 0644);
-	if (fd == -1)
-		printf("%s : No such file or directory\n", file);
+	tmp = ft_strdup(file);
+	if (!*file)
+	{
+		printf("%s : ambiguous redirect\n", tmp);
+		g_gb.exit_statut = 1;
+		exec->output = -1;
+		free(file);
+		free(tmp);
+		return (false);
+	}
+	else
+	{
+		fd = open(file, O_RDWR, 0644);
+		if (fd == -1)
+		{
+			g_gb.exit_statut = 1;
+			g_gb.status = 1;
+			perror(tmp);
+		}	
+	}
 	if (exec->input != 0)
 		close(exec->input);
 	exec->input = fd;
 	free(file);
+	ft_free(&tmp);
 	return (false);
 }
 
@@ -44,11 +63,12 @@ bool	parse_output_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 {
 	char	*file;
 	int		fd;
+	char	*tmp;
 
 	if (tok != '>')
 		return (false);
 	tok = gettoken(buff->ps, buff->es, &(str)->q, &(str)->eq);
-	quotes_pareser(&str, buff->ps);
+	quotes_pareser(&str, buff->ps, cmd);
 	if (!str->q)
 		return (true);
 	if (ft_strchr(FORBIDEN_REDIR, tok))
@@ -57,14 +77,32 @@ bool	parse_output_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 		return (true);
 	}
 	file = ft_substr((str)->q, 0, ((str)->eq - (str)->q));
+	tmp = ft_strdup(file);
 	here_doc_expander(&file, true);
-	fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0644);
-	if (fd == -1)
-		printf("%s : No such file or directory\n", file);
+	if (!*file)
+	{
+		printf("%s : ambiguous redirect\n", tmp);
+		g_gb.exit_statut = 1;
+		exec->output = -1;
+		free(file);
+		free(tmp);
+		return (false);
+	}
+	else
+	{
+		fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0644);
+		if (fd == -1)
+		{
+			g_gb.exit_statut = 1;
+			g_gb.status = 1;
+			perror(tmp);
+		}	
+	}
 	if (exec->output != 1)
 		close(exec->output);
 	exec->output = fd;
 	free(file);
+	free(tmp);
 	return (false);
 }
 
@@ -101,7 +139,7 @@ bool	parse_heredoc(t_ends_of_buff *buff, t_ends_of_tok *str,
 		return (false);
 	here_doc_lim = NULL;
 	tok = gettoken(buff->ps, buff->es, &(str)->q, &(str)->eq);
-	quotes_pareser(&str, buff->ps);
+	quotes_pareser(&str, buff->ps, cmd);
 	if (!str->q)
 		return (true);
 	if (check_tok(tok, cmd))
@@ -121,11 +159,12 @@ bool	parse_output_append(t_ends_of_buff *buff, t_ends_of_tok *str,
 {
 	char	*file;
 	int		fd;
+	char	*tmp;
 
 	if (tok != '+')
 		return (false);
 	tok = gettoken(buff->ps, buff->es, &(str)->q, &(str)->eq);
-	quotes_pareser(&str, buff->ps);
+	quotes_pareser(&str, buff->ps, cmd);
 	if (!str->q)
 		return (true);
 	if (ft_strchr(FORBIDEN_REDIR, tok))
@@ -134,14 +173,31 @@ bool	parse_output_append(t_ends_of_buff *buff, t_ends_of_tok *str,
 		return (true);
 	}
 	file = ft_substr((str)->q, 0, ((str)->eq - (str)->q));
+	tmp = ft_strdup(file);
 	here_doc_expander(&file, true);
-	fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0644);
-	if (fd == -1)
-		printf("%s No such file or directory\n", file);
+	if (!*file)
+	{
+		printf("%s : ambiguous redirect\n", tmp);
+		g_gb.exit_statut = 1;
+		exec->output = -1;
+		free(file);
+		free(tmp);
+		return (false);
+	}
+	else
+	{
+		fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0644);
+		if (fd == -1)
+		{
+			g_gb.exit_statut = 1;
+			perror(tmp);
+		}	
+	}
 	if (exec->output != 1)
 		close(exec->output);
 	exec->output = fd;
 	free(file);
+	free(tmp);
 	return (false);
 }
 

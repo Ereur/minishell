@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:19 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 06:48:48 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 08:41:20 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,11 @@ void	make_quotes(t_list	*args, bool i, int counter)
 	{
 		split_args = NULL;
 		line = tmp->content;
+		if (ft_strlen(line) == 1 && line[0] == '$')
+		{	
+			tmp = tmp->next;
+			continue ;
+		}
 		q = '\"';
 		collect_sq_and_dq(&split_args, line, q);
 		if (i)

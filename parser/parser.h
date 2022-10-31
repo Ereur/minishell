@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 10:28:18 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/31 14:49:42 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_gb_variable
 	int		fdg;
 	int		input;
 	int		output;
+	int		here_doc;
 }	t_gb_variable;
 
 t_gb_variable 	g_gb;
@@ -93,7 +94,7 @@ void	free_args_list(t_list **args);
 void	free_cmd(t_cmd *cmd);
 void	split_dollar(t_list *args, int counter);
 void	here_doc_expander(char **here_doc_lim, bool i);
-void	quotes_pareser(t_ends_of_tok **str, char **ps);
+void	quotes_pareser(t_ends_of_tok **str, char **ps, t_cmd *cmd);
 void	convert_list_to_args(t_execcmd *execcmd);
 char	*grep_variable(char *str, int counter);
 int		count_len(int i, char *line, char q);

@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 07:18:59 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 08:50:47 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*grep_name(char *s)
 {
-	char *tmp;
-	char *name;
-	int  i;
+	char	*tmp;
+	char	*name;
+	int 	i;
 
 	i = 0;
 	tmp = s;
@@ -25,7 +25,7 @@ char	*grep_name(char *s)
 		return (ft_strdup("?"));
 	}
 	if (!*s)
-		return (ft_strdup("$"));
+		return (ft_strdup(s));
 	name = NULL;
 	while (*tmp)
 	{
@@ -50,8 +50,6 @@ char	*grep_variable(char *str, int counter)
 	tmp = NULL;
 	tmp = g_gb.env;
 	name = grep_name(str);
-	if (ft_strcmp(name, "$"))
-		return (name);
 	if (!*name)
 		return (name);
 	variabl = NULL;
@@ -67,6 +65,7 @@ char	*grep_variable(char *str, int counter)
 			variabl = ft_itoa(g_gb.exit_statut);
 		else
 			variabl = ft_itoa(0);
+		ft_free(&name);
 		return (variabl);
 	}
 	if (tmp)
