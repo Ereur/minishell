@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:43:20 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 07:06:46 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 08:27:06 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,12 @@ void	expand(int len, t_list *tmp, int i, int start, int counter)
 	if (len > 1)
 		str = ft_substr(tmp->content, start, len - 1);
 	content = grep_variable(&tmp->content[i], counter);
-	if (!content)
-	{
-		ft_free(&str);
-		return ;
-	}
+	// if (!*content)
+	// {
+	// 	tmp->content = content;
+	// 	ft_free(&str);
+	// 	return ;
+	// }
 	free_content = content;
 	put_zero_in_null(&str);
 	content = ft_strjoin(str, content);

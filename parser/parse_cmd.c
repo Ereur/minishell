@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 13:53:05 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/30 14:59:07 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 11:20:42 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*skip_word(int *i, t_ends_of_tok **str, char **ps)
 	return (&(((*str)->q)[*i]));
 }
 
-bool	check_quot(int *i, char *spec, t_ends_of_tok **str, char **ps)
+bool	check_quot(int *i, char *spec, t_ends_of_tok **str, char **ps, t_cmd *cmd)
 {
 	while (((*str)->q)[*i])
 	{
@@ -51,14 +51,14 @@ bool	check_quot(int *i, char *spec, t_ends_of_tok **str, char **ps)
 	}
 	if (!((*str)->q)[*i])
 	{
-		raise_error("syntax error unclosed quotes", 258, 0, NULL);	
+		raise_error("syntax error unclosed quotes", 258, 0, cmd);
 		(*str)->q = NULL;
 		return (true);
 	}
 	return (false);
 }
 
-bool	quotes(int *i, char *spec, t_ends_of_tok **str, char **ps)
+bool	quotes(int *i, char *spec, t_ends_of_tok **str, char **ps, t_cmd *cmd)
 {
 	if (*spec != '\'' && *spec != '\"')
 	{
@@ -70,18 +70,18 @@ bool	quotes(int *i, char *spec, t_ends_of_tok **str, char **ps)
 	}
 	if (*spec == '\'')
 	{
-		if (check_quot(i, spec, str, ps))
+		if (check_quot(i, spec, str, ps, cmd))
 			return (true);
 	}
 	if (*spec == '\"')
 	{
-		if (check_quot(i, spec, str, ps))
+		if (check_quot(i, spec, str, ps, cmd))
 			return (true);
 	}
 	return (false);
 }
 
-void	quotes_pareser(t_ends_of_tok **str, char **ps)
+void	quotes_pareser(t_ends_of_tok **str, char **ps, t_cmd *cmd)
 {
 	char	*spec;
 	int		i;
@@ -99,7 +99,7 @@ void	quotes_pareser(t_ends_of_tok **str, char **ps)
 				return ;
 			}
 			i++;
-			if (quotes(&i, spec, str, ps))
+			if (quotes(&i, spec, str, ps, cmd))
 				return ;
 		}
 		(*str)->eq = (*str)->q + i;
@@ -109,7 +109,7 @@ void	quotes_pareser(t_ends_of_tok **str, char **ps)
 
 t_cmd	*parse_exec_he(t_ends_of_tok *q_eq, char **ps, t_list **args, char *es, t_cmd *cmd)
 {
-	quotes_pareser(&q_eq, ps);
+	quotes_pareser(&q_eq, ps, cmd);
 	if (!q_eq->q)
 		return (NULL);
 	add_arg(args, &(q_eq->q), &(q_eq->eq));
