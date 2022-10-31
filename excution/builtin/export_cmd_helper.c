@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_cmd_helper.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/27 15:32:15 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/29 15:22:50 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 09:49:21 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ void	export_handler(char *var, int *exit_code, int *fail)
 		*fail = 1;
 		if (!(*exit_code))
 			(*exit_code)++;
-		ft_putstr_fd("bash: export: `", 2);
-		ft_putstr_fd(var, 2);
-		ft_putendl_fd("': not a valid identifier", 2);
+		ft_fprintf(2, "Minishell: export: `%s': not a valid identifier\n", var);
 		return ;
 	}
 	if (export_name_exist(var, &mode))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/30 13:54:59 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 10:39:41 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,21 @@
 int	checkbult(t_execcmd *exec)
 {
 	if (ft_strcmp(exec->argument[0], "echo") == 0)
-	{
 		ft_echo(exec->argument);
-		return (0);
-	}
 	else if (ft_strcmp(exec->argument[0], "export") == 0)
 	{		
 		ft_export(exec->argument);
 		get_envp();
-		return (0);
 	}
 	else if (ft_strcmp(exec->argument[0], "unset") == 0)
-	{
 		unset_cmd(exec->argument);
-		return (0);
-	}
 	else if (ft_strcmp(exec->argument[0], "exit") == 0)
-	{
 		g_gb.exit_statut = exit_cmd(exec->argument);
-		return (0);
-	}
-	return (1);
+	else if (ft_strcmp(exec->argument[0], "env") == 0)
+		env(exec->argument);
+	else
+		return (1);
+	return (0);
 }
 
 int	checifbuiltin(t_execcmd *exec)
@@ -46,6 +40,8 @@ int	checifbuiltin(t_execcmd *exec)
 
 	if (!exec->argument)
 		return (1);
+	if (strcmp(exec->argument[0], "rm") == 0)
+		curent = getcwd(NULL, 0);
 	if (ft_strcmp(exec->argument[0], "cd") == 0)
 	{
 		if (cd_cmd(exec->argument) == 0)
@@ -59,13 +55,11 @@ int	checifbuiltin(t_execcmd *exec)
 	}
 	else if (ft_strcmp(exec->argument[0], "pwd") == 0)
 		built_in_pwd(exec->argument, curent);
-	else if (ft_strcmp(exec->argument[0], "env") == 0)
-		env(exec->argument);
 	else if (checkbult(exec) == 0)
 		;
 	else
 		return (1);
-	ft_free(&curent);
+	// ft_free(&curent);
 	return (0);
 }
 
@@ -124,7 +118,8 @@ void	execute_cmd(t_execcmd *cmd)
 	paths = get_paths();
 	if (!paths)
 	{
-		ft_putstr_fd("Minishell: No such file or directory\n", 2);
+		ft_fprintf(2, "Minishell: %s No such file or directory\n",
+			cmd->argument[0]);
 		g_gb.exit_statut = 127;
 		exit(g_gb.exit_statut);
 	}

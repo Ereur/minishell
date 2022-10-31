@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 22:35:49 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/29 15:10:18 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 09:55:03 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	built_in_pwd(char **str, char *current)
 	if (!pwd)
 	{
 		pwd = reserve;
-		printf("%s\n", current);
+		ft_fprintf(1, "%s\n", current);
 		return (1);
 	}
 	else

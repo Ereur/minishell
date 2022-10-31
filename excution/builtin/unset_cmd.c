@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:59:57 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/29 16:40:35 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/31 09:47:46 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ void	unset_handler(char *var, int *exit_code, int *faila)
 		*faila = 1;
 		if (!(*exit_code))
 			(*exit_code)++;
-		ft_putstr_fd("Minishell: unset: `", 2);
-		ft_putstr_fd(var, 2);
-		ft_putendl_fd("': not a valid identifier", 2);
+		ft_fprintf(2, "Minishell: unset: `%s': not a valid identifier\n", var);
 		return ;
 	}
 	if (unset_name_exist(var, &prenode))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:40:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/30 13:55:06 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 09:42:18 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	waitforcprocess(void)
 			if (WIFSIGNALED(exit_value))
 			{
 				if (WTERMSIG(exit_value) == 3)
-					printf("Quit: 3\n");
+					ft_fprintf(2, "Quit: 3\n");
 				g_gb.exit_statut = WTERMSIG(exit_value) + 128;
 			}
 			else
@@ -54,12 +54,13 @@ void	error_helper(t_execcmd *cmd)
 	if (!access(cmd->argument[0], F_OK) && \
 				access(cmd->argument[0], X_OK))
 	{
-		ft_putstr_fd(": Permision denied\n", 2);
+		ft_fprintf(2, "Minishell: %s Permision denied\n", cmd->argument[0]);
 		g_gb.exit_statut = 126;
 	}
 	else
 	{
-		ft_putstr_fd(": No such file or directory\n", 2);
+		ft_fprintf(2, "Minishell: %s No such file or directory\n",
+			cmd->argument[0]);
 		g_gb.exit_statut = 127;
 	}
 }
@@ -68,11 +69,9 @@ void	error_displayer(t_execcmd *cmd)
 {
 	if (ft_strchr(cmd->argument[0], '/'))
 	{
-		ft_putstr_fd("Minishell: ", 2);
-		ft_putstr_fd(cmd->argument[0], 2);
 		if (opendir(cmd->argument[0]))
 		{
-			ft_putstr_fd(": is a directory\n", 2);
+			ft_fprintf(2, "Minishell: %s is a directory\n", cmd->argument[0]);
 			g_gb.exit_statut = 126;
 		}
 		else
@@ -80,13 +79,8 @@ void	error_displayer(t_execcmd *cmd)
 	}
 	else
 	{
-		ft_putstr_fd("Minishell: ", 2);
-		ft_putstr_fd(cmd->argument[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
+		ft_fprintf(2, "Minishell: %s command not found\n", cmd->argument[0]);
 		g_gb.exit_statut = 127;
-		// fprintf(stderr, "expression : %d\n", ft_strcmp(cmd->argument[0],"echo") && first_cmd && first_cmd->type == PIPE);
-		// if (ft_strcmp(cmd->argument[0],"echo") && first_cmd && first_cmd->type == PIPE)
-		// 	g_gb.exit_statut = 0;
 	}
 	exit(g_gb.exit_statut);
 }

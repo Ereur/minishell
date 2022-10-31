@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 08:58:45 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 09:54:12 by zoukaddo         ###   ########.fr       */
+/*   Created: 2021/12/12 15:56:06 by zoukaddo          #+#    #+#             */
+/*   Updated: 2022/10/31 08:59:56 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../parser/parser.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+# include <unistd.h>
+# include <stdarg.h>
+# include <stdio.h>
 
-void	env(char **arg)
-{
-	t_senv	*head;
-
-	if (arg[1])
-	{
-		g_gb.exit_statut = 1;
-		ft_fprintf(2, "env: %s: No such file or directory\n", arg[1]);
-		return ;
-	}
-	head = g_gb.env;
-	while (head)
-	{
-		if (head->value)
-			printf("%s=%s\n", head->key, head->value);
-		head = head->next;
-	}
-	g_gb.exit_statut = 0;
-	return ;
-}
+int		ft_putchar(int fd, int c);
+void	ft_putnbr(int fd, long long nb, int *len);
+void	ft_putstr(int fd, char *str, int *len);
+void	ft_puthexa(int fd, unsigned int nb, char c, int *len);
+int		ft_fprintf(int fd, const char *str, ...);
+void	ft_put_p(int fd, unsigned long nb, int *len);
+#endif

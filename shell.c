@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/30 09:20:52 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 09:06:36 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	exuctionsudo(t_cmd *cmd)
 		waitforcprocess();
 	}
 }
+
 void	free_args_list(t_list **args)
 {
 	while ((*args))
@@ -67,7 +68,7 @@ void	free_args_list(t_list **args)
 	}
 }
 
-void free_all(t_cmd *cmd)
+void	free_all(t_cmd *cmd)
 {
 	t_pipecmd	*pipcmd;
 	t_execcmd	*execcmd;
@@ -91,7 +92,8 @@ void free_all(t_cmd *cmd)
 		free(execcmd);
 	}
 }
-void free_cmd(t_cmd *cmd)
+
+void	free_cmd(t_cmd *cmd)
 {
 	free_all(cmd);
 }

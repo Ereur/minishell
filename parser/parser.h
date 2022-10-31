@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/30 14:58:36 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 10:28:18 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ typedef struct s_ends_of_buff
 int		checifbuiltin(t_execcmd *exec);
 void	execute_cmd(t_execcmd *cmd);
 
-void    raise_error(char *message, int exitcode, int tok, t_cmd *cmd);
+void	raise_error(char *message, int exitcode, int tok, t_cmd *cmd);
 void	free_args_list(t_list **args);
 void	free_cmd(t_cmd *cmd);
 void	split_dollar(t_list *args, int counter);
@@ -103,21 +103,22 @@ void	word_len(char *arg, int *i, int *len);
 void	collect_var(t_list **lst_of_dollar, int *i, char *arg, t_list *tmp);
 void	expand_lst(t_list *dollars, int counter);
 t_cmd	*parseredirec(char **ps, char *es, t_cmd *cmd);
-t_cmd	*parse_exec_he(t_ends_of_tok *q_eq, char **ps, t_list **args, char *es, t_cmd *cmd);
+t_cmd	*parse_exec_he(t_ends_of_tok *q_eq, char **ps, t_list **args, char *es,
+			t_cmd *cmd);
 // int		here_doc(char *);
 t_cmd	*parsepipe(char **ps, char *es, char **envp);
 t_cmd	*redirecmd(t_cmd *cmd, char *file, char *efile, int mode, int fd);
 t_cmd	*execcmd(void);
 t_cmd	*pipecmd(t_cmd *left, t_cmd *right);
 int		here_doc(char *lim, bool falg);
-int     cd_cmd(char **argument);
+int		cd_cmd(char **argument);
 void	execute_builtins(t_cmd *cmd);
-void    executer(t_cmd *cmd);
+void	executer(t_cmd *cmd);
 void	clean_arguments(t_cmd *cmd, int *counter);
 int		skip_dollar(char *test);
 int		find_name(char *s);
-void 	put_zero_in_null(char **str);
-void 	add_arg(t_list **head, char **q, char **eq);
+void	put_zero_in_null(char **str);
+void	add_arg(t_list **head, char **q, char **eq);
 char	*ft_strncpy(char *dest, char *src, unsigned int n);	
 void	nullterminating(t_cmd *cmd);
 t_cmd	*parser(char **ps, char *es, char **envp);
@@ -125,10 +126,10 @@ void	print_tree(t_cmd *cmd);
 
 // trying
 //trying
-void	pipe_executer(t_cmd *first_cmd, t_cmd *cmd , int npipe, int cpipe);
+void	pipe_executer(t_cmd *first_cmd, t_cmd *cmd, int npipe, int cpipe);
 void	close_all_fds(t_cmd *cmd);
-void 	excute_pipes(t_cmd *cmd, int flag);
-void	sig_handler(int signal); 
+void	excute_pipes(t_cmd *cmd, int flag);
+void	sig_handler(int signal);
 void	error_displayer(t_execcmd *cmd);
 void	rl_replace_line(const char *text, int clear_undo);
 #endif
