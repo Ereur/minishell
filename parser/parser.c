@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/30 15:22:24 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 15:03:05 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	add_arg(t_list **head, char **q, char **eq)
 
 	len = (*eq - *q);
 	str = ft_substr(*q, 0, len);
-	ft_lstadd_back(head,ft_lstnew(str, NOTHING));
+	ft_lstadd_back(head, ft_lstnew(str, NOTHING));
 }
 
 bool	parse_exec_helper(char **ps, char *es, t_cmd *cmd)

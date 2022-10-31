@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 09:06:36 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/31 21:20:24 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	parser_sudo(char **envp)
 	cmd = NULL;
 	while (42)
 	{
+		g_gb.output = dup(0);
 		g_gb.status = 0;
 		signals();
 		ft_free(&buffer);
@@ -140,6 +141,7 @@ int	main(int ac, char **argv, char **envp)
 	g_gb.input = 0;
 	g_gb.output = 1;
 	g_gb.fd_input_prev = 0;
+	// system("leaks minishell");
 	setup_env(envp);
 	parser_sudo(envp);
 	return (0);

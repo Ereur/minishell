@@ -6,7 +6,7 @@
 #    By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by zoukaddo          #+#    #+#              #
-#    Updated: 2022/10/31 14:49:35 by zoukaddo         ###   ########.fr        #
+#    Updated: 2022/10/31 21:20:11 by zoukaddo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,7 @@ all:			$(NAME)
 $(NAME):		$(OBJS)
 				cd ./libft && make
 				cd ./libft && make bonus
-				$(CC) ${OBJS} $(CFLAGS) ./libft/libft.a -o ${NAME} $(READLINE_PATH) -g 
-
+				$(CC) ${OBJS} $(CFLAGS) ./libft/libft.a -o ${NAME} $(READLINE_PATH) -g
 clean:
 				$(RM) $(OBJS) 
 				cd ./libft && make clean
