@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 19:05:45 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 14:35:01 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/31 14:52:11 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	exit_cmd_norm(char **args, t_cord *cord, int exit_num)
 			exit_num = exit_atoi(args[2], cord);
 			if (cord->mod > 0)
 				numeric_argument_required(args[2]);
+			printf("exit\n");
 			exit(exit_num);
 		}
 		exit(g_gb.exit_statut);

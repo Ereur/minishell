@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 09:41:27 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/31 21:09:15 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	set_pwd(t_senv *pwd, int mod)
 {
 	char	*tmp;
+	char	*hold;
 
+	hold = NULL;
+	tmp = NULL;
 	if (pwd)
 	{
 		free(pwd->value);
@@ -24,9 +27,17 @@ void	set_pwd(t_senv *pwd, int mod)
 	else
 	{
 		if (mod)
-			tmp = ft_strjoin("PWD=", getcwd(NULL, 0));
+		{
+			hold = getcwd(NULL, 0);
+			tmp = ft_strjoin("PWD=", hold);
+			ft_free(&hold);
+		}
 		else
-			tmp = ft_strjoin("OLDPWD=", getcwd(NULL, 0));
+		{
+			hold = getcwd(NULL, 0);
+			tmp = ft_strjoin("OLDPWD=", hold);
+			ft_free(&hold);
+		}
 		if (!tmp)
 			return ;
 		env_add_back(&g_gb.env, env_new(tmp));
@@ -60,6 +71,7 @@ int	cd_cmd(char **argument)
 	t_senv	*home;
 
 	set_pwd(env_grabber("OLDPWD"), 0);
+	system("leaks minishell");
 	if (!argument[1])
 	{
 		check_home(argument);
