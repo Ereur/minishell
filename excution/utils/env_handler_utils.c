@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 22:53:43 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/29 19:15:47 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 21:00:23 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,19 @@ void	setup_env(char **envp)
 {
 	int		i;
 	char	*tmp;
+	char	*hold;
 
 	i = 0;
 	g_gb.env = 0;
+	tmp = NULL;
 	while (envp[i])
 		env_add_back(&g_gb.env, env_new(envp[i++]));
 	i = 0;
 	if (!track_env("PWD"))
 	{
-		tmp = ft_strjoin("PWD=", getcwd(NULL, 0));
+		hold = getcwd(NULL, 0);
+		tmp = ft_strjoin("PWD=", hold);
+		ft_free(&hold);
 		if (tmp)
 		{
 			env_add_back(&g_gb.env, env_new(tmp));

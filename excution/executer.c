@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/30 13:54:59 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 15:26:13 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,12 @@ void	execute_cmd(t_execcmd *cmd)
 {
 	char	**paths;
 
-	if (cmd->argument[0][0] == '\0' && cmd->argument[1] == NULL)
-		exit(0);
+	if (cmd->argument[0][0] == '\0')
+	{
+		printf("Minishell :%s :command not found\n", cmd->argument[0]);
+		g_gb.exit_statut = 127;
+		exit(g_gb.exit_statut);
+	}
 	paths = get_paths();
 	if (!paths)
 	{

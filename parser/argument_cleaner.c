@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 08:50:47 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 21:14:07 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ char	*grep_variable(char *str, int counter)
 			break ;
 		tmp = tmp->next;
 	}
+	if (tmp)
+		return (NULL);
 	if (*name == '?')
 	{	
 		if (counter == 0)

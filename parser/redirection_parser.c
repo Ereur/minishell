@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:09:58 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 11:25:12 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 20:17:50 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,8 @@ bool	parse_heredoc(t_ends_of_buff *buff, t_ends_of_tok *str,
 		flag = false;
 	here_doc_expander(&here_doc_lim, false);
 	exec->input = here_doc(here_doc_lim, flag);
+	dup2(g_gb.input, 0);
+	signals();
 	ft_free(&here_doc_lim);
 	return (false);
 }

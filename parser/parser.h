@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 13:47:08 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 16:46:53 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_gb_variable
 	int		npipe;
 	int		fd_input_prev;
 	pid_t	last_pid;
-	int		fdg;
 	int		input;
 	int		output;
 	int		here_doc;
