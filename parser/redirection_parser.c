@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_parser.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:09:58 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/01 13:54:36 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/01 23:51:48 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ bool	parse_input_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 		return (true);
 	}
 	file = ft_substr((str)->q, 0, ((str)->eq - (str)->q));
-	here_doc_expander(&file, true);
 	tmp = ft_strdup(file);
-	if (!*file)
+	here_doc_expander(&file, true);
+	if (!file)
 	{
-		printf("%s : ambiguous redirect\n", tmp);
+		ft_fprintf(2, "%s : ambiguous redirect\n", tmp);
 		g_gb.exit_statut = 1;
 		exec->output = -1;
 		free(file);
@@ -45,9 +45,12 @@ bool	parse_input_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 		fd = open(file, O_RDWR, 0644);
 		if (fd == -1)
 		{
-			g_gb.exit_statut = 1;
-			g_gb.status = 1;
 			perror(tmp);
+			g_gb.exit_statut = 1;
+			exec->output = -1;
+			free(file);
+			free(tmp);
+			return (false);
 		}	
 	}
 	if (exec->input != 0)
@@ -79,9 +82,9 @@ bool	parse_output_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 	file = ft_substr((str)->q, 0, ((str)->eq - (str)->q));
 	tmp = ft_strdup(file);
 	here_doc_expander(&file, true);
-	if (!*file)
+	if (!file)
 	{
-		printf("%s : ambiguous redirect\n", tmp);
+		ft_fprintf(2, "%s : ambiguous redirect\n", tmp);
 		g_gb.exit_statut = 1;
 		exec->output = -1;
 		free(file);
@@ -93,9 +96,12 @@ bool	parse_output_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
 		fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0644);
 		if (fd == -1)
 		{
-			g_gb.exit_statut = 1;
-			g_gb.status = 1;
 			perror(tmp);
+			g_gb.exit_statut = 1;
+			exec->output = -1;
+			free(file);
+			free(tmp);
+			return (false);
 		}	
 	}
 	if (exec->output != 1)
@@ -177,9 +183,9 @@ bool	parse_output_append(t_ends_of_buff *buff, t_ends_of_tok *str,
 	file = ft_substr((str)->q, 0, ((str)->eq - (str)->q));
 	tmp = ft_strdup(file);
 	here_doc_expander(&file, true);
-	if (!*file)
+	if (!file)
 	{
-		printf("%s : ambiguous redirect\n", tmp);
+		ft_fprintf(2, "%s : ambiguous redirect\n", tmp);
 		g_gb.exit_statut = 1;
 		exec->output = -1;
 		free(file);
@@ -191,8 +197,12 @@ bool	parse_output_append(t_ends_of_buff *buff, t_ends_of_tok *str,
 		fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0644);
 		if (fd == -1)
 		{
-			g_gb.exit_statut = 1;
 			perror(tmp);
+			g_gb.exit_statut = 1;
+			exec->output = -1;
+			free(file);
+			free(tmp);
+			return (false);
 		}	
 	}
 	if (exec->output != 1)

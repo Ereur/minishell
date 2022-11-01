@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 14:46:51 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/01 23:59:29 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,5 @@ int	main(int ac, char **argv, char **envp)
 	setup_env(envp);
 	g_gb.curent = ft_strdup(env_grabber("PWD")->value);
 	parser_sudo(envp);
-	return (0);
+	return (g_gb.exit_statut);
 }

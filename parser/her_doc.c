@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 04:15:04 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 15:07:08 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/01 22:22:31 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	sig_handl(int signal)
 	{
 		printf("\n");
 		close(STDIN_FILENO);
+		g_gb.exit_statut = 1;
 		g_gb.here_doc = 1;
 	}
 	return ;
@@ -58,10 +59,11 @@ int	here_doc(char *lim, bool flag)
 	}
 	if (!line)
 	{	
+		g_gb.exit_statut = 0;
 		close(end[1]);
 		return (end[0]);
 	}
-	if (*line)
+	if (*line && ft_strcmp(lim, line))
 		here_doc_expand(&line, flag);
 	if (ft_strcmp(lim, line))
 	{	
@@ -85,7 +87,7 @@ int	here_doc(char *lim, bool flag)
 			close(end[1]);
 			return (end[0]);
 		}
-		if (*line)
+		if (*line && ft_strcmp(lim, line))
 			here_doc_expand(&line, flag);
 		if (!ft_strcmp(lim, line))
 			break ;
