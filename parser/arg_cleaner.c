@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:19 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/01 09:31:54 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/01 13:21:14 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	convert_list_to_args(t_execcmd *execcmd)
 	size = ft_lstsize(execcmd->args);
 	execcmd->argument = malloc(sizeof(char *) * (size + 1));
 	execcmd->argument[size] = NULL;
-	if (!execcmd->args->content)
-	{
-		execcmd->argument[i] = NULL;
-		free(execcmd->args);
-		return ;
-	}
+	// if (!execcmd->args->content)
+	// {
+	// 	execcmd->argument[i] = NULL;
+	// 	// free(execcmd->args);
+	// 	return ;
+	// }
 	while (execcmd->args)
 	{	
 		if (!execcmd->args->content)
@@ -104,10 +104,10 @@ void	split_dollar(t_list *args, int counter)
 		hold = tmp->content;
 		if (!lst_of_dollar->content)
 		{
+			ft_free(&tmp->content);
 			tmp->content = NULL;
-			ft_free(&hold);
 			tmp = tmp->next;
-			continue;
+			continue ;
 		}
 		tmp->content = merge_list(&lst_of_dollar);
 		ft_free(&hold);
@@ -144,7 +144,7 @@ void	make_quotes(t_list	*args, bool i, int counter)
 	char		q;
 	char		*line;
 	t_list		*tmp;
-	
+
 	tmp = args;
 	while (tmp)
 	{
@@ -159,7 +159,6 @@ void	make_quotes(t_list	*args, bool i, int counter)
 		collect_sq_and_dq(&split_args, line, q);
 		if (i)
 			split_dollar(split_args, counter);
-		ft_free(&tmp->content);
 		if (!split_args->content)
 		{
 			tmp->content = NULL;
@@ -167,6 +166,7 @@ void	make_quotes(t_list	*args, bool i, int counter)
 			continue;
 			// ft_free(&tmp->content);
 		}
+		ft_free(&tmp->content);
 		tmp->content = merge_list(&split_args);
 		tmp = tmp->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/01 09:41:46 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/01 13:38:02 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ char	*grep_variable(char *str, int counter)
 		return (variabl);
 	}
 	if (!tmp)
+	{	
+		ft_free(&name);
 		return (NULL);
+	}
 	if (tmp)
 	{
 		if (!*(tmp->value))
