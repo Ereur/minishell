@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 22:53:43 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 11:37:30 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/01 16:47:20 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,11 @@ void	setup_env(char **envp)
 	get_envp();
 }
 
-void	get_envp(void)
+void	freeenv(void)
 {
-	int		i;
-	char	*hold;
-	char	*holdt;
-	t_senv	*tmp;
+	int	i;
 
+	i = 0;
 	if (g_gb.envp)
 	{	
 		i = 0;
@@ -83,6 +81,16 @@ void	get_envp(void)
 			free(g_gb.envp[i++]);
 		free(g_gb.envp);
 	}
+}
+
+void	get_envp(void)
+{
+	int		i;
+	char	*hold;
+	char	*holdt;
+	t_senv	*tmp;
+
+	freeenv();
 	g_gb.envp = (char **)malloc(sizeof(char *) * (env_size() + 1));
 	i = 0;
 	tmp = g_gb.env;
