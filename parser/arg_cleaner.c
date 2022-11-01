@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:19 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 21:16:43 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/01 09:31:54 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,26 @@ void	convert_list_to_args(t_execcmd *execcmd)
 	size = ft_lstsize(execcmd->args);
 	execcmd->argument = malloc(sizeof(char *) * (size + 1));
 	execcmd->argument[size] = NULL;
-	while (execcmd->args)
+	if (!execcmd->args->content)
 	{
+		execcmd->argument[i] = NULL;
+		free(execcmd->args);
+		return ;
+	}
+	while (execcmd->args)
+	{	
+		if (!execcmd->args->content)
+		{
+			execcmd->args = execcmd->args->next;
+			continue ;
+		}
 		execcmd->argument[i] = execcmd->args->content;
 		args = execcmd->args;
 		execcmd->args = execcmd->args->next;
 		free(args);
 		i++;
 	}
+	execcmd->argument[i] = NULL;
 	free(execcmd->args);
 }
 
@@ -90,6 +102,13 @@ void	split_dollar(t_list *args, int counter)
 			collect_var(&lst_of_dollar, &i, arg, tmp);
 		expand_lst(lst_of_dollar, counter);
 		hold = tmp->content;
+		if (!lst_of_dollar->content)
+		{
+			tmp->content = NULL;
+			ft_free(&hold);
+			tmp = tmp->next;
+			continue;
+		}
 		tmp->content = merge_list(&lst_of_dollar);
 		ft_free(&hold);
 		lst_of_dollar = NULL;
@@ -125,7 +144,7 @@ void	make_quotes(t_list	*args, bool i, int counter)
 	char		q;
 	char		*line;
 	t_list		*tmp;
-
+	
 	tmp = args;
 	while (tmp)
 	{
@@ -141,6 +160,13 @@ void	make_quotes(t_list	*args, bool i, int counter)
 		if (i)
 			split_dollar(split_args, counter);
 		ft_free(&tmp->content);
+		if (!split_args->content)
+		{
+			tmp->content = NULL;
+			tmp = tmp->next;
+			continue;
+			// ft_free(&tmp->content);
+		}
 		tmp->content = merge_list(&split_args);
 		tmp = tmp->next;
 	}
