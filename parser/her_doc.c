@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 04:15:04 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 20:20:51 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/01 10:42:22 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	here_doc(char *lim, bool flag)
 	int		end[2];
 	char	*line;
 	char	*tmp;
+	char	*newline;
 
 	g_gb.here_doc = 0;
 	g_gb.input = dup(0);
@@ -61,7 +62,11 @@ int	here_doc(char *lim, bool flag)
 	}
 	here_doc_expand(&line, flag);
 	if (ft_strcmp(lim, line))
-		write(end[1], line, ft_strlen(line));
+	{	
+		newline = ft_strjoin(line, "\n");
+		write(end[1], newline, ft_strlen(newline));
+		free(newline);
+	}
 	while (ft_strcmp(lim, line))
 	{	
 		tmp = line;
@@ -74,6 +79,7 @@ int	here_doc(char *lim, bool flag)
 		}
 		if (g_gb.here_doc == 1)
 		{
+			ft_free(&line);
 			close(end[1]);
 			close(end[0]);
 			return (-1);
@@ -82,7 +88,9 @@ int	here_doc(char *lim, bool flag)
 		free(tmp);
 		if (!ft_strcmp(lim, line))
 			break ;
-		write(end[1], line, ft_strlen(line));
+		newline = ft_strjoin(line, "\n");
+		write(end[1], newline, ft_strlen(newline));
+		free(newline);
 	}
 	free(line);
 	close(end[1]);

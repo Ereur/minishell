@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 08:52:25 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/01 10:25:25 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,16 @@ int	checifbuiltin(t_execcmd *exec)
 	static char	*curent;
 	char		*rev;
 
-	if (!(exec->argument[0]))
+	if (!(exec->argument))
+	{
+		g_gb.exit_statut = 0;
 		return (0);
+	}
+	if (!(exec->argument[0]))
+	{
+		g_gb.exit_statut = 0;
+		return (0);
+	}
 	if (ft_strcmp(exec->argument[0], "cd") == 0)
 	{
 		if (cd_cmd(exec->argument) == 0)
