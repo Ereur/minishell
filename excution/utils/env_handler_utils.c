@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_handler_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 22:53:43 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 21:36:18 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:37:30 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,24 +76,27 @@ void	get_envp(void)
 	char	*holdt;
 	t_senv	*tmp;
 
-	i = 0;
-	tmp = g_gb.env;
 	if (g_gb.envp)
 	{	
+		i = 0;
 		while (g_gb.envp[i])
-			ft_free(&g_gb.envp[i++]);
+			free(g_gb.envp[i++]);
 		free(g_gb.envp);
 	}
 	g_gb.envp = (char **)malloc(sizeof(char *) * (env_size() + 1));
 	i = 0;
+	tmp = g_gb.env;
 	while (tmp)
 	{
 		hold = ft_strjoin(tmp->key, "=");
 		holdt = ft_strjoin(hold, tmp->value);
 		ft_free(&hold);
-		g_gb.envp[i] = holdt;
+		if (holdt)
+		{
+			g_gb.envp[i] = holdt;
+			i++;
+		}
 		tmp = tmp->next;
-		i++;
 	}
 	g_gb.envp[i] = 0;
 }

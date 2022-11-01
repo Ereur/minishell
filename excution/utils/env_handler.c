@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:09:50 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 21:21:01 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:37:52 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	env_size(void)
 	i = 0;
 	while (head)
 	{
-		i++;
+		if (head->value)
+			i++;
 		head = head->next;
 	}
 	return (i);

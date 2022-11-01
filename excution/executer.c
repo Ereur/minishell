@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 09:42:11 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/01 12:01:53 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	checkbult(t_execcmd *exec)
 		g_gb.exit_statut = exit_cmd(exec->argument);
 	else if (ft_strcmp(exec->argument[0], "env") == 0)
 		env(exec->argument);
+	else if (ft_strcmp(exec->argument[0], "pwd") == 0)
+		built_in_pwd(exec->argument, g_gb.curent);
 	else
 		return (1);
 	return (0);
@@ -35,8 +37,7 @@ int	checkbult(t_execcmd *exec)
 
 int	checifbuiltin(t_execcmd *exec)
 {
-	// static char	*curent;
-	char		*rev;
+	char	*rev;
 
 	if (!(exec->argument[0]))
 		return (0);
@@ -45,25 +46,21 @@ int	checifbuiltin(t_execcmd *exec)
 		if (cd_cmd(exec->argument) == 0)
 		{
 			if (g_gb.curent)
-				ft_free(&g_gb.curent);
+				free(g_gb.curent);
 			g_gb.curent = getcwd(NULL, 0);
 		}
 		else
 		{
 			rev = ft_strjoin(g_gb.curent, "/.");
 			if (g_gb.curent)
-				ft_free(&g_gb.curent);
+				free(g_gb.curent);
 			g_gb.curent = rev;
-			free(rev);
 		}
 	}
-	else if (ft_strcmp(exec->argument[0], "pwd") == 0)
-		built_in_pwd(exec->argument, g_gb.curent);
 	else if (checkbult(exec) == 0)
 		;
 	else
 		return (1);
-	// ft_free(&curent);
 	return (0);
 }
 
