@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 19:05:45 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/29 18:34:36 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/10/31 14:52:11 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ int	exit_atoi(const char *str, t_cord *cord)
 
 void	numeric_argument_required(char *arg)
 {
-	ft_putstr_fd("Minishell: exit: ", 2);
-	ft_putstr_fd(arg, 2);
-	ft_putstr_fd(": numeric argument required\n", 2);
+	ft_fprintf(2, "Minishell: exit: %s: numeric argument required\n", arg);
 	exit(255);
 }
 
@@ -83,6 +81,7 @@ void	exit_cmd_norm(char **args, t_cord *cord, int exit_num)
 			exit_num = exit_atoi(args[2], cord);
 			if (cord->mod > 0)
 				numeric_argument_required(args[2]);
+			printf("exit\n");
 			exit(exit_num);
 		}
 		exit(g_gb.exit_statut);
@@ -110,6 +109,9 @@ int	exit_cmd(char **args)
 	if (cord.mod == EXIT_FAIL)
 		numeric_argument_required(args[1]);
 	if (cord.mod == EXIT_SUC)
+	{
+		printf("exit\n");
 		exit(exit_num);
+	}
 	exit(g_gb.exit_statut);
 }

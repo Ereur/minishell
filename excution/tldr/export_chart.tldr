@@ -253,8 +253,8 @@
             "parentId": "page",
             "childIndex": 9,
             "point": [
-              170.87,
-              432.94
+              181.44,
+              464.19
             ],
             "rotation": 0,
             "text": "cant't be with special\ncharacters",
@@ -275,7 +275,7 @@
             "parentId": "page",
             "childIndex": 10,
             "point": [
-              133.5,
+              122.31,
               379.22
             ],
             "rotation": 0,
@@ -295,8 +295,8 @@
                 "id": "end",
                 "index": 1,
                 "point": [
-                  73.48,
-                  45.72
+                  105.13,
+                  76.97
                 ],
                 "canBind": true,
                 "bindingId": "a4f061c8-822d-4fb1-30f3-a9d4e9e8c02f"
@@ -305,8 +305,8 @@
                 "id": "bend",
                 "index": 2,
                 "point": [
-                  36.74,
-                  22.86
+                  52.57,
+                  38.49
                 ]
               }
             },

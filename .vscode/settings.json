@@ -4,7 +4,8 @@
     "minishell.h": "c",
     "unistd.h": "c",
     "execution.h": "c",
-    "dirent.h": "c"
+    "dirent.h": "c",
+    "ft_printf.h": "c"
   },
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",

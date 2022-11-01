@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 09:04:03 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:53:25 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	exuctionsudo(t_cmd *cmd)
 		waitforcprocess();
 	}
 }
+
 void	free_args_list(t_list **args)
 {
 	while ((*args))
@@ -67,7 +68,7 @@ void	free_args_list(t_list **args)
 	}
 }
 
-void free_all(t_cmd *cmd)
+void	free_all(t_cmd *cmd)
 {
 	t_pipecmd	*pipcmd;
 	t_execcmd	*execcmd;
@@ -91,7 +92,8 @@ void free_all(t_cmd *cmd)
 		free(execcmd);
 	}
 }
-void free_cmd(t_cmd *cmd)
+
+void	free_cmd(t_cmd *cmd)
 {
 	free_all(cmd);
 }
@@ -139,8 +141,8 @@ int	main(int ac, char **argv, char **envp)
 	g_gb.input = 0;
 	g_gb.output = 1;
 	g_gb.fd_input_prev = 0;
-	// system("leaks minishell");
 	setup_env(envp);
+	g_gb.curent = ft_strdup(env_grabber("PWD")->value);
 	parser_sudo(envp);
 	return (0);
 }

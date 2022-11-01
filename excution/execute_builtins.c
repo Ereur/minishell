@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtins.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 06:25:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 08:38:59 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/01 09:40:56 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	exitcodesandwait(void)
 	if (WIFSIGNALED(exit_value))
 	{
 		if (WTERMSIG(exit_value) == 3)
-			printf("Quit: 3\n");
+			ft_fprintf(2, "Quit: 3\n");
 		g_gb.exit_statut = WTERMSIG(exit_value) + 128;
 	}
 	else if (WIFEXITED(exit_value))

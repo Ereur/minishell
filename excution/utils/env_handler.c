@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 16:09:50 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 20:48:26 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/01 11:37:52 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ int	env_size(void)
 	t_senv	*head;
 	int		i;
 
-	head =g_gb.env;
+	head = g_gb.env;
 	i = 0;
 	while (head)
 	{
-		i++;
+		if (head->value)
+			i++;
 		head = head->next;
 	}
 	return (i);
@@ -45,7 +46,7 @@ t_senv	*env_grabber(char *keyword)
 {
 	t_senv	*head;
 
-	head =g_gb.env;
+	head = g_gb.env;
 	while (head)
 	{
 		if (!ft_strcmp(keyword, head->key))
