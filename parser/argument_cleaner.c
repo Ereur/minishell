@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 21:14:07 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/01 09:21:27 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ char	*grep_variable(char *str, int counter)
 			break ;
 		tmp = tmp->next;
 	}
-	if (tmp)
-		return (NULL);
 	if (*name == '?')
 	{	
 		if (counter == 0)
@@ -70,6 +68,8 @@ char	*grep_variable(char *str, int counter)
 		ft_free(&name);
 		return (variabl);
 	}
+	if (!tmp)
+		return (NULL);
 	if (tmp)
 	{
 		if (!*(tmp->value))
@@ -95,7 +95,8 @@ bool	clen_arguments_helper(t_execcmd *execcmd, int counter)
 {
 	if (execcmd->args)
 	{	
-		make_quotes(execcmd->args, true, counter);
+		if ((execcmd->args->content[0] != '\"') && (execcmd->args->content[1] != '\"'))
+			make_quotes(execcmd->args, true, counter);
 		if (g_gb.status)
 			return (true);
 		convert_list_to_args(execcmd);

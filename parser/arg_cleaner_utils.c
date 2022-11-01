@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:43:20 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 08:27:06 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 21:44:14 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ void	expand(int len, t_list *tmp, int i, int start, int counter)
 	// 	ft_free(&str);
 	// 	return ;
 	// }
+	if (!content)
+	{	
+		ft_free(&str);
+		tmp->content = content;
+		return ;
+	}
 	free_content = content;
 	put_zero_in_null(&str);
 	content = ft_strjoin(str, content);
