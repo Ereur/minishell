@@ -6,7 +6,7 @@
 #    By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by zoukaddo          #+#    #+#              #
-#    Updated: 2022/10/31 21:20:11 by zoukaddo         ###   ########.fr        #
+#    Updated: 2022/11/01 09:17:20 by zoukaddo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ BUILTIN 		= ./excution/builtin/
 
 EXECUTION		= ./excution/
 
-CFLAGS			=  #-fsanitize=address -g  -Wall -Wextra -Werror
+CFLAGS			=  #-fsanitize=address -g  #-Wall -Wextra -Werror
 
 all:			$(NAME)
 

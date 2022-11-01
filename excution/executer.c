@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 21:20:38 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/01 09:29:52 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,36 @@ int	checkbult(t_execcmd *exec)
 
 int	checifbuiltin(t_execcmd *exec)
 {
-	static char	*curent;
+	// static char	*curent;
 	char		*rev;
-
+	g_gb.curent = NULL;
 	if (!exec->argument)
 		return (1);
 	if (strcmp(exec->argument[0], "rm") == 0)
-		curent = getcwd(NULL, 0);
+	{
+		if (g_gb.curent)
+			ft_free(&g_gb.curent);
+		g_gb.curent = getcwd(NULL, 0);
+	}
 	if (ft_strcmp(exec->argument[0], "cd") == 0)
 	{
 		if (cd_cmd(exec->argument) == 0)
-			curent = getcwd(NULL, 0);
+		{
+			if (g_gb.curent)
+				ft_free(&g_gb.curent);
+			g_gb.curent = getcwd(NULL, 0);
+		}
 		else
 		{
-			rev = ft_strjoin(curent, "/.");
-			free(curent);
-			curent = rev;
+			rev = ft_strjoin(g_gb.curent, "/.");
+			if (g_gb.curent)
+				ft_free(&g_gb.curent);
+			g_gb.curent = rev;
+			free(rev);
 		}
 	}
 	else if (ft_strcmp(exec->argument[0], "pwd") == 0)
-		built_in_pwd(exec->argument, curent);
+		built_in_pwd(exec->argument, g_gb.curent);
 	else if (checkbult(exec) == 0)
 		;
 	else

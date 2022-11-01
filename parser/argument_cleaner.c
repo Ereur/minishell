@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument_cleaner.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 21:14:07 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/10/31 21:43:30 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*grep_name(char *s)
 {
 	char	*tmp;
 	char	*name;
-	int 	i;
+	int		i;
 
 	i = 0;
 	tmp = s;
@@ -59,7 +59,7 @@ char	*grep_variable(char *str, int counter)
 			break ;
 		tmp = tmp->next;
 	}
-	if (tmp)
+	if (!tmp)
 		return (NULL);
 	if (*name == '?')
 	{	

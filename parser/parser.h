@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 21:23:15 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/01 09:32:55 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_gb_variable
 	int		input;
 	int		output;
 	int		here_doc;
+	char	*curent;
 }	t_gb_variable;
 
 t_gb_variable 	g_gb;
@@ -71,7 +72,6 @@ typedef struct s_pipecmd {
 	t_cmd	*left;
 	t_cmd	*right;
 }	t_pipecmd;
-
 
 typedef struct s_ends_of_tok
 {
