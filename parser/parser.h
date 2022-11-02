@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/01 14:42:43 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 00:02:32 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define NOTHING 0
 # define REMOVEQUOTE 1
 # define EXPAND 2
-
 
 typedef struct s_gb_variable
 {
@@ -132,4 +131,5 @@ void	excute_pipes(t_cmd *cmd, int flag);
 void	sig_handler(int signal);
 void	error_displayer(t_execcmd *cmd);
 void	rl_replace_line(const char *text, int clear_undo);
+int		checkbuiltprotection(t_execcmd *exec);
 #endif

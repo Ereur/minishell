@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 21:21:46 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 17:25:17 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/02 03:14:20 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,19 @@ void	pipe_executer(t_cmd *first_cmd, t_cmd *cmd, int npipe, int cpipe)
 	}
 	if (cmd->type == EXEC)
 		g_gb.last_pid = exec_command(first_cmd, (t_execcmd *)cmd, npipe, cpipe);
+}
+
+int	checkbuiltprotection(t_execcmd *exec)
+{
+	if (!(exec->argument))
+	{
+		g_gb.exit_statut = 0;
+		return (1);
+	}
+	if (!(exec->argument[0]))
+	{
+		g_gb.exit_statut = 0;
+		return (1);
+	}
+	return (0);
 }
