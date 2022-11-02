@@ -6,68 +6,68 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 15:03:05 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 04:24:56 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void print_tree(t_cmd *cmd)
-{
-	t_execcmd *execcm;
-	t_redircmd *redir;
-	t_pipecmd	*pipe;
+// void print_tree(t_cmd *cmd)
+// {
+// 	t_execcmd *execcm;
+// 	t_redircmd *redir;
+// 	t_pipecmd	*pipe;
 
-	int i;
-	i = 0;
-	// if (!cmd)
-	// 	return ;
-	// if (cmd->type == REDIR)
-	// {
-	// 		redir = (t_redircmd *)(cmd);
-	// 		printf("\n----------redirection-------\n");
-	// 		// ft_print_som(redir->file, redir->efile);
-	// 		printf("|%s|\n", redir->filee->content);
-	// 		printf("fd %d\n", redir->fd);
-	// 		printf(" \nmode %d\n", redir->mode);
-	// 		print_tree(redir->cmd);
-	// }
-	if (cmd->type == EXEC)
-	{
-		int	i;
+// 	int i;
+// 	i = 0;
+// 	// if (!cmd)
+// 	// 	return ;
+// 	// if (cmd->type == REDIR)
+// 	// {
+// 	// 		redir = (t_redircmd *)(cmd);
+// 	// 		printf("\n----------redirection-------\n");
+// 	// 		// ft_print_som(redir->file, redir->efile);
+// 	// 		printf("|%s|\n", redir->filee->content);
+// 	// 		printf("fd %d\n", redir->fd);
+// 	// 		printf(" \nmode %d\n", redir->mode);
+// 	// 		print_tree(redir->cmd);
+// 	// }
+// 	if (cmd->type == EXEC)
+// 	{
+// 		int	i;
 
-		i = 0;
-		execcm = (t_execcmd	*)(cmd);
-		t_list *tmp;
+// 		i = 0;
+// 		execcm = (t_execcmd	*)(cmd);
+// 		t_list *tmp;
 
-		tmp = execcm->args;
-		printf("\n----------Arguments-------\n");
-		// while (tmp)
-		// {	
-		// 	// ft_print_som(execcm->argv[i], execcm->eargv[i]);
-		// 	// write(1,&execcm->argv[i], ft_strlen(execcm->argv[i]));
-		// 	printf("|%s|\n", tmp->content);
-		// 	tmp = tmp->next;
-		// }
-		while (execcm->argument && execcm->argument[i])
-		{
-			printf("|%s|\n",execcm->argument[i]);
-			i++;
-		}
-		printf("output : %d \n input : %d \n", execcm->output, execcm->input);
-	}
-	if (cmd->type == PIPE)
-	{
-		pipe = (t_pipecmd *)(cmd);
-		printf("\nPIPE\n");
-		print_tree(pipe->left);
-		print_tree(pipe->right);
-	}
-}
+// 		tmp = execcm->args;
+// 		printf("\n----------Arguments-------\n");
+// 		// while (tmp)
+// 		// {	
+// 		// 	// ft_print_som(execcm->argv[i], execcm->eargv[i]);
+// 		// 	// write(1,&execcm->argv[i], ft_strlen(execcm->argv[i]));
+// 		// 	printf("|%s|\n", tmp->content);
+// 		// 	tmp = tmp->next;
+// 		// }
+// 		while (execcm->argument && execcm->argument[i])
+// 		{
+// 			printf("|%s|\n",execcm->argument[i]);
+// 			i++;
+// 		}
+// 		printf("output : %d \n input : %d \n", execcm->output, execcm->input);
+// 	}
+// 	if (cmd->type == PIPE)
+// 	{
+// 		pipe = (t_pipecmd *)(cmd);
+// 		printf("\nPIPE\n");
+// 		print_tree(pipe->left);
+// 		print_tree(pipe->right);
+// 	}
+// }
 
 void	add_arg(t_list **head, char **q, char **eq)
 {
-	size_t len;
+	size_t	len;
 	char	*str;
 
 	len = (*eq - *q);

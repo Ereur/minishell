@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtins.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 06:25:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 09:40:56 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/02 04:18:28 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	execute_builtins(t_cmd *cmd)
 {
 	int			pipe[2];
 	t_execcmd	*exec;
-	t_redircmd	*redir;
 	t_pipecmd	*pipecmd;
 	int			exit_value;
 

@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/01 14:42:43 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 04:36:19 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "../minishell.h"
 # include "../excution/utils/execution.h"
-// # include ".git/exe"
 # define EXEC  1
 # define REDIR 2
 # define PIPE  3
@@ -59,14 +58,6 @@ typedef struct s_execcmd {
 	char	**argument;		
 }	t_execcmd;
 
-typedef struct s_redircmd {
-	int			type;
-	t_cmd		*cmd;
-	t_list		*filee;
-	int			mode;
-	int			fd;
-}	t_redircmd;
-
 typedef struct s_pipecmd {
 	int		type;
 	t_cmd	*left;
@@ -84,6 +75,11 @@ typedef struct s_ends_of_buff
 	char	**ps;
 	char	*es;
 }	t_ends_of_buff;
+
+typedef struct s_ends {
+	t_ends_of_tok	q_and_eq;
+	t_ends_of_buff	buff;
+}	t_ends;
 
 int		checifbuiltin(t_execcmd *exec);
 void	execute_cmd(t_execcmd *cmd);
@@ -105,7 +101,6 @@ void	expand_lst(t_list *dollars, int counter);
 t_cmd	*parseredirec(char **ps, char *es, t_cmd *cmd);
 t_cmd	*parse_exec_he(t_ends_of_tok *q_eq, char **ps, t_list **args, char *es,
 			t_cmd *cmd);
-// int		here_doc(char *);
 t_cmd	*parsepipe(char **ps, char *es, char **envp);
 t_cmd	*redirecmd(t_cmd *cmd, char *file, char *efile, int mode, int fd);
 t_cmd	*execcmd(void);

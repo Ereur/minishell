@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 15:07:11 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 11:45:47 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 00:38:26 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ void	sig_handler(int signal)
 {
 	if (signal == SIGINT)
 	{
+		g_gb.exit_statut = 1;
 		printf("\n");
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+		
 	}
 	return ;
 }

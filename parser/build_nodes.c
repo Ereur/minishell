@@ -6,30 +6,11 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 23:43:08 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/30 15:57:09 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 04:21:41 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-t_cmd	*redirecmd(t_cmd *cmd, char *file, char *efile, int mode, int fd)
-{
-	// t_redircmd	*root;
-	// t_list		*filee;
-	t_execcmd	*root;
-	root = (t_execcmd *)cmd;
-	close(root->output);
-	// root = malloc(sizeof(t_redircmd));
-	// root->filee = NULL;
-	// ft_memset(root, 0, sizeof(t_redircmd *));
-	// add_arg(&root->filee, &file, &efile);
-	// root->mode = mode;
-	// root->type = REDIR;
-	// root->cmd = cmd;
-	// root->fd = fd;
-
-	return ((t_cmd *)(root));
-}
 
 t_cmd	*execcmd(void)
 {

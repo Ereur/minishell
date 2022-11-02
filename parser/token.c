@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:58:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 09:47:02 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 04:26:27 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,21 +68,6 @@ void	get_token_helper(char **s, int *ret)
 	}
 	*s = tmp;
 }
-
-/* ---define tokens---  
-https://www.gnu.org/software/bash/manual/html_node/Definitions.html
-if there is a pipe | return ==> ascci code of |
-Redirection output > return ==> ascii of >
-redirection append	>> return ==> +
-redirection input <  return ==> <
-redirection herdoc	<< return => -
-	word return ==> a
-	and for the tokens bellow i will them as words 
-		( 
-		)
-		;
-		&
-*/
 
 void	helper(char **pt, char **s)
 {

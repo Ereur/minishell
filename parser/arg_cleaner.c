@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:19 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/01 20:25:53 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 04:17:32 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,6 @@ void	convert_list_to_args(t_execcmd *execcmd)
 	size = ft_lstsize(execcmd->args);
 	execcmd->argument = malloc(sizeof(char *) * (size + 1));
 	execcmd->argument[size] = NULL;
-	// if (!execcmd->args->content)
-	// {
-	// 	execcmd->argument[i] = NULL;
-	// 	free(execcmd->args);
-	// 	execcmd->args = NULL;
-	// 	return ;
-	// }
 	while (execcmd->args)
 	{	
 		if (!execcmd->args->content)
@@ -59,6 +52,11 @@ char	*merge_list(t_list **head)
 	lst = *head;
 	tmp = lst;
 	content = NULL;
+	if (ft_lstsize(lst) == 1 && !lst->content)
+	{
+		free(lst);
+		return (NULL);
+	}
 	put_zero_in_null(&content);
 	if (tmp)
 	{	
@@ -150,6 +148,8 @@ bool	ft_verify(t_list *split_args)
 	i  = 1;
 	if (ft_lstsize(split_args) == 1 && split_args->content[0] == '$')
 	{
+		if (ft_isdigit(split_args->content[i]))
+			return (false);
 		while (split_args->content[i])
 		{
 			if (!ft_isdigit(split_args->content[i]))

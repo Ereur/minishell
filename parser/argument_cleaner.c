@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/01 20:29:32 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 04:20:12 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,21 @@ char	*grep_name(char *s)
 	name = NULL;
 	while (*tmp)
 	{
-		if (!ft_isalpha(*tmp) && *tmp !='_')
+		if (ft_isdigit(*tmp))
 			break ;
+		if (!ft_isalpha(*tmp) && *tmp != '_')
+		{	
+			break ;
+		}
+		tmp++;
+		i++;
+	}
+	while (*tmp)
+	{
+		if (!ft_isdigit(*tmp) && *tmp != '_')
+		{	
+			break ;
+		}
 		tmp++;
 		i++;
 	}
@@ -67,15 +80,14 @@ char	*grep_variable(char *str, int counter)
 		ft_free(&name);
 		return (variabl);
 	}
-	// if (!tmp)
-	// {	
-	// 	ft_free(&name);
-	// 	return (NULL);
-	// }
 	if (tmp)
 	{
 		if (!*(tmp->value))
+		{	
 			variabl = NULL;
+			ft_free(&name);
+			return (variabl);
+		}
 		else
 			variabl = ft_strdup(tmp->value);
 	}
@@ -97,7 +109,6 @@ bool	clen_arguments_helper(t_execcmd *execcmd, int counter)
 {
 	if (execcmd->args)
 	{	
-		// if ((execcmd->args->content[0] != '\"') && (execcmd->args->content[1] != '\"'))
 		make_quotes(execcmd->args, true, counter);
 		if (g_gb.status)
 			return (true);
