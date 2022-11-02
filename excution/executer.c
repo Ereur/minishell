@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 13:37:36 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/01 16:50:46 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,8 @@ int	checifbuiltin(t_execcmd *exec)
 {
 	char	*rev;
 
-	if (!(exec->argument))
-	{
-		g_gb.exit_statut = 0;
+	if (checkbuiltprotection(exec))
 		return (0);
-	}
-	if (!(exec->argument[0]))
-	{
-		g_gb.exit_statut = 0;
-		return (0);
-	}
 	if (ft_strcmp(exec->argument[0], "cd") == 0)
 	{
 		if (cd_cmd(exec->argument) == 0)
@@ -123,10 +115,7 @@ void	execute_cmd(t_execcmd *cmd)
 	char	**paths;
 
 	if (!cmd->argument[0])
-	{
-		g_gb.exit_statut = 0;
-		exit(g_gb.exit_statut);
-	}
+		exit(g_gb.exit_statut = 0);
 	if (cmd->argument[0][0] == '\0')
 	{
 		printf("Minishell :%s :command not found\n", cmd->argument[0]);
@@ -139,7 +128,7 @@ void	execute_cmd(t_execcmd *cmd)
 		ft_fprintf(2, "Minishell: %s No such file or directory\n",
 			cmd->argument[0]);
 		g_gb.exit_statut = 127;
-		exit(g_gb.exit_statut);
+		exit(g_gb.exit_statut = 127);
 	}
 	check_access(paths, cmd);
 	signal(SIGINT, SIG_DFL);
