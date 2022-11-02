@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/02 04:24:56 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:29:29 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,22 +99,25 @@ t_cmd	*parseexec(char **ps, char *es, char **envp)
 	t_execcmd		*ret;
 	int				tok;
 	t_ends_of_tok	q_eq;
+	t_ends_of_buff	ps_es;
 
 	cmd = execcmd();
+	ps_es.ps = ps;
+	ps_es.es = es;
 	ret = (t_execcmd *)(cmd);
 	ret->args = NULL;
-	cmd = parseredirec(ps, es, cmd);
+	cmd = parseredirec(ps_es.ps, ps_es.es, cmd);
 	if (!cmd)
 		return (NULL);
-	while (!skip_and_find(ps, es, "|"))
+	while (!skip_and_find(ps_es.ps, ps_es.es, "|"))
 	{
-		tok = gettoken(ps, es, &q_eq.q, &q_eq.eq);
+		tok = gettoken(ps_es.ps, ps_es.es, &q_eq.q, &q_eq.eq);
 		if (!tok)
 			break ;
-		if (!parse_exec_he(&q_eq, ps, &ret->args, es, cmd))
+		if (!parse_exec_he(&q_eq, &ret->args, &ps_es, cmd))
 			return (NULL);
 	}
-	if (parse_exec_helper(ps, es, cmd))
+	if (parse_exec_helper(ps_es.ps, ps_es.es, cmd))
 		return (NULL);
 	return (cmd);
 }

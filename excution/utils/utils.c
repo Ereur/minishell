@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:40:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 16:30:26 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:37:32 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	error_displayer(t_execcmd *cmd)
 	}
 	else
 	{
-		ft_fprintf(2, "Minishell: %s command not found\n", cmd->argument[0]);
+		ft_fprintf(2, "Minishell: %s :command not found\n", cmd->argument[0]);
 		g_gb.exit_statut = 127;
 	}
 	exit(g_gb.exit_statut);

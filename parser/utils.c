@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:23:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/02 04:26:40 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 19:22:14 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	find_name(char *s)
 	}
 	while (*tmp && i != 1)
 	{
-		if (!ft_isdigit(*tmp) && *tmp !='_')
+		if (!ft_isdigit(*tmp) && *tmp != '_')
 		{	
 			break ;
 		}

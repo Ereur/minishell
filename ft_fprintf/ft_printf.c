@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 15:56:25 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 08:56:04 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:46:11 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ int	ft_fprintf(int fd, const char *str, ...)
 		if (*str)
 			len += ft_putchar(fd, *(str++));
 	}
+	va_end(ap);
 	return (len);
 }

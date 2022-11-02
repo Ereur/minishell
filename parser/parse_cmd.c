@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 13:53:05 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 11:20:42 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:50:55 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,18 @@ char	*skip_word(int *i, t_ends_of_tok **str, char **ps)
 	return (&(((*str)->q)[*i]));
 }
 
-bool	check_quot(int *i, char *spec, t_ends_of_tok **str, char **ps, t_cmd *cmd)
+bool	check_quot(int *i, t_ends_of_tok **str, t_ends_of_buff *spec_ps,
+					t_cmd *cmd)
 {
 	while (((*str)->q)[*i])
 	{
-		if (((*str)->q)[*i] == *spec)
+		if (((*str)->q)[*i] == *(spec_ps->es))
 		{
 			(*i)++;
 			if (!(((*str)->q)[*i]))
 			{
 				(*str)->eq = (*str)->q + (*i);
-				*ps = (*str)->eq;
+				*(spec_ps->ps) = (*str)->eq;
 				return (true);
 			}
 			break ;
@@ -58,24 +59,24 @@ bool	check_quot(int *i, char *spec, t_ends_of_tok **str, char **ps, t_cmd *cmd)
 	return (false);
 }
 
-bool	quotes(int *i, char *spec, t_ends_of_tok **str, char **ps, t_cmd *cmd)
+bool	quotes(int *i, t_ends_of_tok **str, t_ends_of_buff *spec_ps, t_cmd *cmd)
 {
-	if (*spec != '\'' && *spec != '\"')
+	if (*(spec_ps->es) != '\'' && *(spec_ps->es) != '\"')
 	{
-		spec = skip_word(i, str, ps);
-		if (!spec)
+		spec_ps->es = skip_word(i, str, spec_ps->ps);
+		if (!spec_ps->es)
 			return (true);
 		if (((*str)->q)[*i])
 			(*i)++;
 	}
-	if (*spec == '\'')
+	if (*(spec_ps->es) == '\'')
 	{
-		if (check_quot(i, spec, str, ps, cmd))
+		if (check_quot(i, str, spec_ps, cmd))
 			return (true);
 	}
-	if (*spec == '\"')
+	if (*(spec_ps->es) == '\"')
 	{
-		if (check_quot(i, spec, str, ps, cmd))
+		if (check_quot(i, str, spec_ps, cmd))
 			return (true);
 	}
 	return (false);
@@ -83,37 +84,40 @@ bool	quotes(int *i, char *spec, t_ends_of_tok **str, char **ps, t_cmd *cmd)
 
 void	quotes_pareser(t_ends_of_tok **str, char **ps, t_cmd *cmd)
 {
-	char	*spec;
-	int		i;
+	char			*spec;
+	int				i;
+	t_ends_of_buff	spec_ps;
 
 	i = 0;
+	spec_ps.ps = ps;
 	if (ft_strchr((*str)->q, '\'') || ft_strchr((*str)->q, '\"'))
 	{
 		while (((*str)->q)[i])
 		{
-			spec = &((*str)->q)[i];
+			spec_ps.es = &((*str)->q)[i];
 			if (ft_strchr("<|> \t\r\n\v", ((*str)->q)[i]))
 			{
 				(*str)->eq = (*str)->q + i;
-				*ps = (*str)->eq;
+				*(spec_ps.ps) = (*str)->eq;
 				return ;
 			}
 			i++;
-			if (quotes(&i, spec, str, ps, cmd))
+			if (quotes(&i, str, &spec_ps, cmd))
 				return ;
 		}
 		(*str)->eq = (*str)->q + i;
-		*ps = (*str)->eq;
+		*(spec_ps.ps) = (*str)->eq;
 	}
 }
 
-t_cmd	*parse_exec_he(t_ends_of_tok *q_eq, char **ps, t_list **args, char *es, t_cmd *cmd)
+t_cmd	*parse_exec_he(t_ends_of_tok *q_eq, t_list **args,
+			t_ends_of_buff *ps_es, t_cmd *cmd)
 {
-	quotes_pareser(&q_eq, ps, cmd);
+	quotes_pareser(&q_eq, ps_es->ps, cmd);
 	if (!q_eq->q)
 		return (NULL);
 	add_arg(args, &(q_eq->q), &(q_eq->eq));
-	if (!parseredirec(ps, es, cmd))
+	if (!parseredirec(ps_es->ps, ps_es->es, cmd))
 		return (NULL);
 	return (cmd);
 }

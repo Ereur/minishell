@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:58:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/02 04:26:27 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:10:46 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	raise_error(char *message, int exitcode, int tok, t_cmd *cmd)
 {
-	printf("%s %c \n", message, tok);
+	ft_fprintf(2, "%s %c \n", message, tok);
 	if (cmd)
 		free_cmd(cmd);
 	g_gb.exit_statut = exitcode;

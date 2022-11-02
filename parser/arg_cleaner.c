@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:19 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/02 04:17:32 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 19:23:39 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ bool	ft_verify(t_list *split_args)
 {
 	int	i;
 
-	i  = 1;
+	i = 1;
 	if (ft_lstsize(split_args) == 1 && split_args->content[0] == '$')
 	{
 		if (ft_isdigit(split_args->content[i]))

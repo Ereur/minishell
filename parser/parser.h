@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/02 14:18:03 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 00:04:37 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,18 @@ typedef struct s_ends {
 	t_ends_of_buff	buff;
 }	t_ends;
 
+typedef struct s_tok_cmd
+{
+	t_cmd	*cmd;
+	int		tok;
+}	t_tok_cmd;
+
+typedef struct s_counter_start {
+	int	start;
+	int	counter;
+
+}	t_counter_start;
+
 int		checifbuiltin(t_execcmd *exec);
 void	execute_cmd(t_execcmd *cmd);
 
@@ -98,10 +110,9 @@ void	word_len(char *arg, int *i, int *len);
 void	collect_var(t_list **lst_of_dollar, int *i, char *arg, t_list *tmp);
 void	expand_lst(t_list *dollars, int counter);
 t_cmd	*parseredirec(char **ps, char *es, t_cmd *cmd);
-t_cmd	*parse_exec_he(t_ends_of_tok *q_eq, char **ps, t_list **args, char *es,
-			t_cmd *cmd);
+t_cmd	*parse_exec_he(t_ends_of_tok *q_eq, t_list **args,
+			t_ends_of_buff *ps_es, t_cmd *cmd);
 t_cmd	*parsepipe(char **ps, char *es, char **envp);
-t_cmd	*redirecmd(t_cmd *cmd, char *file, char *efile, int mode, int fd);
 t_cmd	*execcmd(void);
 t_cmd	*pipecmd(t_cmd *left, t_cmd *right);
 int		here_doc(char *lim, bool falg);

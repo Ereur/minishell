@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+         #
+#    By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by zoukaddo          #+#    #+#              #
-#    Updated: 2022/11/02 00:04:05 by zoukaddo         ###   ########.fr        #
+#    Updated: 2022/11/02 23:42:37 by aamoussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CC				= cc -g
 
 RM				= rm -f
 
-READLINE_PATH = -lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/readline/include
+READLINE_PATH = -lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include
 #-lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.brew/opt/readline/include
 #-lreadline -L ~/homebrew/opt/readline/lib -I ~/homebrew/opt/readline/include
 

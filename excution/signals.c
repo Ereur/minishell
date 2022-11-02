@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 15:07:11 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/02 00:38:26 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 14:19:55 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	sig_handler(int signal)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
-		
 	}
 	return ;
 }

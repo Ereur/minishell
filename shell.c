@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/02 00:52:37 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 18:09:51 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,14 @@ void	exuctionsudo(t_cmd *cmd)
 
 void	free_args_list(t_list **args)
 {
+	t_list	*arg;
+
 	while ((*args))
 	{
 		ft_free(&((*args)->content));
+		arg = (*args);
 		(*args) = (*args)->next;
+		free(arg);
 	}
 }
 

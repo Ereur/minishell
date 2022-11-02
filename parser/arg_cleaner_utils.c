@@ -6,13 +6,13 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:43:20 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/02 04:12:30 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/02 15:41:48 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	expand(int len, t_list *tmp, int i, int start, int counter)
+void	expand(int len, t_list *tmp, int i, t_counter_start star_counter)
 {
 	char	*content;
 	char	*str;
@@ -20,8 +20,8 @@ void	expand(int len, t_list *tmp, int i, int start, int counter)
 
 	str = NULL;
 	if (len > 1)
-		str = ft_substr(tmp->content, start, len - 1);
-	content = grep_variable(&tmp->content[i], counter);
+		str = ft_substr(tmp->content, star_counter.start, len - 1);
+	content = grep_variable(&tmp->content[i], star_counter.counter);
 	if (!content)
 	{	
 		ft_free(&str);
@@ -40,12 +40,13 @@ void	expand(int len, t_list *tmp, int i, int start, int counter)
 
 void	expand_lst(t_list *dollars, int counter)
 {
-	t_list	*tmp;
-	int		start;
-	int		i;
-	int		len;
+	t_list			*tmp;
+	t_counter_start	start_counter;
+	int				i;
+	int				len;
 
 	tmp = dollars;
+	start_counter.counter = counter;
 	while (tmp)
 	{
 		if (!ft_strchr(tmp->content, '$'))
@@ -54,12 +55,12 @@ void	expand_lst(t_list *dollars, int counter)
 			continue ;
 		}
 		i = 0;
-		start = i;
+		start_counter.start = i;
 		len = 0;
 		while (tmp->content[i++] == '$')
 			len++;
 		i--;
-		expand(len, tmp, i, start, counter);
+		expand(len, tmp, i, start_counter);
 		tmp = tmp->next;
 	}
 }

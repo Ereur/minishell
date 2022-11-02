@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 04:15:04 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 22:22:31 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 00:30:22 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,8 @@ void	sig_handl(int signal)
 	return ;
 }
 
-int	here_doc(char *lim, bool flag)
+int	protect_first_sig(int end[2], char *line)
 {
-	int		end[2];
-	char	*line;
-	char	*tmp;
-	char	*newline;
-
-	if (g_gb.here_doc == 1)
-		return (-1);
-	g_gb.input = dup(0);
-	signal(SIGINT, sig_handl);
-	pipe(end);
-	line = readline("< ");
 	if (g_gb.here_doc == 1)
 	{
 		ft_free(&line);
@@ -63,6 +52,18 @@ int	here_doc(char *lim, bool flag)
 		close(end[1]);
 		return (end[0]);
 	}
+}
+
+int	get_first_line(int *end, char *lim, bool flag)
+{
+	char	*newline;
+	char	*line;
+	int		fd;
+
+	line = readline("< ");
+	fd = protect_first_sig(end, line);
+	if (fd != 0)
+		return (fd);
 	if (*line && ft_strcmp(lim, line))
 		here_doc_expand(&line, flag);
 	if (ft_strcmp(lim, line))
@@ -70,23 +71,39 @@ int	here_doc(char *lim, bool flag)
 		newline = ft_strjoin(line, "\n");
 		write(end[1], newline, ft_strlen(newline));
 		ft_free(&newline);
-	}
-	while (ft_strcmp(lim, line))
-	{	
-		tmp = line;
 		ft_free(&line);
+	}
+	return (0);
+}
+
+int	protect_signals(int end[2], char *line)
+{
+	if (g_gb.here_doc == 1)
+	{
+		close(end[1]);
+		close(end[0]);
+		return (-1);
+	}
+	if (!line)
+	{
+		close(end[1]);
+		return (end[0]);
+	}
+	return (0);
+}
+
+int	sig_and_firstline(int *end, char *lim, bool flag)
+{
+	char	*line;
+	char	*newline;
+	int		fd;
+
+	while (1)
+	{	
 		line = readline("< ");
-		if (g_gb.here_doc == 1)
-		{
-			close(end[1]);
-			close(end[0]);
-			return (-1);
-		}
-		if (!line)
-		{
-			close(end[1]);
-			return (end[0]);
-		}
+		fd = protect_signals(end, line);
+		if (fd != 0)
+			return (fd);
 		if (*line && ft_strcmp(lim, line))
 			here_doc_expand(&line, flag);
 		if (!ft_strcmp(lim, line))
@@ -94,8 +111,27 @@ int	here_doc(char *lim, bool flag)
 		newline = ft_strjoin(line, "\n");
 		write(end[1], newline, ft_strlen(newline));
 		free(newline);
+		ft_free(&line);
 	}
 	free(line);
 	close(end[1]);
 	return (end[0]);
+}
+
+int	here_doc(char *lim, bool flag)
+{
+	int		end[2];
+	char	*line;
+	char	*newline;
+	int		fd;
+
+	if (g_gb.here_doc == 1)
+		return (-1);
+	g_gb.input = dup(0);
+	signal(SIGINT, sig_handl);
+	pipe(end);
+	fd = get_first_line(end, lim, flag);
+	if (fd != 0)
+		return (fd);
+	return (sig_and_firstline(end, lim, flag));
 }
