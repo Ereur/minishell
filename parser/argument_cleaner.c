@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argument_cleaner.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/01 13:38:02 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/01 20:29:32 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char	*grep_name(char *s)
 	name = (char *)malloc(i + 1);
 	name = ft_strncpy(name, s, i);
 	name[i] = 0;
-	// name[i] = '=';
 	return (name);
 }
 
@@ -68,11 +67,11 @@ char	*grep_variable(char *str, int counter)
 		ft_free(&name);
 		return (variabl);
 	}
-	if (!tmp)
-	{	
-		ft_free(&name);
-		return (NULL);
-	}
+	// if (!tmp)
+	// {	
+	// 	ft_free(&name);
+	// 	return (NULL);
+	// }
 	if (tmp)
 	{
 		if (!*(tmp->value))
@@ -91,15 +90,15 @@ void	word_len(char *arg, int *i, int *len)
 	{	
 		(*len)++;
 		(*i)++;
-	}	
+	}
 }
 
 bool	clen_arguments_helper(t_execcmd *execcmd, int counter)
 {
 	if (execcmd->args)
 	{	
-		if ((execcmd->args->content[0] != '\"') && (execcmd->args->content[1] != '\"'))
-			make_quotes(execcmd->args, true, counter);
+		// if ((execcmd->args->content[0] != '\"') && (execcmd->args->content[1] != '\"'))
+		make_quotes(execcmd->args, true, counter);
 		if (g_gb.status)
 			return (true);
 		convert_list_to_args(execcmd);

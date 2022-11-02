@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 11:53:25 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/01 23:59:29 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ void	parser_sudo(char **envp)
 		signals();
 		ft_free(&buffer);
 		buffer = readline(getprompt(envp));
+		g_gb.here_doc = 0;
 		if (!buffer)
 			break ;
 		if (!buffer[0])
@@ -144,5 +145,5 @@ int	main(int ac, char **argv, char **envp)
 	setup_env(envp);
 	g_gb.curent = ft_strdup(env_grabber("PWD")->value);
 	parser_sudo(envp);
-	return (0);
+	return (g_gb.exit_statut);
 }

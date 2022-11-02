@@ -6,7 +6,7 @@
 /*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 21:21:46 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 20:20:19 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/02 03:14:20 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,9 @@ pid_t	exec_command(t_cmd *first_cmd, t_execcmd *cmd, int npipe, int cpipe)
 	cord.npipe = npipe;
 	cord.cpipe = cpipe;
 	pipe(fd);
-	printf("sh7al mn mra dkhl\n");
 	pid = my_fork();
 	if (!pid)
 		child_process(first_cmd, cmd, &cord, fd);
-	printf("wslt id :%d getpid %d\n", pid, getpid());
 	close(fd[1]);
 	if (g_gb.fd_input_prev != 0)
 		close(g_gb.fd_input_prev);
