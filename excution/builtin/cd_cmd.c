@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_cmd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 13:29:29 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:10:41 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	set_pwd(t_senv *pwd, int mod)
 		mod_set_pwd(&mod);
 }
 
-int	check_home(char **argument)
+int	check_home(void)
 {
 	t_senv	*home;
 
@@ -56,14 +56,15 @@ int	check_home(char **argument)
 	if (!home)
 	{
 		g_gb.exit_statut = 1;
-		ft_fprintf(2, "Minishell: cd : HOME not set\n");
+		ft_putstr_fd("Minishell: cd : HOME not set\n", 2);
 		return (1);
 	}
 	if (chdir(home->value))
 	{
 		g_gb.exit_statut = 1;
-		ft_fprintf(2, "Minishell: cd: %s: No such file or directory\n",
-			home->value);
+		ft_putstr_fd("Minishell: cd : ", 2);
+		ft_putstr_fd(home->value, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 		return (1);
 	}
 	return (0);
@@ -71,19 +72,19 @@ int	check_home(char **argument)
 
 int	cd_cmd(char **argument)
 {
-	t_senv	*home;
 
 	set_pwd(env_grabber("OLDPWD"), 0);
 	if (!argument[1])
 	{
-		check_home(argument);
+		check_home();
 		return (1);
 	}
 	if (chdir(argument[1]))
 	{
 		g_gb.exit_statut = 1;
-		ft_fprintf(2, "Minishell: cd: %s: No such file or directory\n",
-			argument[1]);
+		ft_putstr_fd("Minishell: cd : ", 2);
+		ft_putstr_fd(argument[1], 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 		return (1);
 	}
 	set_pwd(env_grabber("PWD"), 1);

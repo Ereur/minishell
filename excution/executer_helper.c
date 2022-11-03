@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 21:21:46 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/03 00:14:56 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 04:08:19 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	pipe_executer(t_cmd *first_cmd, t_cmd *cmd, int npipe, int cpipe)
 {
 	t_pipecmd	*pipecmd;
 	int			i;
-	int			pid;
 
 	i = 0;
 	pipecmd = (t_pipecmd *)(cmd);

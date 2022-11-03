@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:09:58 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/03 00:04:26 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:16:23 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ bool	protect_redir_input(char *file, t_execcmd *exec, char *tmp, int fd)
 {	
 	if (!file)
 	{
-		ft_fprintf(2, "%s : ambiguous redirect\n", tmp);
+		ft_putstr_fd(tmp, 2);
+		ft_putstr_fd(" : ambiguous redirect\n",2);
 		g_gb.exit_statut = 1;
 		exec->output = -1;
 		free(file);
@@ -173,7 +174,8 @@ bool	output_append_protection(char *file, t_execcmd *exec, char *tmp, int fd)
 {
 	if (!file)
 	{
-		ft_fprintf(2, "%s : ambiguous redirect\n", tmp);
+		ft_putstr_fd(tmp, 2);
+		ft_putstr_fd(" : ambiguous redirect\n", 2);
 		g_gb.exit_statut = 1;
 		(exec)->output = -1;
 		free(file);
@@ -226,7 +228,6 @@ bool	parse_output_append(t_ends_of_buff *buff, t_ends_of_tok *str,
 
 t_cmd	*parseredirec(char **ps, char *es, t_cmd *cmd)
 {
-	int				tok;
 	t_ends_of_tok	q_and_eq;
 	t_ends_of_buff	buff;
 	t_execcmd		*exec;

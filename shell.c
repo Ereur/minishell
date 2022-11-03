@@ -6,16 +6,11 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 08:09:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/02 18:09:51 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 04:03:25 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-const char	*getprompt(char **envp)
-{
-	return ("Minishell$ ");
-}
 
 pid_t	fork_process(void)
 {
@@ -102,35 +97,51 @@ void	free_cmd(t_cmd *cmd)
 	free_all(cmd);
 }
 
+int	get_buffer(char **buffer)
+{
+	g_gb.output = dup(0);
+	g_gb.status = 0;
+	signals();
+	ft_free(buffer);
+	*buffer = readline("Minishell$ ");
+	g_gb.here_doc = 0;
+	if (!*buffer)
+		return (0);
+	if (!*buffer[0])
+		return (1);
+	return (2);
+}
+
+void	freee(t_cmd **cmd)
+{
+	if (*cmd)
+	{
+		free_cmd(*cmd);
+		*cmd = NULL;
+	}
+}
+
 void	parser_sudo(char **envp)
 {
-	char	*buffer;
 	char	*ps;
 	char	*es;
 	t_cmd	*cmd;
+	char	*buffer;
+	int		i;
 
-	buffer = NULL;
 	cmd = NULL;
+	buffer = NULL;
 	while (42)
 	{
-		g_gb.output = dup(0);
-		g_gb.status = 0;
-		signals();
-		ft_free(&buffer);
-		buffer = readline(getprompt(envp));
-		g_gb.here_doc = 0;
-		if (!buffer)
+		i = get_buffer(&buffer);
+		if (i == 0)
 			break ;
-		if (!buffer[0])
+		else if (i == 1)
 			continue ;
 		es = &buffer[ft_strlen(buffer)];
 		add_history(buffer);
 		ps = buffer;
-		if (cmd)
-		{
-			free_cmd(cmd);
-			cmd = NULL;
-		}
+		freee(&cmd);
 		cmd = parser(&ps, es, envp);
 		if (!cmd)
 			continue ;
@@ -140,8 +151,8 @@ void	parser_sudo(char **envp)
 
 int	main(int ac, char **argv, char **envp)
 {
-	t_cmd	*cmd;
-
+	(void)ac;
+	(void)argv;
 	g_gb.envp = 0;
 	g_gb.input = 0;
 	g_gb.output = 1;

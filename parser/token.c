@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:58:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/02 16:10:46 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 04:03:49 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	raise_error(char *message, int exitcode, int tok, t_cmd *cmd)
 int	skip_and_find_0(char **ps, char *es)
 {
 	char	*s;
-	int		ret;
 
 	s = *ps;
 	while (s < es && ft_strchr(WHITESPACE, *s))
@@ -36,7 +35,6 @@ int	skip_and_find_0(char **ps, char *es)
 int	skip_and_find(char **ps, char *es, char *tok)
 {
 	char	*s;
-	int		ret;
 
 	s = *ps;
 	while (s < es && ft_strchr(WHITESPACE, *s))

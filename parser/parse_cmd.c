@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 13:53:05 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/02 16:50:55 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 04:05:23 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 char	*skip_word(int *i, t_ends_of_tok **str, char **ps)
 {
-	char	*tmp;
-	int		check;
 
 	while (((*str)->q)[*i])
 	{
@@ -84,7 +82,6 @@ bool	quotes(int *i, t_ends_of_tok **str, t_ends_of_buff *spec_ps, t_cmd *cmd)
 
 void	quotes_pareser(t_ends_of_tok **str, char **ps, t_cmd *cmd)
 {
-	char			*spec;
 	int				i;
 	t_ends_of_buff	spec_ps;
 

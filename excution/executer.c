@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 16:50:46 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:03:13 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,15 +118,18 @@ void	execute_cmd(t_execcmd *cmd)
 		exit(g_gb.exit_statut = 0);
 	if (cmd->argument[0][0] == '\0')
 	{
-		printf("Minishell :%s :command not found\n", cmd->argument[0]);
+		ft_putstr_fd("Minishell :", 2);
+		ft_putstr_fd(cmd->argument[0], 2);
+		ft_putstr_fd(" :command not found\n", 2);
 		g_gb.exit_statut = 127;
 		exit(g_gb.exit_statut);
 	}
 	paths = get_paths();
 	if (!paths)
 	{
-		ft_fprintf(2, "Minishell: %s No such file or directory\n",
-			cmd->argument[0]);
+		ft_putstr_fd("Minishell :", 2);
+		ft_putstr_fd(cmd->argument[0], 2);
+		ft_putstr_fd(" No such file or directory\n", 2);
 		g_gb.exit_statut = 127;
 		exit(g_gb.exit_statut = 127);
 	}

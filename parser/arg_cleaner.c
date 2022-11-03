@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:35:19 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/02 19:23:39 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 04:05:43 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,13 @@ void	convert_list_to_args(t_execcmd *execcmd)
 	free(execcmd->args);
 }
 
-char	*merge_list(t_list **head)
+char	*merge(t_list *tmp)
 {
-	t_list	*lst;
-	t_list	*tmp;
 	char	*next;
-	char	*content;
 	t_list	*del;
+	char	*content;
 
-	lst = *head;
-	tmp = lst;
 	content = NULL;
-	if (ft_lstsize(lst) == 1 && !lst->content)
-	{
-		free(lst);
-		return (NULL);
-	}
 	put_zero_in_null(&content);
 	if (tmp)
 	{	
@@ -79,6 +70,29 @@ char	*merge_list(t_list **head)
 	return (content);
 }
 
+char	*merge_list(t_list **head)
+{
+	t_list	*lst;
+	t_list	*tmp;
+	char	*content;
+
+	lst = *head;
+	tmp = lst;
+	content = NULL;
+
+	return (merge(tmp));
+}
+
+bool	check_sq(t_list **tmp)
+{
+	if ((*tmp)->state == SQ)
+	{
+		*tmp = (*tmp)->next;
+		return (true);
+	}
+	return (false);
+}
+
 void	split_dollar(t_list *args, int counter)
 {
 	t_list	*tmp;
@@ -87,17 +101,13 @@ void	split_dollar(t_list *args, int counter)
 	char	*arg;
 	char	*hold;
 
-	i = 0;
 	tmp = args;
 	lst_of_dollar = NULL;
 	while (tmp)
 	{
 		i = 0;
-		if (tmp->state == SQ)
-		{
-			tmp = tmp->next;
+		if (check_sq(&tmp))
 			continue ;
-		}
 		arg = tmp->content;
 		while (arg[i])
 		{	
@@ -105,13 +115,6 @@ void	split_dollar(t_list *args, int counter)
 			expand_lst(lst_of_dollar, counter);
 		}
 		hold = tmp->content;
-		// if (!lst_of_dollar->content)
-		// {
-		// 	ft_free(&tmp->content);
-		// 	tmp->content = NULL;
-		// 	tmp = tmp->next;
-		// 	continue ;
-		// }
 		tmp->content = merge_list(&lst_of_dollar);
 		ft_free(&hold);
 		lst_of_dollar = NULL;
@@ -141,39 +144,6 @@ void	collect_sq_and_dq(t_list **split_args, char *line, char q)
 	}
 }
 
-bool	ft_verify(t_list *split_args)
-{
-	int	i;
-
-	i = 1;
-	if (ft_lstsize(split_args) == 1 && split_args->content[0] == '$')
-	{
-		if (ft_isdigit(split_args->content[i]))
-			return (false);
-		while (split_args->content[i])
-		{
-			if (!ft_isdigit(split_args->content[i]))
-			{	
-				if (!ft_isalpha(split_args->content[i]))
-					return (false);
-			}
-			else if (!ft_isalpha(split_args->content[i]))
-			{
-				if (!ft_isdigit(split_args->content[i]))
-					return (false);
-			}
-			else
-				return (false);
-			i++;
-		}
-		if (!(env_grabber(&split_args->content[1])))
-			return (true);
-	}
-	else
-		return (false);
-	return (false);
-}
-
 void	make_quotes(t_list	*args, bool i, int counter)
 {
 	t_list		*split_args;
@@ -194,27 +164,7 @@ void	make_quotes(t_list	*args, bool i, int counter)
 		q = '\"';
 		collect_sq_and_dq(&split_args, line, q);
 		if (i)
-		{	
-			if (!ft_verify(split_args))
-				split_dollar(split_args, counter);
-			else
-			{
-				free(split_args);
-				free(split_args->content);
-				free(tmp->content);
-				// free(tmp);
-				tmp->content = NULL;
-				tmp = tmp->next;
-				continue;
-			}
-		}
-		// if (!split_args->content)
-		// {
-		// 	tmp->content = NULL;
-		// 	tmp = tmp->next;
-		// 	continue;
-		// 	// ft_free(&tmp->content);
-		// }
+			split_dollar(split_args, counter);
 		ft_free(&tmp->content);
 		tmp->content = merge_list(&split_args);
 		tmp = tmp->next;

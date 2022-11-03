@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 18:59:57 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 09:47:46 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:14:28 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,16 @@ void	unset_handler(char *var, int *exit_code, int *faila)
 	t_senv	*prenode;
 	t_senv	*tmp;
 
+	tmp = NULL;
 	prenode = 0;
 	if (!valid_unset_name(var))
 	{
 		*faila = 1;
 		if (!(*exit_code))
 			(*exit_code)++;
-		ft_fprintf(2, "Minishell: unset: `%s': not a valid identifier\n", var);
+		ft_putstr_fd("Minishell: unset: `", 2);
+		ft_putstr_fd(var, 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
 		return ;
 	}
 	if (unset_name_exist(var, &prenode))

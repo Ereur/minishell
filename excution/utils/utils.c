@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:40:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/02 16:37:32 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:14:52 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	waitforcprocess(void)
 			if (WIFSIGNALED(exit_value))
 			{
 				if (WTERMSIG(exit_value) == 3)
-					ft_fprintf(2, "Quit: 3\n");
+					ft_putstr_fd("Quit: 3\n", 2);
 				g_gb.exit_statut = WTERMSIG(exit_value) + 128;
 			}
 			else
@@ -54,13 +54,16 @@ void	error_helper(t_execcmd *cmd)
 	if (!access(cmd->argument[0], F_OK) && \
 				access(cmd->argument[0], X_OK))
 	{
-		ft_fprintf(2, "Minishell: %s Permision denied\n", cmd->argument[0]);
+		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd(cmd->argument[0], 2);
+		ft_putstr_fd(" Permision denied\n", 2);
 		g_gb.exit_statut = 126;
 	}
 	else
 	{
-		ft_fprintf(2, "Minishell: %s No such file or directory\n",
-			cmd->argument[0]);
+		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd(cmd->argument[0], 2);
+		ft_putstr_fd(" No such file or directory\n", 2);
 		g_gb.exit_statut = 127;
 	}
 }
@@ -71,7 +74,9 @@ void	error_displayer(t_execcmd *cmd)
 	{
 		if (opendir(cmd->argument[0]))
 		{
-			ft_fprintf(2, "Minishell: %s is a directory\n", cmd->argument[0]);
+			ft_putstr_fd("Minishell: ", 2);
+			ft_putstr_fd(cmd->argument[0], 2);
+			ft_putstr_fd("is a directory\n", 2);
 			g_gb.exit_statut = 126;
 		}
 		else
@@ -79,7 +84,9 @@ void	error_displayer(t_execcmd *cmd)
 	}
 	else
 	{
-		ft_fprintf(2, "Minishell: %s :command not found\n", cmd->argument[0]);
+		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd(cmd->argument[0], 2);
+		ft_putstr_fd(" :command not found\n", 2);
 		g_gb.exit_statut = 127;
 	}
 	exit(g_gb.exit_statut);

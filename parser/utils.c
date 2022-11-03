@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 14:23:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/02 19:22:14 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 03:32:29 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,20 @@ int	find_name(char *s)
 	name = NULL;
 	if (*tmp == '?')
 		return (1);
+	if (ft_isdigit(*tmp))
+	{	
+		i++;
+		return (i);
+	}
 	while (*tmp)
 	{
-		if (ft_isdigit(*tmp))
-		{	
-			i++;
-			break ;
-		}
-		if (!ft_isalpha(*tmp) && *tmp != '_')
+		if (*tmp == '_' || ft_isalnum(*tmp))
 		{
-			break ;
+			tmp++;
+			i++;
 		}
-		tmp++;
-		i++;
-	}
-	while (*tmp && i != 1)
-	{
-		if (!ft_isdigit(*tmp) && *tmp != '_')
-		{	
+		else
 			break ;
-		}
-		tmp++;
-		i++;
 	}
 	return (i);
 }

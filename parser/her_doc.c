@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 04:15:04 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/03 00:30:22 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 05:53:57 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	protect_first_sig(int end[2], char *line)
 		close(end[1]);
 		return (end[0]);
 	}
+	return (0);
 }
 
 int	get_first_line(int *end, char *lim, bool flag)
@@ -66,6 +67,11 @@ int	get_first_line(int *end, char *lim, bool flag)
 		return (fd);
 	if (*line && ft_strcmp(lim, line))
 		here_doc_expand(&line, flag);
+	if (!ft_strcmp(lim, line))
+	{	
+		free(line);
+		return (0);
+	}
 	if (ft_strcmp(lim, line))
 	{	
 		newline = ft_strjoin(line, "\n");
@@ -73,7 +79,7 @@ int	get_first_line(int *end, char *lim, bool flag)
 		ft_free(&newline);
 		ft_free(&line);
 	}
-	return (0);
+	return (-1);
 }
 
 int	protect_signals(int end[2], char *line)
@@ -121,8 +127,6 @@ int	sig_and_firstline(int *end, char *lim, bool flag)
 int	here_doc(char *lim, bool flag)
 {
 	int		end[2];
-	char	*line;
-	char	*newline;
 	int		fd;
 
 	if (g_gb.here_doc == 1)
@@ -131,7 +135,9 @@ int	here_doc(char *lim, bool flag)
 	signal(SIGINT, sig_handl);
 	pipe(end);
 	fd = get_first_line(end, lim, flag);
-	if (fd != 0)
+	if (fd == 0)
+		return (-1);
+	else if (fd > 1)
 		return (fd);
 	return (sig_and_firstline(end, lim, flag));
 }

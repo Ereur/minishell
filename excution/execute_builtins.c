@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 06:25:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/02 04:18:28 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 04:08:40 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	redirection_built(t_execcmd *cmd)
 {
-	int	fd;
 
 	if (cmd->input > 0)
 	{
@@ -66,9 +65,7 @@ void	dupandclosefds(void)
 
 void	execute_builtins(t_cmd *cmd)
 {
-	int			pipe[2];
 	t_execcmd	*exec;
-	t_pipecmd	*pipecmd;
 	int			exit_value;
 
 	exit_value = 0;

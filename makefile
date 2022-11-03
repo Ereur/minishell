@@ -6,7 +6,7 @@
 #    By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/16 17:04:34 by zoukaddo          #+#    #+#              #
-#    Updated: 2022/11/02 23:42:37 by aamoussa         ###   ########.fr        #
+#    Updated: 2022/11/03 05:19:52 by aamoussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,15 +33,16 @@ READLINE_PATH = -lreadline -L ~/goinfre/.brew/opt/readline/lib -I ~/goinfre/.bre
 BUILTIN 		= ./excution/builtin/
 
 EXECUTION		= ./excution/
+#-fsanitize=address
 
-CFLAGS			=   -g #-fsanitize=address #-Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror
 
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
 				cd ./libft && make
 				cd ./libft && make bonus
-				$(CC) ${OBJS} $(CFLAGS) ./libft/libft.a -o ${NAME} $(READLINE_PATH) -g
+				$(CC) ${OBJS} $(CFLAGS) ./libft/libft.a -o ${NAME} $(READLINE_PATH) -g 
 clean:
 				$(RM) $(OBJS) 
 				cd ./libft && make clean

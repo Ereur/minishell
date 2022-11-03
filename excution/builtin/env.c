@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 08:58:45 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 09:54:12 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:12:02 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	env(char **arg)
 	if (arg[1])
 	{
 		g_gb.exit_statut = 1;
-		ft_fprintf(2, "env: %s: No such file or directory\n", arg[1]);
+		ft_putstr_fd("env :", 2);
+		ft_putstr_fd(arg[1], 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 		return ;
 	}
 	head = g_gb.env;

@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/02 16:29:29 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 05:12:57 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,27 @@ bool	parse_exec_helper(char **ps, char *es, t_cmd *cmd)
 	return (false);
 }
 
-t_cmd	*parseexec(char **ps, char *es, char **envp)
+
+bool	prse_exec(t_ends_of_tok *q_eq, t_ends_of_buff *ps_es,
+			t_execcmd *ret, t_cmd *cmd)
+{
+	int	tok;
+
+	while (!skip_and_find(ps_es->ps, ps_es->es, "|"))
+	{
+		tok = gettoken(ps_es->ps, ps_es->es, &q_eq->q, &q_eq->eq);
+		if (!tok)
+			break ;
+		if (!parse_exec_he(q_eq, &ret->args, ps_es, cmd))
+			return (false);
+	}
+	return (true);
+}
+
+t_cmd	*parseexec(char **ps, char *es)
 {
 	t_cmd			*cmd;
 	t_execcmd		*ret;
-	int				tok;
 	t_ends_of_tok	q_eq;
 	t_ends_of_buff	ps_es;
 
@@ -109,14 +125,13 @@ t_cmd	*parseexec(char **ps, char *es, char **envp)
 	cmd = parseredirec(ps_es.ps, ps_es.es, cmd);
 	if (!cmd)
 		return (NULL);
-	while (!skip_and_find(ps_es.ps, ps_es.es, "|"))
-	{
-		tok = gettoken(ps_es.ps, ps_es.es, &q_eq.q, &q_eq.eq);
-		if (!tok)
-			break ;
-		if (!parse_exec_he(&q_eq, &ret->args, &ps_es, cmd))
-			return (NULL);
+	if (skip_and_find(ps_es.ps, ps_es.es, "|"))
+	{	
+		raise_error("syntax error near unexpected token", 1, '|', cmd);
+		return (NULL);
 	}
+	if (!prse_exec(&q_eq, &ps_es, ret, cmd))
+		return (NULL);
 	if (parse_exec_helper(ps_es.ps, ps_es.es, cmd))
 		return (NULL);
 	return (cmd);
@@ -127,7 +142,7 @@ t_cmd	*parsepipe(char **ps, char *es, char **envp)
 	t_cmd	*cmd;
 
 	cmd = NULL;
-	cmd = parseexec(ps, es, envp);
+	cmd = parseexec(ps, es);
 	if (!cmd)
 		return (NULL);
 	if (skip_and_find(ps, es, "|"))

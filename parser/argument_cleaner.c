@@ -6,11 +6,25 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/02 04:20:12 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 04:23:36 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+
+void	ft_count_name_len(char *tmp, int *i)
+{
+	while (*tmp)
+	{
+		if (*tmp == '_' || ft_isalnum(*tmp))
+		{
+			tmp++;
+			(*i)++;
+		}
+		else
+			break ;
+	}
+}
 
 char	*grep_name(char *s)
 {
@@ -27,30 +41,34 @@ char	*grep_name(char *s)
 	if (!*s)
 		return (ft_strdup(s));
 	name = NULL;
-	while (*tmp)
-	{
-		if (ft_isdigit(*tmp))
-			break ;
-		if (!ft_isalpha(*tmp) && *tmp != '_')
-		{	
-			break ;
-		}
-		tmp++;
-		i++;
-	}
-	while (*tmp)
-	{
-		if (!ft_isdigit(*tmp) && *tmp != '_')
-		{	
-			break ;
-		}
-		tmp++;
-		i++;
-	}
+	ft_count_name_len(tmp, &i);
 	name = (char *)malloc(i + 1);
 	name = ft_strncpy(name, s, i);
 	name[i] = 0;
 	return (name);
+}
+
+char	*find_value(t_senv	**tmp, char *name, int counter)
+{
+	char	*variabl;
+
+	variabl = NULL;
+	while ((*tmp))
+	{
+		if (!ft_strcmp((*tmp)->key, name))
+			break ;
+		(*tmp) = (*tmp)->next;
+	}
+	if (*name == '?')
+	{	
+		if (counter == 0)
+			variabl = ft_itoa(g_gb.exit_statut);
+		else
+			variabl = ft_itoa(0);
+		ft_free(&name);
+		return (variabl);
+	}
+	return (variabl);
 }
 
 char	*grep_variable(char *str, int counter)
@@ -65,32 +83,11 @@ char	*grep_variable(char *str, int counter)
 	if (!*name)
 		return (name);
 	variabl = NULL;
-	while (tmp)
-	{
-		if (!ft_strcmp(tmp->key, name))
-			break ;
-		tmp = tmp->next;
-	}
-	if (*name == '?')
-	{	
-		if (counter == 0)
-			variabl = ft_itoa(g_gb.exit_statut);
-		else
-			variabl = ft_itoa(0);
-		ft_free(&name);
+	variabl = find_value(&tmp, name, counter);
+	if (variabl)
 		return (variabl);
-	}
-	if (tmp)
-	{
-		if (!*(tmp->value))
-		{	
-			variabl = NULL;
-			ft_free(&name);
-			return (variabl);
-		}
-		else
-			variabl = ft_strdup(tmp->value);
-	}
+	if (tmp && tmp->value)
+		variabl = ft_strdup(tmp->value);
 	put_zero_in_null(&variabl);
 	ft_free(&name);
 	return (variabl);

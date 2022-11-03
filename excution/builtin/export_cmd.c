@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 15:54:48 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/29 16:40:51 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/03 04:06:56 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	free_newvar(char *new_var)
 
 int	export_name_exist(char *var, int *mode)
 {
-	t_senv	*head;
 	char	*addr_var;
 	char	*new_var;
 

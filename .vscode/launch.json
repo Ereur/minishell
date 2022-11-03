@@ -1,44 +1,44 @@
-// {
-//   "configurations": [
-//   {
-//     "name": "(lldb) Launch",
-//     "type": "cppdbg",
-//     "request": "launch",
-//     "program": "${workspaceFolder}/minishell",
-//     "args": [],
-//     "stopAtEntry": false,
-//     "cwd": "${fileDirname}",
-//     "environment": [],
-//     "externalConsole": true,
-//     "MIMode": "lldb"
-//   }
-//   ]
-// }
 {
-  "version": "0.2.0",
   "configurations": [
-    {
-      "type": "lldb",
-      "request": "launch",
-      "name": "Launch",
-      "program": "${workspaceFolder}/minishell",
-      "args": [],
-      "cwd": "${workspaceFolder}",
-      "preLaunchTask": "make"
-    },
-    {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "${workspaceFolder}/minishell",
-      "args": [],
-      "stopAtEntry": false,
-      "cwd": "${fileDirname}",
-      "environment": [],
-      "externalConsole": true,
-      "MIMode": "lldb"
-    }
-    
-    
+  {
+    "name": "(lldb) Launch",
+    "type": "cppdbg",
+    "request": "launch",
+    "program": "${workspaceFolder}/minishell",
+    "args": [],
+    "stopAtEntry": false,
+    "cwd": "${fileDirname}",
+    "environment": [],
+    "externalConsole": true,
+    "MIMode": "lldb"
+  }
   ]
 }
+// {
+//   "version": "0.2.0",
+//   "configurations": [
+//     {
+//       "type": "lldb",
+//       "request": "launch",
+//       "name": "Launch",
+//       "program": "${workspaceFolder}/minishell",
+//       "args": [],
+//       "cwd": "${workspaceFolder}",
+//       "preLaunchTask": "make"
+//     },
+//     {
+//       "name": "C/C++ Runner: Debug Session",
+//       "type": "cppdbg",
+//       "request": "launch",
+//       "program": "${workspaceFolder}/minishell",
+//       "args": [],
+//       "stopAtEntry": false,
+//       "cwd": "${fileDirname}",
+//       "environment": [],
+//       "externalConsole": true,
+//       "MIMode": "lldb"
+//     }
+    
+    
+//   ]
+// }
