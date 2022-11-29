@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/03 07:43:58 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 07:54:40 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void	sig_handler(int signal);
 void	error_displayer(t_execcmd *cmd);
 void	rl_replace_line(const char *text, int clear_undo);
 int		checkbuiltprotection(t_execcmd *exec);
+void	print_er(char *s);
 /******************redir_utils***********/
 bool	check_tok(int tok, t_cmd *cmd);
 bool	protect_redir_input(char *file, t_execcmd *exec, char *tmp, int fd);

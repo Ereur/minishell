@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/03 06:52:44 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/03 06:54:40 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 08:03:17 by zoukaddo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	add_arg(t_list **head, char **q, char **eq)
 
 void	raise_error(char *message, int exitcode, int tok, t_cmd *cmd)
 {
-	ft_fprintf(2, "%s %c \n", message, tok);
+	ft_putstr_fd(message, 2);
+	ft_putchar_fd(tok, 2);
+	ft_putstr_fd("\n", 2);
 	if (cmd)
 		free_cmd(cmd);
 	g_gb.exit_statut = exitcode;
