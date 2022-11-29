@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 13:53:05 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/03 04:05:23 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:50:51 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 char	*skip_word(int *i, t_ends_of_tok **str, char **ps)
 {
-
 	while (((*str)->q)[*i])
 	{
 		if (((*str)->q)[*i] == '\'' || ((*str)->q)[*i] == '\"')

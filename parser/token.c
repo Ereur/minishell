@@ -6,30 +6,11 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 16:58:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/03 04:03:49 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:55:09 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	raise_error(char *message, int exitcode, int tok, t_cmd *cmd)
-{
-	ft_fprintf(2, "%s %c \n", message, tok);
-	if (cmd)
-		free_cmd(cmd);
-	g_gb.exit_statut = exitcode;
-	g_gb.status = 1;
-}
-
-int	skip_and_find_0(char **ps, char *es)
-{
-	char	*s;
-
-	s = *ps;
-	while (s < es && ft_strchr(WHITESPACE, *s))
-		s++;
-	return (!*s);
-}
 
 // skip spaces and return true in case of finding the given token
 int	skip_and_find(char **ps, char *es, char *tok)

@@ -6,74 +6,11 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:06:38 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/03 05:12:57 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 07:43:53 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// void print_tree(t_cmd *cmd)
-// {
-// 	t_execcmd *execcm;
-// 	t_redircmd *redir;
-// 	t_pipecmd	*pipe;
-
-// 	int i;
-// 	i = 0;
-// 	// if (!cmd)
-// 	// 	return ;
-// 	// if (cmd->type == REDIR)
-// 	// {
-// 	// 		redir = (t_redircmd *)(cmd);
-// 	// 		printf("\n----------redirection-------\n");
-// 	// 		// ft_print_som(redir->file, redir->efile);
-// 	// 		printf("|%s|\n", redir->filee->content);
-// 	// 		printf("fd %d\n", redir->fd);
-// 	// 		printf(" \nmode %d\n", redir->mode);
-// 	// 		print_tree(redir->cmd);
-// 	// }
-// 	if (cmd->type == EXEC)
-// 	{
-// 		int	i;
-
-// 		i = 0;
-// 		execcm = (t_execcmd	*)(cmd);
-// 		t_list *tmp;
-
-// 		tmp = execcm->args;
-// 		printf("\n----------Arguments-------\n");
-// 		// while (tmp)
-// 		// {	
-// 		// 	// ft_print_som(execcm->argv[i], execcm->eargv[i]);
-// 		// 	// write(1,&execcm->argv[i], ft_strlen(execcm->argv[i]));
-// 		// 	printf("|%s|\n", tmp->content);
-// 		// 	tmp = tmp->next;
-// 		// }
-// 		while (execcm->argument && execcm->argument[i])
-// 		{
-// 			printf("|%s|\n",execcm->argument[i]);
-// 			i++;
-// 		}
-// 		printf("output : %d \n input : %d \n", execcm->output, execcm->input);
-// 	}
-// 	if (cmd->type == PIPE)
-// 	{
-// 		pipe = (t_pipecmd *)(cmd);
-// 		printf("\nPIPE\n");
-// 		print_tree(pipe->left);
-// 		print_tree(pipe->right);
-// 	}
-// }
-
-void	add_arg(t_list **head, char **q, char **eq)
-{
-	size_t	len;
-	char	*str;
-
-	len = (*eq - *q);
-	str = ft_substr(*q, 0, len);
-	ft_lstadd_back(head, ft_lstnew(str, NOTHING));
-}
 
 bool	parse_exec_helper(char **ps, char *es, t_cmd *cmd)
 {
@@ -86,13 +23,12 @@ bool	parse_exec_helper(char **ps, char *es, t_cmd *cmd)
 			i++;
 		if (!(*ps + 1)[i])
 		{	
-			raise_error("syntax error near unexpected token", 1, '|', cmd);
+			raise_error("syntax error near unexpected token", 258, '|', cmd);
 			return (true);
 		}
 	}
 	return (false);
 }
-
 
 bool	prse_exec(t_ends_of_tok *q_eq, t_ends_of_buff *ps_es,
 			t_execcmd *ret, t_cmd *cmd)
@@ -122,14 +58,14 @@ t_cmd	*parseexec(char **ps, char *es)
 	ps_es.es = es;
 	ret = (t_execcmd *)(cmd);
 	ret->args = NULL;
+	if (skip_and_find(ps_es.ps, ps_es.es, "|"))
+	{	
+		raise_error("syntax error near unexpected token", 258, '|', cmd);
+		return (NULL);
+	}
 	cmd = parseredirec(ps_es.ps, ps_es.es, cmd);
 	if (!cmd)
 		return (NULL);
-	if (skip_and_find(ps_es.ps, ps_es.es, "|"))
-	{	
-		raise_error("syntax error near unexpected token", 1, '|', cmd);
-		return (NULL);
-	}
 	if (!prse_exec(&q_eq, &ps_es, ret, cmd))
 		return (NULL);
 	if (parse_exec_helper(ps_es.ps, ps_es.es, cmd))

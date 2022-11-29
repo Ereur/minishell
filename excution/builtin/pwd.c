@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 22:35:49 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/01 11:14:33 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/03 07:29:58 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ int	built_in_pwd(char **str, char *current)
 	pwd = getcwd(NULL, 0);
 	if (!pwd)
 	{
-		ft_fprintf(1, "%s\n", current);
+		printf("%s\n", current);
 		return (1);
 	}
 	printf("%s\n", pwd);
 	free(pwd);
+	g_gb.exit_statut = 0;
 	return (0);
 }

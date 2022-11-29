@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:18:32 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/03 00:04:37 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 07:43:58 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_gb_variable
 	char	*curent;
 }	t_gb_variable;
 
-t_gb_variable 	g_gb;
+t_gb_variable	g_gb;
 
 typedef struct s_cmd
 {
@@ -130,7 +130,6 @@ t_cmd	*parser(char **ps, char *es, char **envp);
 void	print_tree(t_cmd *cmd);
 
 // trying
-//trying
 void	pipe_executer(t_cmd *first_cmd, t_cmd *cmd, int npipe, int cpipe);
 void	close_all_fds(t_cmd *cmd);
 void	excute_pipes(t_cmd *cmd, int flag);
@@ -138,4 +137,27 @@ void	sig_handler(int signal);
 void	error_displayer(t_execcmd *cmd);
 void	rl_replace_line(const char *text, int clear_undo);
 int		checkbuiltprotection(t_execcmd *exec);
+/******************redir_utils***********/
+bool	check_tok(int tok, t_cmd *cmd);
+bool	protect_redir_input(char *file, t_execcmd *exec, char *tmp, int fd);
+bool	parse_input_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
+			t_execcmd *exec, t_tok_cmd *tok_cmd);
+bool	protect_output_redir(char *file, t_execcmd *exec, char *tmp, int fd);
+bool	parse_output_redir(t_ends_of_buff *buff, t_ends_of_tok *str,
+			t_execcmd *exec, t_tok_cmd *tok_cmd);
+/****************shellutils**********/
+/****************************************/
+bool	clen_arguments_helper(t_execcmd *execcmd, int counter);
+void	clean_arguments(t_cmd *cmd, int *counter);
+void	collect_sq_and_dq(t_list **split_args, char *line, char q);
+void	make_quotes(t_list	*args, bool i, int counter);
+char	*merge_list(t_list **head);
+/*****************herdoc************/
+void	sig_handl(int signal);
+int		get_first_line(int *end, char *lim, bool flag);
+void	here_doc_expand(char **line, bool i);
+int		protect_first_sig(int end[2], char *line);
+/**********************parser_utils***********/
+void	add_arg(t_list **head, char **q, char **eq);
+
 #endif

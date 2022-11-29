@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 17:13:53 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/11/03 04:23:36 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:42:53 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,41 +100,4 @@ void	word_len(char *arg, int *i, int *len)
 		(*len)++;
 		(*i)++;
 	}
-}
-
-bool	clen_arguments_helper(t_execcmd *execcmd, int counter)
-{
-	if (execcmd->args)
-	{	
-		make_quotes(execcmd->args, true, counter);
-		if (g_gb.status)
-			return (true);
-		convert_list_to_args(execcmd);
-	}
-	return (false);
-}
-
-void	clean_arguments(t_cmd *cmd, int *counter)
-{
-	t_execcmd	*execcmd;
-	t_pipecmd	*pipecmd;
-
-	if (!cmd)
-		return ;
-	if (cmd->type == EXEC)
-	{
-		execcmd = (t_execcmd *)cmd;
-		clen_arguments_helper(execcmd, *counter);
-	}
-	if (cmd->type == PIPE)
-	{
-		pipecmd = (t_pipecmd *)(cmd);
-		clean_arguments(pipecmd->left, counter);
-		if (g_gb.status)
-			return ;
-		clean_arguments(pipecmd->right, counter);
-		if (g_gb.status)
-			return ;
-	}
-	(*counter)++;
 }

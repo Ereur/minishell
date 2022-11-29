@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 17:11:41 by aamoussa          #+#    #+#             */
-/*   Updated: 2022/10/31 08:55:42 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:35:35 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,6 @@
 
 int			built_in_pwd(char **str, char *current);
 const char	*getprompt(char **envp);
+pid_t		fork_process(void);
+
 #endif

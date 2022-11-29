@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:08:23 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/03 06:03:13 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 07:00:18 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,9 +127,8 @@ void	execute_cmd(t_execcmd *cmd)
 	paths = get_paths();
 	if (!paths)
 	{
-		ft_putstr_fd("Minishell :", 2);
-		ft_putstr_fd(cmd->argument[0], 2);
-		ft_putstr_fd(" No such file or directory\n", 2);
+		ft_fprintf(2, "Minishell :%s  No such file or directory\n",
+			cmd->argument[0]);
 		g_gb.exit_statut = 127;
 		exit(g_gb.exit_statut = 127);
 	}

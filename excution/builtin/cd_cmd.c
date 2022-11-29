@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 20:28:27 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/03 06:10:41 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:55:36 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	check_home(void)
 
 int	cd_cmd(char **argument)
 {
-
 	set_pwd(env_grabber("OLDPWD"), 0);
 	if (!argument[1])
 	{

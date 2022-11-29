@@ -6,7 +6,7 @@
 /*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 06:25:17 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/11/03 04:08:40 by aamoussa         ###   ########.fr       */
+/*   Updated: 2022/11/03 07:00:35 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	redirection_built(t_execcmd *cmd)
 {
-
 	if (cmd->input > 0)
 	{
 		g_gb.input = dup(0);
@@ -44,7 +43,7 @@ void	exitcodesandwait(void)
 	if (WIFSIGNALED(exit_value))
 	{
 		if (WTERMSIG(exit_value) == 3)
-			ft_fprintf(2, "Quit: 3\n");
+			ft_putstr_fd("Quit: 3\n", 2);
 		g_gb.exit_statut = WTERMSIG(exit_value) + 128;
 	}
 	else if (WIFEXITED(exit_value))

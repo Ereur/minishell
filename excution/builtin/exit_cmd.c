@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zoukaddo <zoukaddo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aamoussa <aamoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 19:05:45 by zoukaddo          #+#    #+#             */
-/*   Updated: 2022/10/31 14:52:11 by zoukaddo         ###   ########.fr       */
+/*   Updated: 2022/11/03 06:22:30 by aamoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,9 @@ int	exit_atoi(const char *str, t_cord *cord)
 
 void	numeric_argument_required(char *arg)
 {
-	ft_fprintf(2, "Minishell: exit: %s: numeric argument required\n", arg);
+	ft_putstr_fd("Minishell: exit: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
 	exit(255);
 }
 
